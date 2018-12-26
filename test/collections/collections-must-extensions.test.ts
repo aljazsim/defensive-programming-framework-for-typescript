@@ -1,7 +1,7 @@
+import "mocha";
 import { ArgumentError } from "../../source/argument-error";
 import { mustBeEmpty, mustBeEqualTo2, mustBeNullOrEmpty, mustBeOneOf2, mustContain, mustContainDuplicates, mustContainNull, mustContainOnlyNull } from "../../source/collections/collection-must-extensions";
 import { expect } from "chai";
-import { describe, it } from "mocha";
 
 describe("collections must extensions", () =>
 {

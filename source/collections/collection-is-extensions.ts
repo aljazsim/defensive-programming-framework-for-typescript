@@ -72,7 +72,7 @@ export function containsNull<T>(value: Array<T>): boolean
     {
         for (const item of value)
         {
-            if (!item)
+            if (isNull(item))
             {
                 return true;
             }
@@ -96,7 +96,7 @@ export function containsOnlyNull<T>(value: Array<T>): boolean
     {
         for (const item of value)
         {
-            if (item != null)
+            if (!isNull(item))
             {
                 return false;
             }
