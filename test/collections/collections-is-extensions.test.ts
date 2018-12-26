@@ -1,6 +1,6 @@
 import "mocha";
 import { ArgumentError } from "../../source/argument-error";
-import { contains, containsDuplicates, containsNull, containsOnlyNull, isEmpty } from "../../source/collections/collection-is-extensions";
+import { contains, containsDuplicates, containsNull, containsOnlyNull, isEmpty, isEqualTo2, isNullOrEmpty, isOneOf2 } from "../../source/collections/collection-is-extensions";
 import { expect } from "chai";
 
 describe("collections cannot extensions", () =>
@@ -105,65 +105,59 @@ describe("collections cannot extensions", () =>
         });
     });
 
-    // // describe("isEqual2()", () =>
-    // // {
-    // //     describe("success", () =>
-    // //     {
-    // //         it("should return null", () => expect(isEqualTo2(null, [0, 1, 2, 3])).to.equal(null));
-    // //         it("should return null", () => expect(isEqualTo2([0], null)).to.equal([0]));
-    // //         it("should return undefined", () => expect(isEqualTo2(undefined, [0, 1, 2, 3])).to.equal(undefined));
-    // //         it("should return undefined", () => expect(isEqualTo2([0], undefined)).to.equal([0]));
-    // //         it("should return [1, 2, 3]", () => expect(isEqualTo2([1, 2, 3], [0, 1, 2, 3])).to.equal([1, 2, 3]));
-    // //         it("should return [1, 2, 3]", () => expect(isEqualTo2([1, 2, 3], [3, 4, 5])).to.equal([1, 2, 3]));
-    // //         it("should return [1, 2, 3]", () => expect(isEqualTo2([1, 2, 3], [3, 2, 1])).to.equal([1, 2, 3]));
-    // //         it("should return [\"a\", \"b\", \"c\"]", () => expect(isEqualTo2(["a", "b", "c"], ["a", "c", "d"])).to.equal(["a", "b", "c"]));
-    // //     });
+    describe("isEqual2()", () =>
+    {
+        describe("success", () =>
+        {
+            it("should return true", () => expect(isEqualTo2(null, null)).to.equal(true));
+            it("should return true", () => expect(isEqualTo2(undefined, undefined)).to.equal(true));
+            it("should return false", () => expect(isEqualTo2(null, [0])).to.equal(false));
+            it("should return false", () => expect(isEqualTo2([0], null)).to.equal(false));
+            it("should return false", () => expect(isEqualTo2(undefined, [0])).to.equal(false));
+            it("should return false", () => expect(isEqualTo2([0], undefined)).to.equal(false));
+            it("should return true", () => expect(isEqualTo2([1, 2, 3], [1, 2, 3])).to.equal(true));
+            it("should return false", () => expect(isEqualTo2([1, 2, 3], [3, 2, 1])).to.equal(false));
+            it("should return true", () => expect(isEqualTo2([1, 2, 3], [3, 2, 1], true)).to.equal(true));
+            it("should return true", () => expect(isEqualTo2(["a", "b", "c"], ["a", "b", "c"])).to.equal(true));
+        });
+    });
 
-    // //     describe("failure", () =>
-    // //     {
-    // //         it("should fail for null", () => expect(() => isEqualTo2(null, null)).to.throw(ArgumentError, "Value cannot be equal to null."));
-    // //         it("should fail for null", () => expect(() => isEqualTo2(undefined, undefined)).to.throw(ArgumentError, "Value cannot be equal to undefined."));
-    // //         it("should fail for identical array", () => expect(() => isEqualTo2([1, 2, 3], [1, 2, 3])).to.throw(ArgumentError, "Value cannot be equal to [1, 2, 3]."));
-    // //         it("should fail for identical array", () => expect(() => isEqualTo2([1, 2, 3], [3, 1, 2], true)).to.throw(ArgumentError, "Value cannot be equal to [3, 1, 2]."));
-    // //     });
-    // // });
+    describe("isNullOrEmpty()", () =>
+    {
+        describe("success", () =>
+        {
+            it("should true", () => expect(isNullOrEmpty(null)).to.equal(true));
+            it("should true", () => expect(isNullOrEmpty(undefined)).to.equal(true));
+            it("should true", () => expect(isNullOrEmpty([])).to.equal(true));
+            it("should true", () => expect(isNullOrEmpty("")).to.equal(true));
+            it("should false", () => expect(isNullOrEmpty("a")).to.equal(false));
+            it("should false", () => expect(isNullOrEmpty("ab")).to.equal(false));
+            it("should false", () => expect(isNullOrEmpty([1])).to.equal(false));
+            it("should false", () => expect(isNullOrEmpty([1, 2])).to.equal(false));
+            it("should false", () => expect(isNullOrEmpty(["a"])).to.equal(false));
+            it("should false", () => expect(isNullOrEmpty(["a", "b"])).to.equal(false));
+        });
+    });
 
-    // // describe("isNullOrEmpty()", () =>
-    // // {
-    // //     describe("success", () =>
-    // //     {
-    // //         it("should return \"a\"", () => expect(isNullOrEmpty("a")).to.equal("a"));
-    // //         it("should return \"ab\"", () => expect(isNullOrEmpty("ab")).to.equal("ab"));
-    // //         it("should return [1]", () => expect(isNullOrEmpty([1])).to.equal([1]));
-    // //         it("should return [1, 2]", () => expect(isNullOrEmpty([1, 2])).to.equal([1, 2]));
-    // //         it("should return [\"a\"]", () => expect(isNullOrEmpty(["a"])).to.equal(["a"]));
-    // //         it("should return [\"a\", \"b\"]", () => expect(isNullOrEmpty(["a", "b"])).to.equal(["a", "b"]));
-    // //     });
+    describe("isOneOf()", () =>
+    {
+        describe("success", () =>
+        {
+            it("should return false", () => expect(isOneOf2(null, [1, 2, 3])).to.equal(false));
+            it("should return false", () => expect(isOneOf2(undefined, [1, 2, 3])).to.equal(false));
+            it("should return false", () => expect(isOneOf2(1, [0, 2, 3])).to.equal(false));
+            it("should return false", () => expect(isOneOf2("aaa", ["a", "aa", "aaaa"])).to.equal(false));
+            it("should return false", () => expect(isOneOf2("x", [null, undefined])).to.equal(false));
+            it("should return true", () => expect(isOneOf2(1, [0, 1, 2, 3, 4])).to.equal(true));
+            it("should return true", () => expect(isOneOf2(3, [0, 1, 2, 3, 4])).to.equal(true));
+            it("should return true", () => expect(isOneOf2(3, [0, 3, 3, 3, 1, 2, 3, 4])).to.equal(true));
+            it("should return true", () => expect(isOneOf2("x", [null, undefined, 1, 6, "a", "x", -1, "CCC"])).to.equal(true));
+        });
 
-    // //     describe("failure", () =>
-    // //     {
-    // //         it("should fail for null", () => expect(() => isNullOrEmpty(null)).to.throw(ArgumentError, "Value cannot be null or empty."));
-    // //         it("should fail for undefined", () => expect(() => isNullOrEmpty(undefined)).to.throw(ArgumentError, "Value cannot be null or empty."));
-    // //         it("should fail for empty string", () => expect(() => isNullOrEmpty("")).to.throw(ArgumentError, "Value cannot be null or empty."));
-    // //         it("should fail for empty array", () => expect(() => isNullOrEmpty([])).to.throw(ArgumentError, "Value cannot be null or empty."));
-    // //     });
-    // // });
-
-    // // describe("isOneOf()", () =>
-    // // {
-    // //     describe("success", () =>
-    // //     {
-    // //         it("should return null", () => expect(isOneOf2(null, [1, 2, 3])).to.equal(null));
-    // //         it("should return undefined", () => expect(isOneOf2(undefined, [1, 2, 3])).to.equal(undefined));
-    // //         it("should return 1", () => expect(isOneOf2(1, [0, 2, 3])).to.equal(1));
-    // //         it("should return \"a\"", () => expect(isOneOf2("aaa", ["a", "aa", "aaaa"])).to.equal("aaa"));
-    // //     });
-
-    // //     describe("failure", () =>
-    // //     {
-    // //         it("should fail for null", () => expect(() => isOneOf2(1, null)).to.throw(ArgumentError, "Value cannot be null."));
-    // //         it("should fail for undefined", () => expect(() => isOneOf2(1, undefined)).to.throw(ArgumentError, "Value cannot be null."));
-    // //         it("should fail for included value", () => expect(() => isOneOf2(1, [0, 1, 2, 3, 4])).to.throw(ArgumentError, "Value cannot be one of [0, 1, 2, 3, 4]."));
-    // //     });
-    // // });
+        describe("failure", () =>
+        {
+            it("should fail for null", () => expect(() => isOneOf2(1, null)).to.throw(ArgumentError, "Value cannot be null."));
+            it("should fail for undefined", () => expect(() => isOneOf2(1, undefined)).to.throw(ArgumentError, "Value cannot be null."));
+        });
+    });
 });
