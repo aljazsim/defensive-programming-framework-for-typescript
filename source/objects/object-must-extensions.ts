@@ -1,6 +1,6 @@
 import { ArgumentError } from "../argument-error";
-import { cannotBeNullOrUndefined } from "./object-cannot-extensions";
-import { doesMatch, is, isBetween, isEqualTo, isGreaterThan, isGreaterThanOrEqualTo, isInteger, isLessThan, isLessThanOrEqualTo, isNull, isNullOrUndefined, isNullOrWhiteSpace, isOneOf, isSubTypeOf, isTypeOf } from "./object-is-extensions";
+import { cannotBeNull } from "./object-cannot-extensions";
+import { doesMatch, is, isBetween, isEqualTo, isGreaterThan, isGreaterThanOrEqualTo, isInteger, isLessThan, isLessThanOrEqualTo, isNull, isNullOrWhiteSpace, isOneOf, isSubTypeOf, isTypeOf } from "./object-is-extensions";
 
 /**
  * Returns original value if the specified function returns true; otherwise throws a new ArgumentError.
@@ -13,14 +13,14 @@ import { doesMatch, is, isBetween, isEqualTo, isGreaterThan, isGreaterThanOrEqua
  */
 export function mustBe<T>(value: T, func: (value: T) => boolean): T
 {
-	cannotBeNullOrUndefined(func);
+    cannotBeNull(func);
 
-	if (!is(value, func))
-	{
-		throw new ArgumentError("Expression cannot be true.");
-	}
+    if (!is(value, func))
+    {
+        throw new ArgumentError("Expression cannot be true.");
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -36,16 +36,16 @@ export function mustBe<T>(value: T, func: (value: T) => boolean): T
  */
 export function mustBeBetween<T>(value: T, minValue: T, maxValue: T, inclusive: boolean = true): T
 {
-	cannotBeNullOrUndefined(minValue);
-	cannotBeNullOrUndefined(maxValue);
-	mustBeLessThan(minValue, maxValue);
+    cannotBeNull(minValue);
+    cannotBeNull(maxValue);
+    mustBeLessThan(minValue, maxValue);
 
-	if (!isBetween(value, minValue, maxValue))
-	{
-		throw new ArgumentError(`Value must be between ${minValue} and ${maxValue}.`);
-	}
+    if (!isBetween(value, minValue, maxValue))
+    {
+        throw new ArgumentError(`Value must be between ${minValue} and ${maxValue}.`);
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -59,12 +59,12 @@ export function mustBeBetween<T>(value: T, minValue: T, maxValue: T, inclusive: 
  */
 export function mustBeEqualTo<T>(value1: T, value2: T): T
 {
-	if (!isEqualTo(value1, value2))
-	{
-		throw new ArgumentError(`Value must be equal to ${value2}.`);
-	}
+    if (!isEqualTo(value1, value2))
+    {
+        throw new ArgumentError(`Value must be equal to ${value2}.`);
+    }
 
-	return value1;
+    return value1;
 }
 
 /**
@@ -78,12 +78,12 @@ export function mustBeEqualTo<T>(value1: T, value2: T): T
  */
 export function mustBeGreaterThan<T>(value: T, minValue: T): T
 {
-	if (!isGreaterThan(value, minValue))
-	{
-		throw new ArgumentError(`Value must be greater than ${minValue}.`);
-	}
+    if (!isGreaterThan(value, minValue))
+    {
+        throw new ArgumentError(`Value must be greater than ${minValue}.`);
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -97,12 +97,12 @@ export function mustBeGreaterThan<T>(value: T, minValue: T): T
  */
 export function mustBeGreaterThanOrEqualTo<T>(value: T, minValue: T): T
 {
-	if (!isGreaterThanOrEqualTo(value, minValue))
-	{
-		throw new ArgumentError(`Value must be greater than or equal to ${minValue}.`);
-	}
+    if (!isGreaterThanOrEqualTo(value, minValue))
+    {
+        throw new ArgumentError(`Value must be greater than or equal to ${minValue}.`);
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -114,12 +114,12 @@ export function mustBeGreaterThanOrEqualTo<T>(value: T, minValue: T): T
  */
 export function mustBeInteger(value: number)
 {
-	if (!isInteger(value))
-	{
-		throw new ArgumentError(`Value must be an integer.`);
-	}
+    if (!isInteger(value))
+    {
+        throw new ArgumentError(`Value must be an integer.`);
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -133,12 +133,12 @@ export function mustBeInteger(value: number)
  */
 export function mustBeLessOrEqualToThan<T>(value: T, maxValue: T): T
 {
-	if (!isLessThanOrEqualTo(value, maxValue))
-	{
-		throw new ArgumentError(`Value must be less than or equal to ${maxValue}.`);
-	}
+    if (!isLessThanOrEqualTo(value, maxValue))
+    {
+        throw new ArgumentError(`Value must be less than or equal to ${maxValue}.`);
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -152,12 +152,12 @@ export function mustBeLessOrEqualToThan<T>(value: T, maxValue: T): T
  */
 export function mustBeLessThan<T>(value: T, maxValue: T): T
 {
-	if (!isLessThan(value, maxValue))
-	{
-		throw new ArgumentError(`Value must be less than ${maxValue}.`);
-	}
+    if (!isLessThan(value, maxValue))
+    {
+        throw new ArgumentError(`Value must be less than ${maxValue}.`);
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -170,30 +170,12 @@ export function mustBeLessThan<T>(value: T, maxValue: T): T
  */
 export function mustBeNull<T>(value: T): T
 {
-	if (!isNull(value))
-	{
-		throw new ArgumentError("Value must be null.");
-	}
+    if (!isNull(value))
+    {
+        throw new ArgumentError("Value must be null.");
+    }
 
-	return value;
-}
-
-/**
- * Returns original value if it equals null or undefined; otherwise throws a new ArgumentError.
- *
- * @export
- * @template T - The value type.
- * @param {T} value - The value.
- * @returns {T} - The  original value if it equals null or undefined; otherwise throws a new ArgumentError.
- */
-export function mustBeNullOrUndefined<T>(value: T): T
-{
-	if (!isNullOrUndefined(value))
-	{
-		throw new ArgumentError("Value must be null or undefined.");
-	}
-
-	return value;
+    return value;
 }
 
 /**
@@ -205,12 +187,12 @@ export function mustBeNullOrUndefined<T>(value: T): T
  */
 export function mustBeNullOrWhiteSpace(value: string): string
 {
-	if (!isNullOrWhiteSpace(value))
-	{
-		throw new ArgumentError("Value must be null or whitespace.");
-	}
+    if (!isNullOrWhiteSpace(value))
+    {
+        throw new ArgumentError("Value must be null or whitespace.");
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -224,14 +206,14 @@ export function mustBeNullOrWhiteSpace(value: string): string
  */
 export function mustBeOneOf<T>(value: T, ...set: T[]): T
 {
-	cannotBeNullOrUndefined(set);
+    cannotBeNull(set);
 
-	if (!isOneOf(value, ...set))
-	{
-		throw new ArgumentError(`Value must be one of ${set}.`);
-	}
+    if (!isOneOf(value, ...set))
+    {
+        throw new ArgumentError(`Value must be one of ${set}.`);
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -245,14 +227,14 @@ export function mustBeOneOf<T>(value: T, ...set: T[]): T
  */
 export function mustBeSubTypeOf<T>(value: T, type: any): T
 {
-	cannotBeNullOrUndefined(type);
+    cannotBeNull(type);
 
-	if (!isSubTypeOf(value, type))
-	{
-		throw new ArgumentError(`Value must be subtype of type ${type}.`);
-	}
+    if (!isSubTypeOf(value, type))
+    {
+        throw new ArgumentError(`Value must be subtype of type ${type}.`);
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -266,14 +248,14 @@ export function mustBeSubTypeOf<T>(value: T, type: any): T
  */
 export function mustBeTypeOf<T>(value: T, type: string): T
 {
-	cannotBeNullOrUndefined(type);
+    cannotBeNull(type);
 
-	if (!isTypeOf(value, type))
-	{
-		throw new ArgumentError(`Value must be of type ${type}.`);
-	}
+    if (!isTypeOf(value, type))
+    {
+        throw new ArgumentError(`Value must be of type ${type}.`);
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -286,13 +268,13 @@ export function mustBeTypeOf<T>(value: T, type: string): T
  */
 export function mustMatch(value: string, regex: RegExp)
 {
-	cannotBeNullOrUndefined(value);
-	cannotBeNullOrUndefined(regex);
+    cannotBeNull(value);
+    cannotBeNull(regex);
 
-	if (!doesMatch(value, regex))
-	{
-		throw new ArgumentError(`Value must match ${regex}.`);
-	}
+    if (!doesMatch(value, regex))
+    {
+        throw new ArgumentError(`Value must match ${regex}.`);
+    }
 
-	return value;
+    return value;
 }

@@ -1,8 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import { cannotBeNullOrWhiteSpace } from "../objects/object-cannot-extensions";
-import { isNullOrEmpty } from "../collections/collection-is-extensions";
-import { isNullOrUndefined, isNullOrWhiteSpace } from "../objects/object-is-extensions";
+import { isNull, isNullOrWhiteSpace } from "../objects/object-is-extensions";
 import { mustBeValidDirectoryPath, mustBeValidFilePath } from "./file-system-must-extensions";
 
 /**
@@ -14,10 +13,10 @@ import { mustBeValidDirectoryPath, mustBeValidFilePath } from "./file-system-mus
  */
 export function doesDirectoryExist(value: string): boolean
 {
-	cannotBeNullOrWhiteSpace(value);
-	mustBeValidDirectoryPath(value);
+    cannotBeNullOrWhiteSpace(value);
+    mustBeValidDirectoryPath(value);
 
-	return fs.existsSync(value);
+    return fs.existsSync(value);
 }
 
 /**
@@ -29,9 +28,9 @@ export function doesDirectoryExist(value: string): boolean
  */
 export function doesFileExist(value: string): boolean
 {
-	mustBeValidFilePath(value);
+    mustBeValidFilePath(value);
 
-	return fs.existsSync(value);
+    return fs.existsSync(value);
 }
 
 /**
@@ -43,9 +42,9 @@ export function doesFileExist(value: string): boolean
  */
 export function isAbsoluteDirectoryPath(value: string): boolean
 {
-	mustBeValidDirectoryPath(value);
+    mustBeValidDirectoryPath(value);
 
-	return path.isAbsolute(value);
+    return path.isAbsolute(value);
 }
 
 /**
@@ -57,9 +56,9 @@ export function isAbsoluteDirectoryPath(value: string): boolean
 */
 export function isAbsoluteFilePath(value: string): boolean
 {
-	mustBeValidFilePath(value);
+    mustBeValidFilePath(value);
 
-	return path.isAbsolute(value);
+    return path.isAbsolute(value);
 }
 
 /**
@@ -71,16 +70,16 @@ export function isAbsoluteFilePath(value: string): boolean
  */
 export function isEmptyDirectory(value: string): boolean
 {
-	mustBeValidDirectoryPath(value);
+    mustBeValidDirectoryPath(value);
 
-	if (doesDirectoryExist(value))
-	{
-		return fs.readdirSync(value).length === 0;
-	}
-	else
-	{
-		return true;
-	}
+    if (doesDirectoryExist(value))
+    {
+        return fs.readdirSync(value).length === 0;
+    }
+    else
+    {
+        return true;
+    }
 }
 
 /**
@@ -92,18 +91,18 @@ export function isEmptyDirectory(value: string): boolean
  */
 export function isValidDirectoryPath(value: string): boolean
 {
-	if (isNullOrUndefined(value))
-	{
-		return true;
-	}
-	else if (isNullOrWhiteSpace(value))
-	{
-		return false;
-	}
-	else
-	{
-		return path.dirname(value) === value;
-	}
+    if (isNull(value))
+    {
+        return true;
+    }
+    else if (isNullOrWhiteSpace(value))
+    {
+        return false;
+    }
+    else
+    {
+        return path.dirname(value) === value;
+    }
 }
 
 /**
@@ -115,16 +114,16 @@ export function isValidDirectoryPath(value: string): boolean
  */
 export function isValidFilePath(value: string): boolean
 {
-	if (isNullOrUndefined(value))
-	{
-		return true;
-	}
-	else if (isNullOrWhiteSpace(value))
-	{
-		return false;
-	}
-	else
-	{
-		return path.dirname(value) !== value;
-	}
+    if (isNull(value))
+    {
+        return true;
+    }
+    else if (isNullOrWhiteSpace(value))
+    {
+        return false;
+    }
+    else
+    {
+        return path.dirname(value) !== value;
+    }
 }

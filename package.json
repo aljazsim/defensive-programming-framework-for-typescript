@@ -1,56 +1,56 @@
 {
-	"name": "defensive-programming-framework",
-	"version": "1.0.0",
-	"description": "Defensive programming framework for TypeScript and JavaScript",
-	"author": "Aljaz Simonic",
-	"license": "MIT",
-	"main": "dist/index.js",
-	"types": "dist/index.d.ts",
-	"scripts": {
-		"start": "npm run link",
-		"build": "tsc --project ./tsconfig.json",
-		"build-watch": "npm run build --watch",
-		"test": "mocha --require ts-node/register ./**/*.test.ts",
-		"test-watch": "mocha --watch --watch-extensions ts --reporter min --require ts-node/register ./**/*.test.ts",
-		"test-coverage": "nyc mocha --require ts-node/register ./**/*.test.ts",
-		"lint": "tslint --project ./tsconfig.json --config ./tslint.json",
-		"link": "npm link ./source",
-		"publish": "npm publish",
-		"pack": "npm pack",
-		"update": "ncu -u"
-	},
-	"nyc": {
-		"extension": [
-			".ts",
-			".tsx"
-		],
-		"include": [
-			"source"
-		],
-		"reporter": [
-			"html",
-			"text"
-		],
-		"all": true
-	},
-	"keywords": [
-		"defensive programming",
-		"validation",
-		"verification",
-		"checking",
-		"parameter",
-		"input"
-	],
-	"dependencies": {
-		"@types/node": "^10.12.18",
-		"@types/mocha": "5.2.5",
-		"@types/chai": "4.1.7",
-		"chai": "^4.2.0",
-		"mocha": "^5.2.0",
-		"npm-check-updates": "^2.15.0",
-		"tslint": "^5.12.0",
-		"ts-node": "7.0.1",
-		"typescript": "^3.2.2",
-		"nyc": "13.1.0"
-	}
+    "name": "defensive-programming-framework",
+    "version": "1.0.0",
+    "description": "Defensive programming framework for TypeScript and JavaScript",
+    "author": "Aljaz Simonic",
+    "license": "MIT",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "start": "npm run link",
+        "build": "tsc --project ./tsconfig.json",
+        "build-watch": "npm run build --watch",
+        "test": "mocha --require ts-node/register ./**/*.test.ts",
+        "test-watch": "mocha --watch --watch-extensions ts --reporter min --require ts-node/register ./**/*.test.ts",
+        "test-coverage": "nyc mocha --require ts-node/register ./**/*.test.ts",
+        "lint": "tslint --project ./tsconfig.json --config ./tslint.json",
+        "link": "npm link ./source",
+        "publish": "npm publish",
+        "pack": "npm pack",
+        "update": "ncu -u"
+    },
+    "nyc": {
+        "extension": [
+            ".ts",
+            ".tsx"
+        ],
+        "include": [
+            "source"
+        ],
+        "reporter": [
+            "html",
+            "text"
+        ],
+        "all": true
+    },
+    "keywords": [
+        "defensive programming",
+        "validation",
+        "verification",
+        "checking",
+        "parameter",
+        "input"
+    ],
+    "dependencies": {
+        "@types/node": "^10.12.18",
+        "@types/mocha": "5.2.5",
+        "@types/chai": "4.1.7",
+        "chai": "^4.2.0",
+        "mocha": "^5.2.0",
+        "npm-check-updates": "^2.15.0",
+        "tslint": "^5.12.0",
+        "ts-node": "7.0.1",
+        "typescript": "^3.2.2",
+        "nyc": "13.1.0"
+    }
 }

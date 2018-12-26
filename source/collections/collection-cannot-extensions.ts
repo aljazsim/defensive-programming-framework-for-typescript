@@ -1,4 +1,5 @@
 import { ArgumentError } from "../argument-error";
+import { isNull } from "../objects/object-is-extensions";
 import { contains, containsDuplicates, containsNull, containsOnlyNull, isEmpty, isEqualTo2, isNullOrEmpty, isOneOf2 } from "./collection-is-extensions";
 
 // #region Functions (8)
@@ -13,12 +14,12 @@ import { contains, containsDuplicates, containsNull, containsOnlyNull, isEmpty, 
  */
 export function cannotBeEmpty<T>(value: Array<T> | string): Array<T> | string
 {
-	if (isEmpty(value))
-	{
-		throw new ArgumentError("Value cannot be empty.");
-	}
+    if (isEmpty(value))
+    {
+        throw new ArgumentError("Value cannot be empty.");
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -33,12 +34,19 @@ export function cannotBeEmpty<T>(value: Array<T> | string): Array<T> | string
  */
 export function cannotBeEqualTo2<T>(value1: Array<T>, value2: Array<T>, ignoreOrder: boolean = false): Array<T>
 {
-	if (isEqualTo2(value1, value2, ignoreOrder))
-	{
-		throw new ArgumentError(`Value cannot be equal to [${value2.join(", ")}].`);
-	}
+    if (isEqualTo2(value1, value2, ignoreOrder))
+    {
+        if (isNull(value2))
+        {
+            throw new ArgumentError(`Value cannot be equal to ${value2}.`);
+        }
+        else
+        {
+            throw new ArgumentError(`Value cannot be equal to [${value2.join(", ")}].`);
+        }
+    }
 
-	return value1;
+    return value1;
 }
 
 /**
@@ -51,12 +59,12 @@ export function cannotBeEqualTo2<T>(value1: Array<T>, value2: Array<T>, ignoreOr
  */
 export function cannotBeNullOrEmpty<T>(value: Array<T> | string): Array<T> | string
 {
-	if (isNullOrEmpty(value))
-	{
-		throw new ArgumentError("Value cannot be null or empty.");
-	}
+    if (isNullOrEmpty(value))
+    {
+        throw new ArgumentError("Value cannot be null or empty.");
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -70,12 +78,12 @@ export function cannotBeNullOrEmpty<T>(value: Array<T> | string): Array<T> | str
  */
 export function cannotBeOneOf2<T>(value: T, set: Array<T>): T
 {
-	if (isOneOf2(value, set))
-	{
-		throw new ArgumentError(`Value cannot be one of [${set.join(", ")}].`);
-	}
+    if (isOneOf2(value, set))
+    {
+        throw new ArgumentError(`Value cannot be one of [${set.join(", ")}].`);
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -89,12 +97,12 @@ export function cannotBeOneOf2<T>(value: T, set: Array<T>): T
  */
 export function cannotContain<T>(value: Array<T>, func: (T) => boolean): Array<T>
 {
-	if (contains(value, func))
-	{
-		throw new ArgumentError("Value cannot contain specified expression.");
-	}
+    if (contains(value, func))
+    {
+        throw new ArgumentError("Value cannot contain the specified expression.");
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -107,12 +115,12 @@ export function cannotContain<T>(value: Array<T>, func: (T) => boolean): Array<T
  */
 export function cannotContainDuplicates<T>(value: Array<T>): Array<T>
 {
-	if (containsDuplicates(value))
-	{
-		throw new ArgumentError("Value cannot contain duplicates.");
-	}
+    if (containsDuplicates(value))
+    {
+        throw new ArgumentError("Value cannot contain duplicates.");
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -125,12 +133,12 @@ export function cannotContainDuplicates<T>(value: Array<T>): Array<T>
  */
 export function cannotContainNull<T>(value: Array<T>): Array<T>
 {
-	if (containsNull(value))
-	{
-		throw new ArgumentError("Value cannot contain null.");
-	}
+    if (containsNull(value))
+    {
+        throw new ArgumentError("Value cannot contain null.");
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -143,12 +151,10 @@ export function cannotContainNull<T>(value: Array<T>): Array<T>
  */
 export function cannotContainOnlyNull<T>(value: Array<T>): Array<T>
 {
-	if (containsOnlyNull(value))
-	{
-		throw new ArgumentError("Value cannot contain only null.");
-	}
+    if (containsOnlyNull(value))
+    {
+        throw new ArgumentError("Value cannot contain only null.");
+    }
 
-	return value;
+    return value;
 }
-
-// #endregion

@@ -1,4 +1,4 @@
-import { cannotBeNull, cannotBeNullOrUndefined } from "./object-cannot-extensions";
+import { cannotBeNull } from "./object-cannot-extensions";
 import { mustBeLessThan } from "./object-must-extensions";
 
 /**
@@ -11,16 +11,16 @@ import { mustBeLessThan } from "./object-must-extensions";
  */
 export function doesMatch(value: string, regex: RegExp): boolean
 {
-	cannotBeNull(regex);
+    cannotBeNull(regex);
 
-	if (value == null)
-	{
-		return false;
-	}
-	else
-	{
-		return regex.test(value);
-	}
+    if (value == null)
+    {
+        return false;
+    }
+    else
+    {
+        return regex.test(value);
+    }
 }
 
 /**
@@ -34,9 +34,9 @@ export function doesMatch(value: string, regex: RegExp): boolean
  */
 export function is<T>(value: T, func: (value: T) => boolean): boolean
 {
-	cannotBeNull(func);
+    cannotBeNull(func);
 
-	return func(value);
+    return func(value);
 }
 
 /**
@@ -52,25 +52,25 @@ export function is<T>(value: T, func: (value: T) => boolean): boolean
  */
 export function isBetween<T>(value: T, minValue: T, maxValue: T, inclusive: boolean = true): boolean
 {
-	cannotBeNullOrUndefined(minValue);
-	cannotBeNullOrUndefined(maxValue);
-	mustBeLessThan(minValue, maxValue);
+    cannotBeNull(minValue);
+    cannotBeNull(maxValue);
+    mustBeLessThan(minValue, maxValue);
 
-	if (isNullOrUndefined(value))
-	{
-		return false;
-	}
-	else
-	{
-		if (inclusive)
-		{
-			return value <= minValue && value >= maxValue;
-		}
-		else
-		{
-			return value < minValue && value > maxValue;
-		}
-	}
+    if (isNull(value))
+    {
+        return false;
+    }
+    else
+    {
+        if (inclusive)
+        {
+            return value <= minValue && value >= maxValue;
+        }
+        else
+        {
+            return value < minValue && value > maxValue;
+        }
+    }
 }
 
 /**
@@ -84,7 +84,7 @@ export function isBetween<T>(value: T, minValue: T, maxValue: T, inclusive: bool
  */
 export function isEqualTo<T>(value1: T, value2: T): boolean
 {
-	return value1 === value2;
+    return value1 === value2;
 }
 
 /**
@@ -98,10 +98,10 @@ export function isEqualTo<T>(value1: T, value2: T): boolean
  */
 export function isGreaterThan<T>(value: T, minValue: T): boolean
 {
-	cannotBeNullOrUndefined(value);
-	cannotBeNullOrUndefined(minValue);
+    cannotBeNull(value);
+    cannotBeNull(minValue);
 
-	return value > minValue;
+    return value > minValue;
 }
 
 /**
@@ -115,10 +115,10 @@ export function isGreaterThan<T>(value: T, minValue: T): boolean
  */
 export function isGreaterThanOrEqualTo<T>(value: T, minValue: T): boolean
 {
-	cannotBeNullOrUndefined(value);
-	cannotBeNullOrUndefined(minValue);
+    cannotBeNull(value);
+    cannotBeNull(minValue);
 
-	return value >= minValue;
+    return value >= minValue;
 }
 
 /**
@@ -130,9 +130,9 @@ export function isGreaterThanOrEqualTo<T>(value: T, minValue: T): boolean
  */
 export function isInteger(value: number)
 {
-	cannotBeNullOrUndefined(value);
+    cannotBeNull(value);
 
-	return value === Math.round(value);
+    return value === Math.round(value);
 }
 
 /**
@@ -146,10 +146,10 @@ export function isInteger(value: number)
  */
 export function isLessThan<T>(value: T, maxValue: T): boolean
 {
-	cannotBeNullOrUndefined(value);
-	cannotBeNullOrUndefined(maxValue);
+    cannotBeNull(value);
+    cannotBeNull(maxValue);
 
-	return value < maxValue;
+    return value < maxValue;
 }
 
 /**
@@ -163,23 +163,10 @@ export function isLessThan<T>(value: T, maxValue: T): boolean
  */
 export function isLessThanOrEqualTo<T>(value: T, maxValue: T): boolean
 {
-	cannotBeNullOrUndefined(value);
-	cannotBeNullOrUndefined(maxValue);
+    cannotBeNull(value);
+    cannotBeNull(maxValue);
 
-	return value <= maxValue;
-}
-
-/**
- * Determines whether the specified value is null.
- *
- * @export
- * @template T - The value type.
- * @param {T} value - The value.
- * @returns {boolean} - True if the specified value is null; otherwise, false.
- */
-export function isNull<T>(value: T): boolean
-{
-	return value === null;
+    return value <= maxValue;
 }
 
 /**
@@ -190,9 +177,9 @@ export function isNull<T>(value: T): boolean
  * @param {T} value - The value.
  * @returns {boolean} - True if the specified value is null or undefined; otherwise, false.
  */
-export function isNullOrUndefined<T>(value: T): boolean
+export function isNull<T>(value: T): boolean
 {
-	return value === null || value === undefined;
+    return value === null || value === undefined;
 }
 
 /**
@@ -204,14 +191,14 @@ export function isNullOrUndefined<T>(value: T): boolean
  */
 export function isNullOrWhiteSpace(value: string): boolean
 {
-	if (isNullOrUndefined(value))
-	{
-		return true;
-	}
-	else
-	{
-		return value.trim() === "";
-	}
+    if (isNull(value))
+    {
+        return true;
+    }
+    else
+    {
+        return value.trim() === "";
+    }
 }
 
 /**
@@ -225,17 +212,17 @@ export function isNullOrWhiteSpace(value: string): boolean
  */
 export function isOneOf<T>(value: T, ...set: T[]): boolean
 {
-	cannotBeNullOrUndefined(set);
+    cannotBeNull(set);
 
-	for (const item of set)
-	{
-		if (value === item)
-		{
-			return true;
-		}
-	}
+    for (const item of set)
+    {
+        if (value === item)
+        {
+            return true;
+        }
+    }
 
-	return false;
+    return false;
 }
 
 /**
@@ -249,9 +236,9 @@ export function isOneOf<T>(value: T, ...set: T[]): boolean
  */
 export function isSubTypeOf<T>(value: T, type: any): boolean
 {
-	cannotBeNullOrUndefined(type);
+    cannotBeNull(type);
 
-	return value instanceof type;
+    return value instanceof type;
 }
 
 /**
@@ -265,7 +252,7 @@ export function isSubTypeOf<T>(value: T, type: any): boolean
  */
 export function isTypeOf<T>(value: T, type: string): boolean
 {
-	cannotBeNullOrUndefined(type);
+    cannotBeNull(type);
 
-	return typeof value !== type;
+    return typeof value !== type;
 }

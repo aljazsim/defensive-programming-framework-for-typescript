@@ -1,4 +1,4 @@
-import { doesMatch, is, isBetween, isEqualTo, isGreaterThan, isGreaterThanOrEqualTo, isInteger, isLessThan, isLessThanOrEqualTo, isNull, isNullOrUndefined, isNullOrWhiteSpace, isOneOf, isSubTypeOf, isTypeOf } from "./object-is-extensions";
+import { doesMatch, is, isBetween, isEqualTo, isGreaterThan, isGreaterThanOrEqualTo, isInteger, isLessThan, isLessThanOrEqualTo, isNull, isNullOrWhiteSpace, isOneOf, isSubTypeOf, isTypeOf } from "./object-is-extensions";
 
 /**
  * Returns default value when the original value does match the specified regular expression; otherwise returns the original value.
@@ -11,14 +11,14 @@ import { doesMatch, is, isBetween, isEqualTo, isGreaterThan, isGreaterThanOrEqua
  */
 export function whenDoesMatch(value: string, regex: RegExp, defaultValue: string)
 {
-	if (doesMatch(value, regex))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (doesMatch(value, regex))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }
 
 /**
@@ -33,14 +33,14 @@ export function whenDoesMatch(value: string, regex: RegExp, defaultValue: string
  */
 export function whenIs<T>(value: T, func: (value: T) => boolean, defaultValue: T): T
 {
-	if (is(value, func))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (is(value, func))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }
 
 /**
@@ -57,14 +57,14 @@ export function whenIs<T>(value: T, func: (value: T) => boolean, defaultValue: T
  */
 export function whenIsBetween<T>(value: T, minValue: T, maxValue: T, inclusive: boolean = true, defaultValue: T): T
 {
-	if (isBetween(value, minValue, maxValue, inclusive))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (isBetween(value, minValue, maxValue, inclusive))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }
 
 /**
@@ -79,14 +79,14 @@ export function whenIsBetween<T>(value: T, minValue: T, maxValue: T, inclusive: 
  */
 export function whenIsEqualTo<T>(value1: T, value2: T, defaultValue: T): T
 {
-	if (isEqualTo(value1, value2))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value1;
-	}
+    if (isEqualTo(value1, value2))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value1;
+    }
 }
 
 /**
@@ -101,14 +101,14 @@ export function whenIsEqualTo<T>(value1: T, value2: T, defaultValue: T): T
  */
 export function whenIsGreaterThan<T>(value: T, minValue: T, defaultValue: T): T
 {
-	if (isGreaterThan(value, minValue))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (isGreaterThan(value, minValue))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }
 
 /**
@@ -123,14 +123,14 @@ export function whenIsGreaterThan<T>(value: T, minValue: T, defaultValue: T): T
  */
 export function whenIsGreaterThanOrEqualTo<T>(value: T, minValue: T, defaultValue: T): T
 {
-	if (isGreaterThanOrEqualTo(value, minValue))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (isGreaterThanOrEqualTo(value, minValue))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }
 
 /**
@@ -143,14 +143,14 @@ export function whenIsGreaterThanOrEqualTo<T>(value: T, minValue: T, defaultValu
  */
 export function whenIsInteger(value: number, defaultValue: number): number
 {
-	if (isInteger(value))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (isInteger(value))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }
 
 /**
@@ -165,14 +165,14 @@ export function whenIsInteger(value: number, defaultValue: number): number
  */
 export function whenIsLessThan<T>(value: T, maxValue: T, defaultValue: T): T
 {
-	if (isLessThan(value, maxValue))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (isLessThan(value, maxValue))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }
 
 /**
@@ -187,35 +187,14 @@ export function whenIsLessThan<T>(value: T, maxValue: T, defaultValue: T): T
  */
 export function whenIsLessThanOrEqualTo<T>(value: T, maxValue: T, defaultValue: T): T
 {
-	if (isLessThanOrEqualTo(value, maxValue))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
-}
-
-/**
- * Returns default value when the original value is null; otherwise returns the original value.
- *
- * @export
- * @template T - The value type.
- * @param {T} value - The value.
- * @param {T} defaultValue - The default value.
- * @returns {T} - The default value when the original value is null; otherwise returns the original value.
- */
-export function whenIsNull<T>(value: T, defaultValue: T): T
-{
-	if (isNull(value))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (isLessThanOrEqualTo(value, maxValue))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }
 
 /**
@@ -227,16 +206,16 @@ export function whenIsNull<T>(value: T, defaultValue: T): T
  * @param {T} defaultValue - The default value.
  * @returns {T} - The default value when the original value is null or undefined; otherwise returns the original value.
  */
-export function whenIsNullOrUndefined<T>(value: T, defaultValue: T): T
+export function whenIsNull<T>(value: T, defaultValue: T): T
 {
-	if (isNullOrUndefined(value))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (isNull(value))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }
 
 /**
@@ -251,14 +230,14 @@ export function whenIsNullOrUndefined<T>(value: T, defaultValue: T): T
  */
 export function whenIsOneOf<T>(value: T, set: T[], defaultValue: T): T
 {
-	if (isOneOf(value, ...set))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (isOneOf(value, ...set))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }
 
 /**
@@ -273,14 +252,14 @@ export function whenIsOneOf<T>(value: T, set: T[], defaultValue: T): T
  */
 export function whenIsSubTypeOf<T>(value: T, type: any, defaultValue: T): T
 {
-	if (isSubTypeOf(value, type))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (isSubTypeOf(value, type))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }
 
 /**
@@ -295,14 +274,14 @@ export function whenIsSubTypeOf<T>(value: T, type: any, defaultValue: T): T
  */
 export function whenIsTypeOf<T>(value: T, type: string, defaultValue: T): T
 {
-	if (isTypeOf(value, type))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (isTypeOf(value, type))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }
 
 /**
@@ -314,12 +293,12 @@ export function whenIsTypeOf<T>(value: T, type: string, defaultValue: T): T
  */
 export function whenNullOrWhiteSpace(value: string, defaultValue: string): string
 {
-	if (isNullOrWhiteSpace(value))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (isNullOrWhiteSpace(value))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }

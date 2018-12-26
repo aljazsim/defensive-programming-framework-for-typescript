@@ -12,20 +12,20 @@ import { isNull } from "../objects/object-is-extensions";
  */
 export function contains<T>(value: Array<T>, func: (T) => boolean): boolean
 {
-	cannotBeNull(func);
+    cannotBeNull(func);
 
-	if (!isNull(value))
-	{
-		for (const item of value)
-		{
-			if (func(item))
-			{
-				return true;
-			}
-		}
-	}
+    if (!isNull(value))
+    {
+        for (const item of value)
+        {
+            if (func(item))
+            {
+                return true;
+            }
+        }
+    }
 
-	return false;
+    return false;
 }
 
 /**
@@ -38,24 +38,24 @@ export function contains<T>(value: Array<T>, func: (T) => boolean): boolean
  */
 export function containsDuplicates<T>(value: Array<T>)
 {
-	const duplicates = new Set<T>();
+    const duplicates = new Set<T>();
 
-	if (!isNull(value))
-	{
-		for (const item of value)
-		{
-			if (duplicates.has(item))
-			{
-				return true;
-			}
-			else
-			{
-				duplicates.add(item);
-			}
-		}
-	}
+    if (!isNull(value))
+    {
+        for (const item of value)
+        {
+            if (duplicates.has(item))
+            {
+                return true;
+            }
+            else
+            {
+                duplicates.add(item);
+            }
+        }
+    }
 
-	return false;
+    return false;
 }
 
 /**
@@ -68,18 +68,18 @@ export function containsDuplicates<T>(value: Array<T>)
  */
 export function containsNull<T>(value: Array<T>): boolean
 {
-	if (!isNull(value))
-	{
-		for (const item of value)
-		{
-			if (!item)
-			{
-				return true;
-			}
-		}
-	}
+    if (!isNull(value))
+    {
+        for (const item of value)
+        {
+            if (!item)
+            {
+                return true;
+            }
+        }
+    }
 
-	return false;
+    return false;
 }
 
 /**
@@ -92,20 +92,20 @@ export function containsNull<T>(value: Array<T>): boolean
  */
 export function containsOnlyNull<T>(value: Array<T>): boolean
 {
-	if (!isNullOrEmpty(value))
-	{
-		for (const item of value)
-		{
-			if (item != null)
-			{
-				return false;
-			}
-		}
+    if (!isNullOrEmpty(value))
+    {
+        for (const item of value)
+        {
+            if (item != null)
+            {
+                return false;
+            }
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	return false;
+    return false;
 }
 
 /**
@@ -118,14 +118,14 @@ export function containsOnlyNull<T>(value: Array<T>): boolean
  */
 export function isEmpty<T>(value: Array<T> | string): boolean
 {
-	if (isNull(value))
-	{
-		return false;
-	}
-	else
-	{
-		return value.length === 0;
-	}
+    if (isNull(value))
+    {
+        return false;
+    }
+    else
+    {
+        return value.length === 0;
+    }
 }
 
 /**
@@ -140,43 +140,43 @@ export function isEmpty<T>(value: Array<T> | string): boolean
  */
 export function isEqualTo2<T>(value1: Array<T>, value2: Array<T>, ignoreOrder: boolean = false): boolean
 {
-	if (isNull(value1) &&
-		isNull(value2))
-	{
-		return true;
-	}
-	else if (!isNull(value1) &&
-		!isNull(value2) &&
-		value1.length === value2.length)
-	{
-		if (ignoreOrder)
-		{
-			for (let i = 0; i < value1.length; i++)
-			{
-				if (value1.indexOf(value2[i]) === -1 ||
-					value2.indexOf(value1[i]) === -1)
-				{
-					return false;
-				}
-			}
-		}
-		else
-		{
-			for (let i = 0; i < value1.length; i++)
-			{
-				if (value1[i] !== value2[i])
-				{
-					return false;
-				}
-			}
-		}
+    if (isNull(value1) &&
+        isNull(value2))
+    {
+        return true;
+    }
+    else if (!isNull(value1) &&
+        !isNull(value2) &&
+        value1.length === value2.length)
+    {
+        if (ignoreOrder)
+        {
+            for (let i = 0; i < value1.length; i++)
+            {
+                if (value1.indexOf(value2[i]) === -1 ||
+                    value2.indexOf(value1[i]) === -1)
+                {
+                    return false;
+                }
+            }
+        }
+        else
+        {
+            for (let i = 0; i < value1.length; i++)
+            {
+                if (value1[i] !== value2[i])
+                {
+                    return false;
+                }
+            }
+        }
 
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 /**
@@ -189,14 +189,14 @@ export function isEqualTo2<T>(value1: Array<T>, value2: Array<T>, ignoreOrder: b
  */
 export function isNullOrEmpty<T>(value: Array<T> | string): boolean
 {
-	if (isNull(value))
-	{
-		return true;
-	}
-	else
-	{
-		return value.length === 0;
-	}
+    if (isNull(value))
+    {
+        return true;
+    }
+    else
+    {
+        return value.length === 0;
+    }
 }
 
 /**
@@ -210,7 +210,7 @@ export function isNullOrEmpty<T>(value: Array<T> | string): boolean
  */
 export function isOneOf2<T>(value: T, set: Array<T>): boolean
 {
-	cannotBeNull(set);
+    cannotBeNull(set);
 
-	return set.indexOf(value) > 0;
+    return set.indexOf(value) > 0;
 }

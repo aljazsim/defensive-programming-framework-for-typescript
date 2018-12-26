@@ -1,5 +1,5 @@
 import { ArgumentError } from "../argument-error";
-import { doesMatch, is, isBetween, isEqualTo, isGreaterThan, isGreaterThanOrEqualTo, isInteger, isLessThan, isLessThanOrEqualTo, isNull, isNullOrUndefined, isNullOrWhiteSpace, isOneOf, isSubTypeOf, isTypeOf } from "./object-is-extensions";
+import { doesMatch, is, isBetween, isEqualTo, isGreaterThan, isGreaterThanOrEqualTo, isInteger, isLessThan, isLessThanOrEqualTo, isNull, isNullOrWhiteSpace, isOneOf, isSubTypeOf, isTypeOf } from "./object-is-extensions";
 import { isEmpty } from "../collections/collection-is-extensions";
 import { mustBeLessThan } from "./object-must-extensions";
 
@@ -14,14 +14,14 @@ import { mustBeLessThan } from "./object-must-extensions";
  */
 export function cannotBe<T>(value: T, func: (value: T) => boolean): T
 {
-	cannotBeNullOrUndefined(func);
+    cannotBeNull(func);
 
-	if (is(value, func))
-	{
-		throw new ArgumentError("Expression cannot be true.");
-	}
+    if (is(value, func))
+    {
+        throw new ArgumentError("Expression cannot be true.");
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -37,16 +37,16 @@ export function cannotBe<T>(value: T, func: (value: T) => boolean): T
  */
 export function cannotBeBetween<T>(value: T, minValue: T, maxValue: T, inclusive: boolean = true): T
 {
-	cannotBeNullOrUndefined(minValue);
-	cannotBeNullOrUndefined(maxValue);
-	mustBeLessThan(minValue, maxValue);
+    cannotBeNull(minValue);
+    cannotBeNull(maxValue);
+    mustBeLessThan(minValue, maxValue);
 
-	if (isBetween(value, minValue, maxValue))
-	{
-		throw new ArgumentError(`Value cannot be between ${minValue} and ${maxValue}.`);
-	}
+    if (isBetween(value, minValue, maxValue))
+    {
+        throw new ArgumentError(`Value cannot be between ${minValue} and ${maxValue}.`);
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -60,12 +60,12 @@ export function cannotBeBetween<T>(value: T, minValue: T, maxValue: T, inclusive
  */
 export function cannotBeEqualTo<T>(value1: T, value2: T): T
 {
-	if (isEqualTo(value1, value2))
-	{
-		throw new ArgumentError(`Value cannot be equal to ${value2}.`);
-	}
+    if (isEqualTo(value1, value2))
+    {
+        throw new ArgumentError(`Value cannot be equal to ${value2}.`);
+    }
 
-	return value1;
+    return value1;
 }
 
 /**
@@ -79,12 +79,12 @@ export function cannotBeEqualTo<T>(value1: T, value2: T): T
  */
 export function cannotBeGreaterThan<T>(value: T, minValue: T): T
 {
-	if (isGreaterThan(value, minValue))
-	{
-		throw new ArgumentError(`Value cannot be greater than ${minValue}.`);
-	}
+    if (isGreaterThan(value, minValue))
+    {
+        throw new ArgumentError(`Value cannot be greater than ${minValue}.`);
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -98,12 +98,12 @@ export function cannotBeGreaterThan<T>(value: T, minValue: T): T
  */
 export function cannotBeGreaterThanOrEqualTo<T>(value: T, minValue: T): T
 {
-	if (isGreaterThanOrEqualTo(value, minValue))
-	{
-		throw new ArgumentError(`Value cannot be greater than or equal to ${minValue}.`);
-	}
+    if (isGreaterThanOrEqualTo(value, minValue))
+    {
+        throw new ArgumentError(`Value cannot be greater than or equal to ${minValue}.`);
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -115,12 +115,12 @@ export function cannotBeGreaterThanOrEqualTo<T>(value: T, minValue: T): T
  */
 export function cannotBeInteger(value: number)
 {
-	if (isInteger(value))
-	{
-		throw new ArgumentError(`Value cannot be an integer.`);
-	}
+    if (isInteger(value))
+    {
+        throw new ArgumentError(`Value cannot be an integer.`);
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -134,12 +134,12 @@ export function cannotBeInteger(value: number)
  */
 export function cannotBeLessOrEqualToThan<T>(value: T, maxValue: T): T
 {
-	if (isLessThanOrEqualTo(value, maxValue))
-	{
-		throw new ArgumentError(`Value cannot be less than or equal to ${maxValue}.`);
-	}
+    if (isLessThanOrEqualTo(value, maxValue))
+    {
+        throw new ArgumentError(`Value cannot be less than or equal to ${maxValue}.`);
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -153,30 +153,12 @@ export function cannotBeLessOrEqualToThan<T>(value: T, maxValue: T): T
  */
 export function cannotBeLessThan<T>(value: T, maxValue: T): T
 {
-	if (isLessThan(value, maxValue))
-	{
-		throw new ArgumentError(`Value cannot be less than ${maxValue}.`);
-	}
+    if (isLessThan(value, maxValue))
+    {
+        throw new ArgumentError(`Value cannot be less than ${maxValue}.`);
+    }
 
-	return value;
-}
-
-/**
- * Returns original value if it does not equal null; otherwise throws a new ArgumentError.
- *
- * @export
- * @template T - The value type.
- * @param {T} value - The value.
- * @returns {T} - The  original value if it does not equal null; otherwise throws a new ArgumentError.
- */
-export function cannotBeNull<T>(value: T): T
-{
-	if (isNull(value))
-	{
-		throw new ArgumentError("Value cannot be null.");
-	}
-
-	return value;
+    return value;
 }
 
 /**
@@ -187,14 +169,14 @@ export function cannotBeNull<T>(value: T): T
  * @param {T} value - The value.
  * @returns {T} - The  original value if it does not equal null or undefined; otherwise throws a new ArgumentError.
  */
-export function cannotBeNullOrUndefined<T>(value: T): T
+export function cannotBeNull<T>(value: T): T
 {
-	if (isNullOrUndefined(value))
-	{
-		throw new ArgumentError("Value cannot be null or undefined.");
-	}
+    if (isNull(value))
+    {
+        throw new ArgumentError("Value cannot be null.");
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -206,20 +188,20 @@ export function cannotBeNullOrUndefined<T>(value: T): T
  */
 export function cannotBeNullOrWhiteSpace(value: string): string
 {
-	if (isNull(value))
-	{
-		throw new ArgumentError("Value cannot be null.");
-	}
-	else if (isEmpty(value))
-	{
-		throw new ArgumentError("Value cannot be empty.");
-	}
-	else if (isNullOrWhiteSpace(value))
-	{
-		throw new ArgumentError("Value cannot be whitespace.");
-	}
+    if (isNull(value))
+    {
+        throw new ArgumentError("Value cannot be null.");
+    }
+    else if (isEmpty(value))
+    {
+        throw new ArgumentError("Value cannot be empty.");
+    }
+    else if (isNullOrWhiteSpace(value))
+    {
+        throw new ArgumentError("Value cannot be whitespace.");
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -233,14 +215,14 @@ export function cannotBeNullOrWhiteSpace(value: string): string
  */
 export function cannotBeOneOf<T>(value: T, ...set: T[]): T
 {
-	cannotBeNull(set);
+    cannotBeNull(set);
 
-	if (isOneOf(value, ...set))
-	{
-		throw new ArgumentError(`Value cannot be one of ${set}.`);
-	}
+    if (isOneOf(value, ...set))
+    {
+        throw new ArgumentError(`Value cannot be one of ${set}.`);
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -254,12 +236,12 @@ export function cannotBeOneOf<T>(value: T, ...set: T[]): T
  */
 export function cannotBeSubTypeOf<T>(value: T, type: any): T
 {
-	if (isSubTypeOf(value, type))
-	{
-		throw new ArgumentError(`Value cannot be subtype of type ${type}.`);
-	}
+    if (isSubTypeOf(value, type))
+    {
+        throw new ArgumentError(`Value cannot be subtype of type ${type}.`);
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -273,12 +255,12 @@ export function cannotBeSubTypeOf<T>(value: T, type: any): T
  */
 export function cannotBeTypeOf<T>(value: T, type: string): T
 {
-	if (isTypeOf(value, type))
-	{
-		throw new ArgumentError(`Value cannot be of type ${type}.`);
-	}
+    if (isTypeOf(value, type))
+    {
+        throw new ArgumentError(`Value cannot be of type ${type}.`);
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -291,13 +273,13 @@ export function cannotBeTypeOf<T>(value: T, type: string): T
  */
 export function cannotMatch(value: string, regex: RegExp)
 {
-	cannotBeNullOrUndefined(value);
-	cannotBeNullOrUndefined(regex);
+    cannotBeNull(value);
+    cannotBeNull(regex);
 
-	if (doesMatch(value, regex))
-	{
-		throw new ArgumentError(`Value cannot match ${regex}.`);
-	}
+    if (doesMatch(value, regex))
+    {
+        throw new ArgumentError(`Value cannot match ${regex}.`);
+    }
 
-	return value;
+    return value;
 }
