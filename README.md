@@ -1,1 +1,0 @@
-# defensive-programming-framework-for-typescript
