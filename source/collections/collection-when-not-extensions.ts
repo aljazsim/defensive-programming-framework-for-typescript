@@ -12,14 +12,14 @@ import { contains, containsDuplicates, containsNull, containsOnlyNull, isEmpty, 
  */
 export function whenContainsNot<T>(value: Array<T>, func: (T) => boolean, defaultValue: Array<T>): Array<T>
 {
-	if (!contains(value, func))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (!contains(value, func))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }
 
 /**
@@ -33,14 +33,14 @@ export function whenContainsNot<T>(value: Array<T>, func: (T) => boolean, defaul
  */
 export function whenContainsNotDuplicates<T>(value: Array<T>, defaultValue: Array<T>): Array<T>
 {
-	if (!containsDuplicates(value))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (!containsDuplicates(value))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }
 
 /**
@@ -54,14 +54,14 @@ export function whenContainsNotDuplicates<T>(value: Array<T>, defaultValue: Arra
  */
 export function whenContainsNotNull<T>(value: Array<T>, defaultValue: Array<T>): Array<T>
 {
-	if (!containsNull(value))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (!containsNull(value))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }
 
 /**
@@ -75,14 +75,14 @@ export function whenContainsNotNull<T>(value: Array<T>, defaultValue: Array<T>):
  */
 export function whenContainsNotOnlyNull<T>(value: Array<T>, defaultValue: Array<T>): Array<T>
 {
-	if (!containsOnlyNull(value))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (!containsOnlyNull(value))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }
 
 /**
@@ -94,16 +94,16 @@ export function whenContainsNotOnlyNull<T>(value: Array<T>, defaultValue: Array<
  * @param {Array<T>} defaultValue - The default value.
  * @returns {Array<T>} - The original value if the specified value is not empty; otherwise returns the original value.
  */
-export function whenIsNotEmpty<T>(value, defaultValue: Array<T>): Array<T>
+export function whenIsNotEmpty<T>(value: Array<T> | string, defaultValue: Array<T> | string): Array<T> | string
 {
-	if (!isEmpty(value))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (!isEmpty(value))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }
 
 /**
@@ -117,16 +117,16 @@ export function whenIsNotEmpty<T>(value, defaultValue: Array<T>): Array<T>
  * @param {Array<T>} defaultValue - The default value.
  * @returns {Array<T>} - The original value if the specified value is not equal to the compared value; otherwise returns the original value.
  */
-export function whenIsNotEqualTo<T>(value1: Array<T>, value2: Array<T>, ignoreOrder: boolean = true, defaultValue: Array<T>): Array<T>
+export function whenIsNotEqualTo2<T>(value1: Array<T>, value2: Array<T>, ignoreOrder: boolean = true, defaultValue: Array<T>): Array<T>
 {
-	if (!isEqualTo2(value1, value2, ignoreOrder))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value1;
-	}
+    if (!isEqualTo2(value1, value2, ignoreOrder))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value1;
+    }
 }
 
 /**
@@ -138,16 +138,16 @@ export function whenIsNotEqualTo<T>(value1: Array<T>, value2: Array<T>, ignoreOr
  * @param {Array<T>} defaultValue - The default value.
  * @returns {Array<T>} - The original value if the specified value is not null or empty; otherwise returns the original value.
  */
-export function whenIsNotNullOrEmpty<T>(value: Array<T>, defaultValue: Array<T>): Array<T>
+export function whenIsNotNullOrEmpty<T>(value: Array<T> | string, defaultValue: Array<T> | string): Array<T> | string
 {
-	if (!isNullOrEmpty(value))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (!isNullOrEmpty(value))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }
 
 /**
@@ -162,12 +162,12 @@ export function whenIsNotNullOrEmpty<T>(value: Array<T>, defaultValue: Array<T>)
  */
 export function whenIsNotOneOf2<T>(value: T, set: Array<T>, defaultValue: T): T
 {
-	if (!isOneOf2(value, set))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (!isOneOf2(value, set))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }

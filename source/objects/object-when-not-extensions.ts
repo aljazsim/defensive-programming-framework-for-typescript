@@ -77,7 +77,7 @@ export function whenIsNotBetween<T>(value: T, minValue: T, maxValue: T, inclusiv
  * @param {T} defaultValue - The default value.
  * @returns {T} - The default value when the original value is not equal to the compared value; otherwise returns the original value.
  */
-export function whenIsNotEqualTo2<T>(value1: T, value2: T, defaultValue: T): T
+export function whenIsNotEqualTo<T>(value1: T, value2: T, defaultValue: T): T
 {
     if (!isEqualTo(value1, value2))
     {
