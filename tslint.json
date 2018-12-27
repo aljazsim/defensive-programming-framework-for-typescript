@@ -92,8 +92,7 @@
             "always"
         ],
         "triple-equals": [
-            true,
-            "allow-null-check"
+            true
         ],
         "typedef-whitespace": [
             true,

@@ -7,9 +7,8 @@
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
-        "start": "npm run link",
         "build": "tsc --project ./tsconfig.json",
-        "build-watch": "npm run build --watch",
+        "build-watch": "tsc --watch --project ./tsconfig.json",
         "test": "mocha --require ts-node/register ./**/*.test.ts",
         "test-watch": "mocha --watch --watch-extensions ts --reporter min --require ts-node/register ./**/*.test.ts",
         "test-coverage": "nyc mocha --require ts-node/register ./**/*.test.ts",

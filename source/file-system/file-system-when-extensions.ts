@@ -9,14 +9,14 @@ import { doesDirectoryExist, doesFileExist, isAbsoluteDirectoryPath, isAbsoluteF
  */
 export function whenDoesDirectoryExist(value, defaultValue: string): string
 {
-	if (doesDirectoryExist(value))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (doesDirectoryExist(value))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }
 
 /**
@@ -28,14 +28,14 @@ export function whenDoesDirectoryExist(value, defaultValue: string): string
  */
 export function whenDoesFileExist(value, defaultValue: string): string
 {
-	if (doesFileExist(value))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (doesFileExist(value))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }
 
 /**
@@ -47,14 +47,14 @@ export function whenDoesFileExist(value, defaultValue: string): string
  */
 export function whenIsAbsoluteDirectoryPath(value, defaultValue: string): string
 {
-	if (isAbsoluteDirectoryPath(value))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (isAbsoluteDirectoryPath(value))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }
 
 /**
@@ -66,14 +66,14 @@ export function whenIsAbsoluteDirectoryPath(value, defaultValue: string): string
  */
 export function whenIsAbsoluteFilePath(value, defaultValue: string): string
 {
-	if (isAbsoluteFilePath(value))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (isAbsoluteFilePath(value))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }
 
 /**
@@ -85,14 +85,14 @@ export function whenIsAbsoluteFilePath(value, defaultValue: string): string
  */
 export function whenIsEmptyDirectory(value, defaultValue: string): string
 {
-	if (isEmptyDirectory(value))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (isEmptyDirectory(value))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }
 
 /**
@@ -104,14 +104,14 @@ export function whenIsEmptyDirectory(value, defaultValue: string): string
  */
 export function whenIsValidDirectoryPath(value, defaultValue: string): string
 {
-	if (isValidDirectoryPath(value))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (isValidDirectoryPath(value))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }
 
 /**
@@ -123,12 +123,12 @@ export function whenIsValidDirectoryPath(value, defaultValue: string): string
  */
 export function whenIsValidFilePath(value, defaultValue: string): string
 {
-	if (isValidFilePath(value))
-	{
-		return defaultValue;
-	}
-	else
-	{
-		return value;
-	}
+    if (isValidFilePath(value))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
 }

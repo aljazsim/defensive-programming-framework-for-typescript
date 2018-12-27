@@ -1,7 +1,7 @@
 import { ArgumentError } from "../argument-error";
-import { doesMatch, is, isBetween, isEqualTo, isGreaterThan, isGreaterThanOrEqualTo, isInteger, isLessThan, isLessThanOrEqualTo, isNull, isNullOrWhiteSpace, isOneOf, isSubTypeOf, isTypeOf } from "./object-is-extensions";
 import { isEmpty } from "../collections/collection-is-extensions";
-import { mustBeLessThan } from "./object-must-extensions";
+import { doesMatch, is, isBetween, isEqualTo, isGreaterThan, isGreaterThanOrEqualTo, isInteger, isLessThan, isLessThanOrEqualTo, isNull, isNullOrWhiteSpace, isOneOf, isSubTypeOf, isTypeOf } from "./object-is-extensions";
+import { mustBeLessThanOrEqualTo } from "./object-must-extensions";
 
 /**
  * Returns original value if the specified function returns false; otherwise throws a new ArgumentError.
@@ -29,21 +29,28 @@ export function cannotBe<T>(value: T, func: (value: T) => boolean): T
  *
  * @export
  * @template T - The value type.
- * @param {T} value - The value.
- * @param {T} minValue -The minimum value type.
- * @param {T} maxValue - The maximum value type.
+ * @param {(number | string)} value - The value.
+ * @param {(number | string)} minValue -The minimum value type.
+ * @param {(number | string)} maxValue - The maximum value type.
  * @param {boolean} [inclusive=true] - If set to true include limits in the range.
- * @returns {T} - The  original value if it is not between the specified limits; otherwise throws a new ArgumentError.
+ * @returns {(number | string)} - The  original value if it is not between the specified limits; otherwise throws a new ArgumentError.
  */
-export function cannotBeBetween<T>(value: T, minValue: T, maxValue: T, inclusive: boolean = true): T
+export function cannotBeBetween(value: number | string, minValue: number | string, maxValue: number | string, inclusive: boolean = true): number | string
 {
     cannotBeNull(minValue);
     cannotBeNull(maxValue);
-    mustBeLessThan(minValue, maxValue);
+    mustBeLessThanOrEqualTo(minValue, maxValue);
 
-    if (isBetween(value, minValue, maxValue))
+    if (isBetween(value, minValue, maxValue, inclusive))
     {
-        throw new ArgumentError(`Value cannot be between ${minValue} and ${maxValue}.`);
+        if (inclusive)
+        {
+            throw new ArgumentError(`Value cannot be between ${minValue} and ${maxValue} inclusive.`);
+        }
+        else
+        {
+            throw new ArgumentError(`Value cannot be between ${minValue} and ${maxValue}.`);
+        }
     }
 
     return value;
@@ -132,7 +139,7 @@ export function cannotBeInteger(value: number)
  * @param {T} maxValue - The maximum value.
  * @returns {T} - The original value if it is not less than or equal to the specified limit; otherwise throws a new ArgumentError.
  */
-export function cannotBeLessOrEqualToThan<T>(value: T, maxValue: T): T
+export function cannotBeLessThanOrEqualTo<T>(value: T, maxValue: T): T
 {
     if (isLessThanOrEqualTo(value, maxValue))
     {
@@ -215,11 +222,16 @@ export function cannotBeNullOrWhiteSpace(value: string): string
  */
 export function cannotBeOneOf<T>(value: T, ...set: T[]): T
 {
-    cannotBeNull(set);
-
     if (isOneOf(value, ...set))
     {
-        throw new ArgumentError(`Value cannot be one of ${set}.`);
+        if (isNull(set))
+        {
+            throw new ArgumentError(`Value cannot be one of ${set}.`);
+        }
+        else
+        {
+            throw new ArgumentError(`Value cannot be one of [${set.join(", ")}].`);
+        }
     }
 
     return value;
@@ -238,7 +250,7 @@ export function cannotBeSubTypeOf<T>(value: T, type: any): T
 {
     if (isSubTypeOf(value, type))
     {
-        throw new ArgumentError(`Value cannot be subtype of type ${type}.`);
+        throw new ArgumentError(`Value cannot be subtype of type ${type.name}.`);
     }
 
     return value;
@@ -273,9 +285,6 @@ export function cannotBeTypeOf<T>(value: T, type: string): T
  */
 export function cannotMatch(value: string, regex: RegExp)
 {
-    cannotBeNull(value);
-    cannotBeNull(regex);
-
     if (doesMatch(value, regex))
     {
         throw new ArgumentError(`Value cannot match ${regex}.`);

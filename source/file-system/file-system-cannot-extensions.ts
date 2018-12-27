@@ -10,12 +10,12 @@ import { doesDirectoryExist, doesFileExist, isAbsoluteDirectoryPath, isAbsoluteF
  */
 export function cannotBeAbsoluteDirectoryPath(value: string): string
 {
-	if (isAbsoluteDirectoryPath(value))
-	{
-		throw new ArgumentError("Value cannot be an absolute directory path.");
-	}
+    if (isAbsoluteDirectoryPath(value))
+    {
+        throw new ArgumentError("Value cannot be an absolute directory path.");
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -27,12 +27,12 @@ export function cannotBeAbsoluteDirectoryPath(value: string): string
  */
 export function cannotBeAbsoluteFilePath(value: string): string
 {
-	if (isAbsoluteFilePath(value))
-	{
-		throw new ArgumentError("Value cannot be an absolute file path.");
-	}
+    if (isAbsoluteFilePath(value))
+    {
+        throw new ArgumentError("Value cannot be an absolute file path.");
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -44,12 +44,12 @@ export function cannotBeAbsoluteFilePath(value: string): string
  */
 export function cannotBeEmptyDirectory(value: string): string
 {
-	if (isEmptyDirectory(value))
-	{
-		throw new ArgumentError("Value cannot be an empty directory.");
-	}
+    if (isEmptyDirectory(value))
+    {
+        throw new ArgumentError("Value cannot be an empty directory.");
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -61,12 +61,12 @@ export function cannotBeEmptyDirectory(value: string): string
  */
 export function cannotBeValidDirectoryPath(value: string): string
 {
-	if (isValidDirectoryPath(value))
-	{
-		throw new ArgumentError("Value cannot be a valid directory path.");
-	}
+    if (isValidDirectoryPath(value))
+    {
+        throw new ArgumentError("Value cannot be a valid directory path.");
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -78,12 +78,12 @@ export function cannotBeValidDirectoryPath(value: string): string
 */
 export function cannotBeValidFilePath(value: string): string
 {
-	if (isValidFilePath(value))
-	{
-		throw new ArgumentError("Value cannot be a valid file path.");
-	}
+    if (isValidFilePath(value))
+    {
+        throw new ArgumentError("Value cannot be a valid file path.");
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -95,12 +95,12 @@ export function cannotBeValidFilePath(value: string): string
  */
 export function cannotDirectoryExist(value: string): string
 {
-	if (doesDirectoryExist(value))
-	{
-		throw new ArgumentError("Directory cannot exist.");
-	}
+    if (doesDirectoryExist(value))
+    {
+        throw new ArgumentError("Directory cannot exist.");
+    }
 
-	return value;
+    return value;
 }
 
 /**
@@ -112,10 +112,10 @@ export function cannotDirectoryExist(value: string): string
  */
 export function cannotFileExist(value: string): string
 {
-	if (doesFileExist(value))
-	{
-		throw new ArgumentError("File cannot exist.");
-	}
+    if (doesFileExist(value))
+    {
+        throw new ArgumentError("File cannot exist.");
+    }
 
-	return value;
+    return value;
 }

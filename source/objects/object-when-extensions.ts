@@ -47,15 +47,14 @@ export function whenIs<T>(value: T, func: (value: T) => boolean, defaultValue: T
  * Returns default value when the original value is between the specified limits; otherwise returns the original value.
  *
  * @export
- * @template T - The value type.
- * @param {T} value - The value.
- * @param {T} minValue - The minimum value.
- * @param {T} maxValue - The maximum value.
+ * @param {(number|string)} value - The value.
+ * @param {(number|string)} minValue - The minimum value.
+ * @param {(number|string)} maxValue - The maximum value.
  * @param {boolean} [inclusive=true] - If set to true include the limits in the range.
- * @param {T} defaultValue - The default value.
- * @returns {T} - The default value when the original value is between the specified limits; otherwise returns the original value.
+ * @param {(number|string)} defaultValue - The default value.
+ * @returns {(number|string)} - The default value when the original value is between the specified limits; otherwise returns the original value.
  */
-export function whenIsBetween<T>(value: T, minValue: T, maxValue: T, inclusive: boolean = true, defaultValue: T): T
+export function whenIsBetween(value: number | string, minValue: number | string, maxValue: number | string, inclusive: boolean = true, defaultValue: number | string): number | string
 {
     if (isBetween(value, minValue, maxValue, inclusive))
     {

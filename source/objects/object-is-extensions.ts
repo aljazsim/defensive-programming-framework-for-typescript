@@ -1,5 +1,5 @@
 import { cannotBeNull } from "./object-cannot-extensions";
-import { mustBeLessThan } from "./object-must-extensions";
+import { mustBeLessThanOrEqualTo } from "./object-must-extensions";
 
 /**
  * Determines whether the specified value matches the specified regular expression.
@@ -13,7 +13,7 @@ export function doesMatch(value: string, regex: RegExp): boolean
 {
     cannotBeNull(regex);
 
-    if (value == null)
+    if (value === null)
     {
         return false;
     }
@@ -44,17 +44,17 @@ export function is<T>(value: T, func: (value: T) => boolean): boolean
  *
  * @export
  * @template T - The value type.
- * @param {T} value - The value.
- * @param {T} minValue - The minimum value.
- * @param {T} maxValue - The maximum value.
+ * @param {(number|string)} value - The value.
+ * @param {(number|string)} minValue - The minimum value.
+ * @param {(number|string)} maxValue - The maximum value.
  * @param {boolean} [inclusive=true] - If set to true include the limits in the range.
  * @returns {boolean} - True if the specified value is between the specified limits; otherwise, false.
  */
-export function isBetween<T>(value: T, minValue: T, maxValue: T, inclusive: boolean = true): boolean
+export function isBetween(value: number | string, minValue: number | string, maxValue: number | string, inclusive: boolean = true): boolean
 {
     cannotBeNull(minValue);
     cannotBeNull(maxValue);
-    mustBeLessThan(minValue, maxValue);
+    mustBeLessThanOrEqualTo(minValue, maxValue);
 
     if (isNull(value))
     {
@@ -64,11 +64,11 @@ export function isBetween<T>(value: T, minValue: T, maxValue: T, inclusive: bool
     {
         if (inclusive)
         {
-            return value <= minValue && value >= maxValue;
+            return value >= minValue && value <= maxValue;
         }
         else
         {
-            return value < minValue && value > maxValue;
+            return value > minValue && value < maxValue;
         }
     }
 }
@@ -84,7 +84,20 @@ export function isBetween<T>(value: T, minValue: T, maxValue: T, inclusive: bool
  */
 export function isEqualTo<T>(value1: T, value2: T): boolean
 {
-    return value1 === value2;
+    if (value1 === null &&
+        value2 === undefined)
+    {
+        return true;
+    }
+    else if (value1 === undefined &&
+        value2 === null)
+    {
+        return true;
+    }
+    else
+    {
+        return value1 === value2;
+    }
 }
 
 /**
@@ -98,10 +111,16 @@ export function isEqualTo<T>(value1: T, value2: T): boolean
  */
 export function isGreaterThan<T>(value: T, minValue: T): boolean
 {
-    cannotBeNull(value);
     cannotBeNull(minValue);
 
-    return value > minValue;
+    if (isNull(value))
+    {
+        return false;
+    }
+    else
+    {
+        return value > minValue;
+    }
 }
 
 /**
@@ -115,10 +134,16 @@ export function isGreaterThan<T>(value: T, minValue: T): boolean
  */
 export function isGreaterThanOrEqualTo<T>(value: T, minValue: T): boolean
 {
-    cannotBeNull(value);
     cannotBeNull(minValue);
 
-    return value >= minValue;
+    if (isNull(value))
+    {
+        return false;
+    }
+    else
+    {
+        return value >= minValue;
+    }
 }
 
 /**
@@ -132,7 +157,14 @@ export function isInteger(value: number)
 {
     cannotBeNull(value);
 
-    return value === Math.round(value);
+    if (isNull(value))
+    {
+        return false;
+    }
+    else
+    {
+        return value === Math.round(value);
+    }
 }
 
 /**
@@ -146,10 +178,16 @@ export function isInteger(value: number)
  */
 export function isLessThan<T>(value: T, maxValue: T): boolean
 {
-    cannotBeNull(value);
     cannotBeNull(maxValue);
 
-    return value < maxValue;
+    if (isNull(value))
+    {
+        return false;
+    }
+    else
+    {
+        return value < maxValue;
+    }
 }
 
 /**
@@ -163,10 +201,16 @@ export function isLessThan<T>(value: T, maxValue: T): boolean
  */
 export function isLessThanOrEqualTo<T>(value: T, maxValue: T): boolean
 {
-    cannotBeNull(value);
     cannotBeNull(maxValue);
 
-    return value <= maxValue;
+    if (isNull(value))
+    {
+        return false;
+    }
+    else
+    {
+        return value <= maxValue;
+    }
 }
 
 /**
@@ -254,5 +298,5 @@ export function isTypeOf<T>(value: T, type: string): boolean
 {
     cannotBeNull(type);
 
-    return typeof value !== type;
+    return typeof value === type;
 }

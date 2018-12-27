@@ -27,14 +27,13 @@ export function mustBe<T>(value: T, func: (value: T) => boolean): T
  * Returns original value if it is between the specified limits; otherwise throws a new ArgumentError.
  *
  * @export
- * @template T - The value type.
- * @param {T} value - The value.
- * @param {T} minValue -The minimum value type.
- * @param {T} maxValue - The maximum value type.
+ * @param {(number|string)} value - The value.
+ * @param {(number|string)} minValue -The minimum value type.
+ * @param {(number|string)} maxValue - The maximum value type.
  * @param {boolean} [inclusive=true] - If set to true include limits in the range.
- * @returns {T} - The original value if it is between the specified limits; otherwise throws a new ArgumentError.
+ * @returns {(number|string)} - The original value if it is between the specified limits; otherwise throws a new ArgumentError.
  */
-export function mustBeBetween<T>(value: T, minValue: T, maxValue: T, inclusive: boolean = true): T
+export function mustBeBetween(value: number | string, minValue: number | string, maxValue: number | string, inclusive: boolean = true): number | string
 {
     cannotBeNull(minValue);
     cannotBeNull(maxValue);
@@ -131,7 +130,7 @@ export function mustBeInteger(value: number)
  * @param {T} maxValue - The maximum value.
  * @returns {T} - The original value if it is less than or equal to the specified limit; otherwise throws a new ArgumentError.
  */
-export function mustBeLessOrEqualToThan<T>(value: T, maxValue: T): T
+export function mustBeLessThanOrEqualTo<T>(value: T, maxValue: T): T
 {
     if (!isLessThanOrEqualTo(value, maxValue))
     {
