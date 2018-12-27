@@ -11,7 +11,7 @@
         "build-watch": "tsc --watch --project ./tsconfig.json",
         "test": "mocha --require ts-node/register ./**/*.test.ts",
         "test-watch": "mocha --watch --watch-extensions ts --reporter min --require ts-node/register ./**/*.test.ts",
-        "test-coverage": "nyc mocha --require ts-node/register ./**/*.test.ts",
+        "test-coverage": "nyc mocha --require ts-node/register ./**/*.test.ts && start ./coverage/index.html",
         "lint": "tslint --project ./tsconfig.json --config ./tslint.json",
         "link": "npm link ./source",
         "publish": "npm publish",
