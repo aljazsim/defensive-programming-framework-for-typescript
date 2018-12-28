@@ -1,5 +1,4 @@
 import { ArgumentError } from "../argument-error";
-import { cannotBeNull } from "./object-cannot-extensions";
 import { doesMatch, is, isBetween, isEqualTo, isGreaterThan, isGreaterThanOrEqualTo, isInteger, isLessThan, isLessThanOrEqualTo, isNull, isNullOrWhiteSpace, isOneOf, isSubTypeOf, isTypeOf } from "./object-is-extensions";
 
 /**
@@ -13,11 +12,9 @@ import { doesMatch, is, isBetween, isEqualTo, isGreaterThan, isGreaterThanOrEqua
  */
 export function mustBe<T>(value: T, func: (value: T) => boolean): T
 {
-    cannotBeNull(func);
-
     if (!is(value, func))
     {
-        throw new ArgumentError("Expression cannot be true.");
+        throw new ArgumentError("Expression must be true.");
     }
 
     return value;
@@ -35,13 +32,17 @@ export function mustBe<T>(value: T, func: (value: T) => boolean): T
  */
 export function mustBeBetween(value: number | string, minValue: number | string, maxValue: number | string, inclusive: boolean = true): number | string
 {
-    cannotBeNull(minValue);
-    cannotBeNull(maxValue);
-    mustBeLessThan(minValue, maxValue);
-
-    if (!isBetween(value, minValue, maxValue))
+    if (!isBetween(value, minValue, maxValue, inclusive))
     {
-        throw new ArgumentError(`Value must be between ${minValue} and ${maxValue}.`);
+        if (inclusive)
+        {
+            throw new ArgumentError(`Value must be between ${minValue} and ${maxValue} inclusive.`);
+        }
+        else
+        {
+            throw new ArgumentError(`Value must be between ${minValue} and ${maxValue}.`);
+        }
+
     }
 
     return value;
@@ -205,11 +206,16 @@ export function mustBeNullOrWhiteSpace(value: string): string
  */
 export function mustBeOneOf<T>(value: T, ...set: T[]): T
 {
-    cannotBeNull(set);
-
     if (!isOneOf(value, ...set))
     {
-        throw new ArgumentError(`Value must be one of ${set}.`);
+        if (isNull(set))
+        {
+            throw new ArgumentError(`Value must be one of ${set}.`);
+        }
+        else
+        {
+            throw new ArgumentError(`Value must be one of [${set.join(", ")}].`);
+        }
     }
 
     return value;
@@ -226,11 +232,9 @@ export function mustBeOneOf<T>(value: T, ...set: T[]): T
  */
 export function mustBeSubTypeOf<T>(value: T, type: any): T
 {
-    cannotBeNull(type);
-
     if (!isSubTypeOf(value, type))
     {
-        throw new ArgumentError(`Value must be subtype of type ${type}.`);
+        throw new ArgumentError(`Value must be subtype of type ${type.name}.`);
     }
 
     return value;
@@ -247,8 +251,6 @@ export function mustBeSubTypeOf<T>(value: T, type: any): T
  */
 export function mustBeTypeOf<T>(value: T, type: string): T
 {
-    cannotBeNull(type);
-
     if (!isTypeOf(value, type))
     {
         throw new ArgumentError(`Value must be of type ${type}.`);
@@ -267,9 +269,6 @@ export function mustBeTypeOf<T>(value: T, type: string): T
  */
 export function mustMatch(value: string, regex: RegExp)
 {
-    cannotBeNull(value);
-    cannotBeNull(regex);
-
     if (!doesMatch(value, regex))
     {
         throw new ArgumentError(`Value must match ${regex}.`);

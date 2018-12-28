@@ -54,7 +54,7 @@ export function whenIsNot<T>(value: T, func: (value: T) => boolean, defaultValue
  * @param {(number | string)} defaultValue - The default value.
  * @returns {(number | string)} - The default value when the original value is not between the specified limits; otherwise returns the original value.
  */
-export function whenIsNotBetween(value: number | string, minValue: number | string, maxValue: number | string, inclusive: boolean = true, defaultValue: number): number | string
+export function whenIsNotBetween(value: number | string, minValue: number | string, maxValue: number | string, inclusive: boolean = true, defaultValue: number | string): number | string
 {
     if (!isBetween(value, minValue, maxValue, inclusive))
     {

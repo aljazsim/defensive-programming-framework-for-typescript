@@ -1,7 +1,6 @@
 import { ArgumentError } from "../argument-error";
 import { isEmpty } from "../collections/collection-is-extensions";
 import { doesMatch, is, isBetween, isEqualTo, isGreaterThan, isGreaterThanOrEqualTo, isInteger, isLessThan, isLessThanOrEqualTo, isNull, isNullOrWhiteSpace, isOneOf, isSubTypeOf, isTypeOf } from "./object-is-extensions";
-import { mustBeLessThanOrEqualTo } from "./object-must-extensions";
 
 /**
  * Returns original value if the specified function returns false; otherwise throws a new ArgumentError.
@@ -14,8 +13,6 @@ import { mustBeLessThanOrEqualTo } from "./object-must-extensions";
  */
 export function cannotBe<T>(value: T, func: (value: T) => boolean): T
 {
-    cannotBeNull(func);
-
     if (is(value, func))
     {
         throw new ArgumentError("Expression cannot be true.");
@@ -37,10 +34,6 @@ export function cannotBe<T>(value: T, func: (value: T) => boolean): T
  */
 export function cannotBeBetween(value: number | string, minValue: number | string, maxValue: number | string, inclusive: boolean = true): number | string
 {
-    cannotBeNull(minValue);
-    cannotBeNull(maxValue);
-    mustBeLessThanOrEqualTo(minValue, maxValue);
-
     if (isBetween(value, minValue, maxValue, inclusive))
     {
         if (inclusive)

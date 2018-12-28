@@ -9,9 +9,9 @@
     "scripts": {
         "build": "tsc --project ./tsconfig.json",
         "build-watch": "tsc --watch --project ./tsconfig.json",
-        "test": "mocha --require ts-node/register ./**/*.test.ts",
-        "test-watch": "mocha --watch --watch-extensions ts --reporter min --require ts-node/register ./**/*.test.ts",
-        "test-coverage": "nyc mocha --require ts-node/register ./**/*.test.ts && start ./coverage/index.html",
+        "test": "ts-mocha --project ./tsconfig.json --recursive ./test/**/*.ts",
+        "test-watch": "ts-mocha --project ./tsconfig.json --watch --watch-extensions ts --reporter min --bail --recursive ./test/**/*.ts",
+        "test-coverage": "nyc mocha --require ts-node/register --recursive ./test/**/*.ts && start ./coverage/index.html",
         "lint": "tslint --project ./tsconfig.json --config ./tslint.json",
         "link": "npm link ./source",
         "publish": "npm publish",
@@ -30,6 +30,11 @@
             "html",
             "text"
         ],
+        "require": [
+            "ts-node/register"
+        ],
+        "sourceMap": true,
+        "instrument": true,
         "all": true
     },
     "keywords": [
@@ -40,7 +45,8 @@
         "parameter",
         "input"
     ],
-    "dependencies": {
+    "dependencies": {},
+    "devDependencies": {
         "@types/node": "^10.12.18",
         "@types/mocha": "5.2.5",
         "@types/chai": "4.1.7",
@@ -50,6 +56,8 @@
         "tslint": "^5.12.0",
         "ts-node": "7.0.1",
         "typescript": "^3.2.2",
-        "nyc": "13.1.0"
+        "nyc": "13.1.0",
+        "ts-mocha": "2.0.0",
+        "source-map-support": "^0.5.9"
     }
 }

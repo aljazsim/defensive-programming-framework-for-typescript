@@ -5,10 +5,11 @@
 /node_modules
 
 # IDEs and editors
-.vscode
+/.vscode
 
 # code coverage
-.nyc_output
+/.nyc_output
+/coverage
 
 # misc
 *.log
