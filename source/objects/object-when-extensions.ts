@@ -265,7 +265,7 @@ export function whenIsSubTypeOf<T>(value: T, type: any, defaultValue: T): T
  * Returns default value when the original value is of the specified type; otherwise returns the original value.
  *
  * @export
- * @template T - The value typ.e
+ * @template T - The value type.
  * @param {T} value - The value.
  * @param {*} type - The type.
  * @param {T} defaultValue - The default value.
