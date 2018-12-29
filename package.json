@@ -58,6 +58,7 @@
         "typescript": "^3.2.2",
         "nyc": "13.1.0",
         "ts-mocha": "2.0.0",
-        "source-map-support": "^0.5.9"
+        "source-map-support": "^0.5.9",
+        "rimraf": "2.6.2"
     }
 }

@@ -1,5 +1,5 @@
 import { ArgumentError } from "../argument-error";
-import { doesDirectoryExist, doesFileExist, isAbsoluteDirectoryPath, isAbsoluteFilePath, isEmptyDirectory, isValidDirectoryPath, isValidFilePath } from "./file-system-is-extensions";
+import { doesDirectoryExist, doesFileExist, isAbsoluteDirectoryPath, isAbsoluteFilePath, isEmptyDirectory, isValidDirectoryPath, isValidFileName, isValidFilePath } from "./file-system-is-extensions";
 
 /**
  * Returns original value if the specified value is an absolute directory path; otherwise throws a new ArgumentError.
@@ -64,6 +64,23 @@ export function mustBeValidDirectoryPath(value: string): string
     if (!isValidDirectoryPath(value))
     {
         throw new ArgumentError("Value must be a valid directory path.");
+    }
+
+    return value;
+}
+
+/**
+* Returns original value if the specified value is a valid file name; otherwise throws a new ArgumentError.
+*
+* @export
+* @param {string} value - The value.
+* @returns {string} - The original value if the specified value is a valid file name; otherwise throws a new ArgumentError.
+*/
+export function mustBeValidFileName(value: string): string
+{
+    if (isValidFileName(value))
+    {
+        throw new ArgumentError("Value must be a valid file name.");
     }
 
     return value;

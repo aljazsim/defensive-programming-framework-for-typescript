@@ -41,8 +41,8 @@ describe("file system is extensions", () =>
     {
         describe("success", () =>
         {
-            it("should return true for null", () => expect(isAbsoluteDirectoryPath(null)).to.equal(true));
-            it("should return true for undefined", () => expect(isAbsoluteDirectoryPath(undefined)).to.equal(true));
+            it("should return true for null", () => expect(isAbsoluteDirectoryPath(null)).to.equal(false));
+            it("should return true for undefined", () => expect(isAbsoluteDirectoryPath(undefined)).to.equal(false));
 
             it("should return true for absolute directory path", () => expect(isAbsoluteDirectoryPath("C:\\")).to.equal(true));
             it("should return true for absolute directory path", () => expect(isAbsoluteDirectoryPath("C:\\temp")).to.equal(true));
@@ -75,8 +75,8 @@ describe("file system is extensions", () =>
     {
         describe("success", () =>
         {
-            it("should return true for null", () => expect(isAbsoluteFilePath(null)).to.equal(true));
-            it("should return true for undefined", () => expect(isAbsoluteFilePath(undefined)).to.equal(true));
+            it("should return true for null", () => expect(isAbsoluteFilePath(null)).to.equal(false));
+            it("should return true for undefined", () => expect(isAbsoluteFilePath(undefined)).to.equal(false));
 
             it("should return true for absolute file path", () => expect(isAbsoluteFilePath("C:\\")).to.equal(true));
             it("should return true for absolute file path", () => expect(isAbsoluteFilePath("C:\\temp")).to.equal(true));
@@ -134,9 +134,9 @@ describe("file system is extensions", () =>
             it("should return true valid directory path", () => expect(isValidDirectoryPath("C:\\temp\\")).to.equal(true));
             it("should return true valid directory path", () => expect(isValidDirectoryPath("C:/temp")).to.equal(true));
             it("should return true valid directory path", () => expect(isValidDirectoryPath("C:/temp/")).to.equal(true));
-            it("should return true valid directory path", () => expect(isValidFilePath("temp")).to.equal(true));
-            it("should return true valid directory path", () => expect(isValidFilePath("./temp")).to.equal(true));
-            it("should return true valid directory path", () => expect(isValidFilePath("./temp")).to.equal(true));
+            it("should return true valid directory path", () => expect(isValidDirectoryPath("temp")).to.equal(true));
+            it("should return true valid directory path", () => expect(isValidDirectoryPath("./temp")).to.equal(true));
+            it("should return true valid directory path", () => expect(isValidDirectoryPath("./temp")).to.equal(true));
 
             // TODO: write tests for invalid directory paths
             // // it("should return false invalid directory path", () => expect(isValidDirectoryPath("???")).to.equal(false));
@@ -178,12 +178,12 @@ describe("file system is extensions", () =>
             it("should return true valid file name", () => expect(isValidFileName("temp")).to.equal(true));
             it("should return true valid file name", () => expect(isValidFileName("temp.txt")).to.equal(true));
 
-            it("should return true valid file name", () => expect(isValidFileName("C:\\temp.txt")).to.equal(false));
-            it("should return true valid file name", () => expect(isValidFileName("C:\\temp\\temp.txt")).to.equal(false));
-            it("should return true valid file name", () => expect(isValidFileName("C:/temp\\temp.txt")).to.equal(false));
-            // // it("should return true valid file name", () => expect(isValidFileName("C:/temp/temp.txt")).to.equal(false));
-            // // it("should return true valid file name", () => expect(isValidFileName("./temp.txt")).to.equal(false));
-            // // it("should return true valid file name", () => expect(isValidFileName("./temp/temp.txt")).to.equal(false));
+            it("should return false for file path", () => expect(isValidFileName("C:\\temp.txt")).to.equal(false));
+            it("should return false for file path", () => expect(isValidFileName("C:\\temp\\temp.txt")).to.equal(false));
+            it("should return false for file path", () => expect(isValidFileName("C:/temp\\temp.txt")).to.equal(false));
+            // // it("should return false for file path", () => expect(isValidFileName("C:/temp/temp.txt")).to.equal(false));
+            // // it("should return false for file path", () => expect(isValidFileName("./temp.txt")).to.equal(false));
+            // // it("should return false for file path", () => expect(isValidFileName("./temp/temp.txt")).to.equal(false));
 
             // TODO: write tests for invalid file names
             // // it("should return false invalid file name", () => expect(isValidFileName("???")).to.equal(false));

@@ -1,6 +1,7 @@
 import { ArgumentError } from "../argument-error";
+import { cannotBeNull } from "../objects/object-cannot-extensions";
 import { isNull } from "../objects/object-is-extensions";
-import { contains, containsDuplicates, containsNull, containsOnlyNull, isEmpty, isEqualTo2, isNullOrEmpty, isOneOf2 } from "./collection-is-extensions";
+import { contains, containsDuplicates, containsNull, containsOnlyNull, isEmpty, isEqualTo2, isOneOf2 } from "./collection-is-extensions";
 
 // #region Functions (8)
 
@@ -59,10 +60,8 @@ export function cannotBeEqualTo2<T>(value1: Array<T>, value2: Array<T>, ignoreOr
  */
 export function cannotBeNullOrEmpty<T>(value: Array<T> | string): Array<T> | string
 {
-    if (isNullOrEmpty(value))
-    {
-        throw new ArgumentError("Value cannot be null or empty.");
-    }
+    cannotBeNull(value);
+    cannotBeEmpty(value);
 
     return value;
 }

@@ -63,10 +63,10 @@ describe("collections cannot extensions", () =>
 
         describe("failure", () =>
         {
-            it("should fail for null", () => expect(() => cannotBeNullOrEmpty(null)).to.throw(ArgumentError, "Value cannot be null or empty."));
-            it("should fail for undefined", () => expect(() => cannotBeNullOrEmpty(undefined)).to.throw(ArgumentError, "Value cannot be null or empty."));
-            it("should fail for empty string", () => expect(() => cannotBeNullOrEmpty("")).to.throw(ArgumentError, "Value cannot be null or empty."));
-            it("should fail for empty array", () => expect(() => cannotBeNullOrEmpty([])).to.throw(ArgumentError, "Value cannot be null or empty."));
+            it("should fail for null", () => expect(() => cannotBeNullOrEmpty(null)).to.throw(ArgumentError, "Value cannot be null."));
+            it("should fail for undefined", () => expect(() => cannotBeNullOrEmpty(undefined)).to.throw(ArgumentError, "Value cannot be null."));
+            it("should fail for empty string", () => expect(() => cannotBeNullOrEmpty("")).to.throw(ArgumentError, "Value cannot be empty."));
+            it("should fail for empty array", () => expect(() => cannotBeNullOrEmpty([])).to.throw(ArgumentError, "Value cannot be empty."));
         });
     });
 

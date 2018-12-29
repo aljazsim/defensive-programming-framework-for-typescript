@@ -1,4 +1,4 @@
-import { doesDirectoryExist, doesFileExist, isAbsoluteDirectoryPath, isAbsoluteFilePath, isEmptyDirectory, isValidDirectoryPath, isValidFilePath } from "./file-system-is-extensions";
+import { doesDirectoryExist, doesFileExist, isAbsoluteDirectoryPath, isAbsoluteFilePath, isEmptyDirectory, isValidDirectoryPath, isValidFileName, isValidFilePath } from "./file-system-is-extensions";
 
 /**
  * Returns default value when the specified directory does exist; otherwise returns the original value.
@@ -10,6 +10,25 @@ import { doesDirectoryExist, doesFileExist, isAbsoluteDirectoryPath, isAbsoluteF
 export function whenDoesDirectoryExist(value, defaultValue: string): string
 {
     if (doesDirectoryExist(value))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
+}
+
+/**
+* Returns default value when the specified file name is valid; otherwise returns the original value.
+*
+* @export
+* @param {string} value - The value.
+* @returns {string} - The default value when the specified file name is valid; otherwise returns the original value.
+*/
+export function whenIsValidFileName(value: string, defaultValue: string): string
+{
+    if (isValidFileName(value))
     {
         return defaultValue;
     }

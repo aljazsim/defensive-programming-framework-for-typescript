@@ -1,8 +1,9 @@
-import * as fs from "fs";
-import * as path from "path";
+import { cannotBeNullOrEmpty } from "../collections/collection-cannot-extensions";
 import { cannotBeNullOrWhiteSpace } from "../objects/object-cannot-extensions";
 import { isNull, isNullOrWhiteSpace } from "../objects/object-is-extensions";
 import { mustBeValidDirectoryPath, mustBeValidFilePath } from "./file-system-must-extensions";
+import * as fs from "fs";
+import * as path from "path";
 
 /**
  * Determines whether the specified directory exists.
@@ -28,6 +29,7 @@ export function doesDirectoryExist(value: string): boolean
  */
 export function doesFileExist(value: string): boolean
 {
+    cannotBeNullOrWhiteSpace(value);
     mustBeValidFilePath(value);
 
     return fs.existsSync(value);
@@ -44,7 +46,14 @@ export function isAbsoluteDirectoryPath(value: string): boolean
 {
     mustBeValidDirectoryPath(value);
 
-    return path.isAbsolute(value);
+    if (isNull(value))
+    {
+        return false;
+    }
+    else
+    {
+        return path.isAbsolute(value);
+    }
 }
 
 /**
@@ -58,18 +67,26 @@ export function isAbsoluteFilePath(value: string): boolean
 {
     mustBeValidFilePath(value);
 
-    return path.isAbsolute(value);
+    if (isNull(value))
+    {
+        return false;
+    }
+    else
+    {
+        return path.isAbsolute(value);
+    }
 }
 
 /**
- * Determines whether specified direcory is empty.
+ * Determines whether specified directory is empty.
  *
  * @export
  * @param {string} value - The value.
- * @returns {boolean} - True if specified direcory is empty; otherwise, false.
+ * @returns {boolean} - True if specified directory is empty; otherwise, false.
  */
 export function isEmptyDirectory(value: string): boolean
 {
+    cannotBeNullOrEmpty(value);
     mustBeValidDirectoryPath(value);
 
     if (doesDirectoryExist(value))
@@ -101,7 +118,8 @@ export function isValidDirectoryPath(value: string): boolean
     }
     else
     {
-        return path.dirname(value) === value;
+        // TODO: check for invalid characters for different operating systems
+        return true;
     }
 }
 
@@ -124,6 +142,35 @@ export function isValidFilePath(value: string): boolean
     }
     else
     {
-        return path.dirname(value) !== value;
+        // TODO: check for invalid characters
+        return true;
+    }
+}
+
+/**
+ * Determines whether the specified value is a valid file name.
+ *
+ * @export
+ * @param {string} value - The value.
+ * @returns {boolean} - True if the specified value is a valid file name; otherwise, false.
+ */
+export function isValidFileName(value: string): boolean
+{
+    if (isNull(value))
+    {
+        return true;
+    }
+    else if (isNullOrWhiteSpace(value))
+    {
+        return false;
+    }
+    else if (value.indexOf(path.sep) > -1)
+    {
+        return false;
+    }
+    else
+    {
+        // TODO: check for invalid characters
+        return true;
     }
 }
