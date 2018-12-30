@@ -48,7 +48,7 @@ export function isAbsoluteDirectoryPath(value: string): boolean
 
     if (isNull(value))
     {
-        return false;
+        return true;
     }
     else
     {
@@ -69,7 +69,7 @@ export function isAbsoluteFilePath(value: string): boolean
 
     if (isNull(value))
     {
-        return false;
+        return true;
     }
     else
     {

@@ -41,8 +41,8 @@ describe("file system is extensions", () =>
     {
         describe("success", () =>
         {
-            it("should return true for null", () => expect(isAbsoluteDirectoryPath(null)).to.equal(false));
-            it("should return true for undefined", () => expect(isAbsoluteDirectoryPath(undefined)).to.equal(false));
+            it("should return true for null", () => expect(isAbsoluteDirectoryPath(null)).to.equal(true));
+            it("should return true for undefined", () => expect(isAbsoluteDirectoryPath(undefined)).to.equal(true));
 
             it("should return true for absolute directory path", () => expect(isAbsoluteDirectoryPath("C:\\")).to.equal(true));
             it("should return true for absolute directory path", () => expect(isAbsoluteDirectoryPath("C:\\temp")).to.equal(true));
@@ -75,8 +75,8 @@ describe("file system is extensions", () =>
     {
         describe("success", () =>
         {
-            it("should return true for null", () => expect(isAbsoluteFilePath(null)).to.equal(false));
-            it("should return true for undefined", () => expect(isAbsoluteFilePath(undefined)).to.equal(false));
+            it("should return true for null", () => expect(isAbsoluteFilePath(null)).to.equal(true));
+            it("should return true for undefined", () => expect(isAbsoluteFilePath(undefined)).to.equal(true));
 
             it("should return true for absolute file path", () => expect(isAbsoluteFilePath("C:\\")).to.equal(true));
             it("should return true for absolute file path", () => expect(isAbsoluteFilePath("C:\\temp")).to.equal(true));

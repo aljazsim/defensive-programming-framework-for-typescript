@@ -41,6 +41,9 @@ describe("file system must extensions", () =>
     {
         describe("success", () =>
         {
+            it("should fail for null", () => expect(mustBeAbsoluteDirectoryPath(null)).to.equal(null));
+            it("should fail for undefined", () => expect(mustBeAbsoluteDirectoryPath(undefined)).to.equal(undefined));
+
             it("should return absolute directory path", () => expect(mustBeAbsoluteDirectoryPath("C:\\")).to.equal("C:\\"));
             it("should return absolute directory path", () => expect(mustBeAbsoluteDirectoryPath("C:\\temp")).to.equal("C:\\temp"));
             it("should return absolute directory path", () => expect(mustBeAbsoluteDirectoryPath("C:\\temp\\")).to.equal("C:\\temp\\"));
@@ -50,16 +53,10 @@ describe("file system must extensions", () =>
             it("should return absolute directory path", () => expect(mustBeAbsoluteDirectoryPath("C:\\temp\\sub_folder\\")).to.equal("C:\\temp\\sub_folder\\"));
             it("should return absolute directory path", () => expect(mustBeAbsoluteDirectoryPath("C:\\temp\\sub-folder\\")).to.equal("C:\\temp\\sub-folder\\"));
             it("should return absolute directory path", () => expect(mustBeAbsoluteDirectoryPath("C:\\temp\\sub-folder\\1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111")).to.equal("C:\\temp\\sub-folder\\1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"));
-
-            // TODO: write tests for invalid directory paths
-            // // it("should fail for invalid file path", () => expect(() => isAbsoluteFilePath("$~/\\")).to.throw(ArgumentError, "Value must be a valid directory path."));
         });
 
         describe("failure", () =>
         {
-            it("should fail for null", () => expect(() => mustBeAbsoluteDirectoryPath(null)).to.throw(ArgumentError, "Value must be an absolute directory path."));
-            it("should fail for undefined", () => expect(() => mustBeAbsoluteDirectoryPath(undefined)).to.throw(ArgumentError, "Value must be an absolute directory path."));
-
             it("should fail for relative directory path", () => expect(() => mustBeAbsoluteDirectoryPath(".\\temp\\")).to.throw(ArgumentError, "Value must be an absolute directory path."));
             it("should fail for relative directory path", () => expect(() => mustBeAbsoluteDirectoryPath(".\\temp")).to.throw(ArgumentError, "Value must be an absolute directory path."));
             it("should fail for relative directory path", () => expect(() => mustBeAbsoluteDirectoryPath("./temp")).to.throw(ArgumentError, "Value must be an absolute directory path."));
@@ -68,6 +65,8 @@ describe("file system must extensions", () =>
             it("should fail for relative directory path", () => expect(() => mustBeAbsoluteDirectoryPath("../temp/")).to.throw(ArgumentError, "Value must be an absolute directory path."));
             it("should fail for relative directory path", () => expect(() => mustBeAbsoluteDirectoryPath("temp")).to.throw(ArgumentError, "Value must be an absolute directory path."));
             it("should fail for relative directory path", () => expect(() => mustBeAbsoluteDirectoryPath("temp.txt")).to.throw(ArgumentError, "Value must be an absolute directory path."));
+            // TODO: write tests for invalid directory paths
+            // // it("should fail for invalid file path", () => expect(() => isAbsoluteFilePath("$~/\\")).to.throw(ArgumentError, "Value must be a valid directory path."));
         });
     });
 
@@ -75,8 +74,8 @@ describe("file system must extensions", () =>
     {
         describe("success", () =>
         {
-            it("should return true for null", () => expect(() => mustBeAbsoluteFilePath(null)).to.throw(ArgumentError, "Value must be an absolute file path."));
-            it("should return true for undefined", () => expect(() => mustBeAbsoluteFilePath(undefined)).to.throw(ArgumentError, "Value must be an absolute file path."));
+            it("should return true for null", () => expect(mustBeAbsoluteFilePath(null)).to.equal(null));
+            it("should return true for undefined", () => expect(mustBeAbsoluteFilePath(undefined)).to.equal(undefined));
 
             it("should return absolute file path", () => expect(mustBeAbsoluteFilePath("C:\\")).to.equal("C:\\"));
             it("should return absolute file path", () => expect(mustBeAbsoluteFilePath("C:\\temp")).to.equal("C:\\temp"));
