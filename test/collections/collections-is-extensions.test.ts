@@ -119,6 +119,10 @@ describe("collections cannot extensions", () =>
             it("should return false", () => expect(isEqualTo2([1, 2, 3], [3, 2, 1])).to.equal(false));
             it("should return true", () => expect(isEqualTo2([1, 2, 3], [3, 2, 1], true)).to.equal(true));
             it("should return true", () => expect(isEqualTo2(["a", "b", "c"], ["a", "b", "c"])).to.equal(true));
+
+            it("should return true", () => expect(isEqualTo2(["a", "b", "c"], ["a", "b", "d"])).to.equal(false));
+            it("should return true", () => expect(isEqualTo2([1, 2, 3], [3, 4, 5], true)).to.equal(false));
+
         });
     });
 

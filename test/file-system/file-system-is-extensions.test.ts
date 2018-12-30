@@ -15,7 +15,7 @@ describe("file system is extensions", () =>
         {
             it("should fail for null directory path", () => expect(() => doesDirectoryExist(null)).to.throw(ArgumentError, "Value cannot be null."));
             it("should fail for empty directory path", () => expect(() => doesDirectoryExist("")).to.throw(ArgumentError, "Value cannot be empty."));
-            it("should fail for whitespace directory path", () => expect(() => doesDirectoryExist("  \t")).to.throw(ArgumentError, "Value cannot be whitespace."));
+            it("should fail for whitespace directory path", () => expect(() => doesDirectoryExist("  \t")).to.throw(ArgumentError, "Value cannot be white space."));
 
             // TODO: write tests for invalid directory paths
             // // it("should fail for invalid directory path", () => expect(() => doesDirectoryExist("$~/\\")).to.throw(ArgumentError, "Value must be a valid directory path."));
@@ -30,7 +30,7 @@ describe("file system is extensions", () =>
         {
             it("should fail for null file path", () => expect(() => doesFileExist(null)).to.throw(ArgumentError, "Value cannot be null."));
             it("should fail for empty file path", () => expect(() => doesFileExist("")).to.throw(ArgumentError, "Value cannot be empty."));
-            it("should fail for whitespace file path", () => expect(() => doesFileExist("  \t")).to.throw(ArgumentError, "Value cannot be whitespace."));
+            it("should fail for whitespace file path", () => expect(() => doesFileExist("  \t")).to.throw(ArgumentError, "Value cannot be white space."));
 
             // TODO: write tests for invalid file paths
             // // it("should fail for invalid file path", () => expect(() => doesFileExist("$~/\\")).to.throw(ArgumentError, "Value must be a valid directory path."));

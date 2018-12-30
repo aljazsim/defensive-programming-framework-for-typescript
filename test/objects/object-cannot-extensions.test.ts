@@ -1,6 +1,7 @@
 import "mocha";
 import { ArgumentError } from "../../source/argument-error";
-import { cannotBe, cannotBeBetween, cannotBeEqualTo, cannotBeGreaterThan, cannotBeGreaterThanOrEqualTo, cannotBeLessThan, cannotBeLessThanOrEqualTo, cannotBeNull, cannotBeOneOf, cannotBeSubTypeOf, cannotBeTypeOf, cannotMatch } from "../../source/objects/object-cannot-extensions";
+import { cannotBeNullOrEmpty } from "../../source/collections/collection-cannot-extensions";
+import { cannotBe, cannotBeBetween, cannotBeEqualTo, cannotBeGreaterThan, cannotBeGreaterThanOrEqualTo, cannotBeInteger, cannotBeLessThan, cannotBeLessThanOrEqualTo, cannotBeNull, cannotBeNullOrWhiteSpace, cannotBeOneOf, cannotBeSubTypeOf, cannotBeTypeOf, cannotMatch } from "../../source/objects/object-cannot-extensions";
 import { expect } from "chai";
 
 describe("object cannot extensions", () =>
@@ -200,6 +201,28 @@ describe("object cannot extensions", () =>
         });
     });
 
+    describe("cannotBeInteger()", () =>
+    {
+        describe("success", () =>
+        {
+            it("should not be integer", () => expect(cannotBeInteger(null)).to.equal(null));
+            it("should not be integer", () => expect(cannotBeInteger(undefined)).to.equal(undefined));
+
+            it("should not be integer", () => expect(cannotBeInteger(3.1)).to.equal(3.1));
+            it("should not be integer", () => expect(cannotBeInteger(3.14)).to.equal(3.14));
+            it("should not be integer", () => expect(cannotBeInteger(3.14159265359)).to.equal(3.14159265359));
+        });
+
+        describe("failure", () =>
+        {
+            it("should fail for being an integer", () => expect(() => cannotBeInteger(-100)).to.to.throw(ArgumentError, "Value cannot be an integer."));
+            it("should fail for being an integer", () => expect(() => cannotBeInteger(-1)).to.throw(ArgumentError, "Value cannot be an integer."));
+            it("should fail for being an integer", () => expect(() => cannotBeInteger(0)).to.throw(ArgumentError, "Value cannot be an integer."));
+            it("should fail for being an integer", () => expect(() => cannotBeInteger(2)).to.throw(ArgumentError, "Value cannot be an integer."));
+            it("should fail for being an integer", () => expect(() => cannotBeInteger(200)).to.throw(ArgumentError, "Value cannot be an integer."));
+        });
+    });
+
     describe("cannotBeNull()", () =>
     {
         describe("success", () =>
@@ -213,6 +236,44 @@ describe("object cannot extensions", () =>
         {
             it("should fail for null", () => expect(() => cannotBeNull(null)).to.throw(ArgumentError, "Value cannot be null."));
             it("should fail for null", () => expect(() => cannotBeNull(undefined)).to.throw(ArgumentError, "Value cannot be null."));
+        });
+    });
+
+    describe("cannotBeNullOrEmpty()", () =>
+    {
+        describe("success", () =>
+        {
+            it("should be valid", () => expect(cannotBeNullOrEmpty("a")).to.equal("a"));
+            it("should be valid", () => expect(cannotBeNullOrEmpty("aa")).to.equal("aa"));
+            it("should be valid", () => expect(cannotBeNullOrEmpty("aaa")).to.equal("aaa"));
+        });
+
+        describe("failure", () =>
+        {
+            it("should be null or empty", () => expect(() => cannotBeNullOrEmpty(null)).to.throw(ArgumentError, "Value cannot be null."));
+            it("should be null or empty", () => expect(() => cannotBeNullOrEmpty(undefined)).to.throw(ArgumentError, "Value cannot be null."));
+            it("should be null or empty", () => expect(() => cannotBeNullOrEmpty("")).to.throw(ArgumentError, "Value cannot be empty."));
+        });
+    });
+
+    describe("cannotBeNullOrWhiteSpace()", () =>
+    {
+        describe("success", () =>
+        {
+            it("should be valid", () => expect(cannotBeNullOrWhiteSpace("a")).to.equal("a"));
+            it("should be valid", () => expect(cannotBeNullOrWhiteSpace("aa")).to.equal("aa"));
+            it("should be valid", () => expect(cannotBeNullOrWhiteSpace("aaa")).to.equal("aaa"));
+            it("should be valid", () => expect(cannotBeNullOrWhiteSpace(" a a a ")).to.equal(" a a a "));
+        });
+
+        describe("failure", () =>
+        {
+            it("should be null", () => expect(() => cannotBeNullOrWhiteSpace(null)).to.throw(ArgumentError, "Value cannot be null."));
+            it("should be null", () => expect(() => cannotBeNullOrWhiteSpace(undefined)).to.throw(ArgumentError, "Value cannot be null."));
+            it("should be null", () => expect(() => cannotBeNullOrWhiteSpace("")).to.throw(ArgumentError, "Value cannot be empty."));
+            it("should be null", () => expect(() => cannotBeNullOrWhiteSpace("\t")).to.throw(ArgumentError, "Value cannot be white space."));
+            it("should be null", () => expect(() => cannotBeNullOrWhiteSpace("    \t        ")).to.throw(ArgumentError, "Value cannot be white space."));
+            it("should be null", () => expect(() => cannotBeNullOrWhiteSpace("    ")).to.throw(ArgumentError, "Value cannot be white space."));
         });
     });
 

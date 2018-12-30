@@ -103,6 +103,8 @@ describe("collections cannot extensions", () =>
         {
             it("should fail for null", () => expect(() => cannotContain([], null)).to.throw(ArgumentError, "Value cannot be null."));
             it("should fail for undefined", () => expect(() => cannotContain([], undefined)).to.throw(ArgumentError, "Value cannot be null."));
+            it("should fail for undefined", () => expect(() => cannotContain([1, 2, 3], x => x === 3)).to.throw(ArgumentError, "Value cannot contain the specified expression."));
+            it("should fail for undefined", () => expect(() => cannotContain(["a", "b", "c"], x => x === "c")).to.throw(ArgumentError, "Value cannot contain the specified expression."));
         });
     });
 

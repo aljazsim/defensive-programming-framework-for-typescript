@@ -1,6 +1,7 @@
 import "mocha";
 import { ArgumentError } from "../../source/argument-error";
-import { whenDoesNotMatch, whenIsNot, whenIsNotBetween, whenIsNotEqualTo, whenIsNotGreaterThan, whenIsNotGreaterThanOrEqualTo, whenIsNotLessThan, whenIsNotLessThanOrEqualTo, whenIsNotNull, whenIsNotOneOf, whenIsNotSubTypeOf, whenIsNotTypeOf } from "../../source/objects/object-when-not-extensions";
+import { whenIsNotNullOrEmpty } from "../../source/collections/collection-when-not-extensions";
+import { whenDoesNotMatch, whenIsNot, whenIsNotBetween, whenIsNotEqualTo, whenIsNotGreaterThan, whenIsNotGreaterThanOrEqualTo, whenIsNotInteger, whenIsNotLessThan, whenIsNotLessThanOrEqualTo, whenIsNotNull, whenIsNotNullOrWhiteSpace, whenIsNotOneOf, whenIsNotSubTypeOf, whenIsNotTypeOf } from "../../source/objects/object-when-not-extensions";
 import { expect } from "chai";
 
 describe("object cannot extensions", () =>
@@ -207,6 +208,25 @@ describe("object cannot extensions", () =>
         });
     });
 
+    describe("whenIsNotInteger()", () =>
+    {
+        describe("success", () =>
+        {
+            it("should not be integer", () => expect(whenIsNotInteger(null, 9)).to.equal(9));
+            it("should not be integer", () => expect(whenIsNotInteger(undefined, 9)).to.equal(9));
+
+            it(", 1should not be integer", () => expect(whenIsNotInteger(3.1, 9)).to.equal(9));
+            it("sh, 1ould not be integer", () => expect(whenIsNotInteger(3.14, 9)).to.equal(9));
+            it("should not be integer", () => expect(whenIsNotInteger(3.14159265359, 9)).to.equal(9));
+
+            it("should be integer", () => expect(whenIsNotInteger(-100, 9)).to.equal(-100));
+            it("should be integer", () => expect(whenIsNotInteger(-1, 9)).to.equal(-1));
+            it("should be integer", () => expect(whenIsNotInteger(0, 9)).to.equal(0));
+            it("should be integer", () => expect(whenIsNotInteger(2, 9)).to.equal(2));
+            it("should be integer", () => expect(whenIsNotInteger(200, 9)).to.equal(200));
+        });
+    });
+
     describe("whenIsNotNull()", () =>
     {
         describe("success", () =>
@@ -216,6 +236,36 @@ describe("object cannot extensions", () =>
             it("should be not null", () => expect(whenIsNotNull("aaa", "9")).to.equal("9"));
             it("should be null", () => expect(whenIsNotNull(null, 9)).to.equal(null));
             it("should be null", () => expect(whenIsNotNull(undefined, 9)).to.equal(undefined));
+        });
+    });
+
+    describe("whenIsNotNullOrEmpty()", () =>
+    {
+        describe("success", () =>
+        {
+            it("should be valid", () => expect(whenIsNotNullOrEmpty(null, "9")).to.equal(null));
+            it("should be valid", () => expect(whenIsNotNullOrEmpty(undefined, "9")).to.equal(undefined));
+            it("should be valid", () => expect(whenIsNotNullOrEmpty("", "9")).to.equal(""));
+            it("should be valid", () => expect(whenIsNotNullOrEmpty("a", "9")).to.equal("9"));
+            it("should be valid", () => expect(whenIsNotNullOrEmpty("aa", "9")).to.equal("9"));
+            it("should be valid", () => expect(whenIsNotNullOrEmpty("aaa", "9")).to.equal("9"));
+        });
+    });
+
+    describe("mustIsNotNullOrWhiteSpace()", () =>
+    {
+        describe("success", () =>
+        {
+            it("should be valid", () => expect(whenIsNotNullOrWhiteSpace(null, "9")).to.equal(null));
+            it("should be valid", () => expect(whenIsNotNullOrWhiteSpace(undefined, "9")).to.equal(undefined));
+            it("should be valid", () => expect(whenIsNotNullOrWhiteSpace("", "9")).to.equal(""));
+            it("should be valid", () => expect(whenIsNotNullOrWhiteSpace("\t", "9")).to.equal("\t"));
+            it("should be valid", () => expect(whenIsNotNullOrWhiteSpace("     \t ", "9")).to.equal("     \t "));
+            it("should be valid", () => expect(whenIsNotNullOrWhiteSpace("   ", "9")).to.equal("   "));
+            it("should be valid", () => expect(whenIsNotNullOrWhiteSpace("a", "9")).to.equal("9"));
+            it("should be valid", () => expect(whenIsNotNullOrWhiteSpace("aa", "9")).to.equal("9"));
+            it("should be valid", () => expect(whenIsNotNullOrWhiteSpace("aaa", "9")).to.equal("9"));
+            it("should be valid", () => expect(whenIsNotNullOrWhiteSpace(" a a a ", "9")).to.equal("9"));
         });
     });
 

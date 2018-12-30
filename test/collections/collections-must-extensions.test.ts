@@ -94,6 +94,9 @@ describe("collections must extensions", () =>
         {
             it("should return [1]", () => expect(mustContain([1], x => x === 1)).to.eql([1]));
             it("should return [1, 2, 3]", () => expect(mustContain([1, 2, 3], x => x === 1)).to.eql([1, 2, 3]));
+
+            it("should fail for undefined", () => expect(mustContain([1, 2, 3], x => x === 3)).to.eql([1, 2, 3]));
+            it("should fail for undefined", () => expect(mustContain(["a", "b", "c"], x => x === "c")).to.eql(["a", "b", "c"]));
         });
 
         describe("failure", () =>

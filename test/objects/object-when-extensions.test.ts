@@ -1,6 +1,7 @@
 import "mocha";
 import { ArgumentError } from "../../source/argument-error";
-import { whenDoesMatch, whenIs, whenIsBetween, whenIsEqualTo, whenIsGreaterThan, whenIsGreaterThanOrEqualTo, whenIsLessThan, whenIsLessThanOrEqualTo, whenIsNull, whenIsOneOf, whenIsSubTypeOf, whenIsTypeOf } from "../../source/objects/object-when-extensions";
+import { whenIsNullOrEmpty } from "../../source/collections/collection-when-extensions";
+import { whenDoesMatch, whenIs, whenIsBetween, whenIsEqualTo, whenIsGreaterThan, whenIsGreaterThanOrEqualTo, whenIsInteger, whenIsLessThan, whenIsLessThanOrEqualTo, whenIsNull, whenIsNullOrWhiteSpace, whenIsOneOf, whenIsSubTypeOf, whenIsTypeOf } from "../../source/objects/object-when-extensions";
 import { expect } from "chai";
 
 describe("object can extensions", () =>
@@ -207,6 +208,25 @@ describe("object can extensions", () =>
         });
     });
 
+    describe("whenIsInteger()", () =>
+    {
+        describe("success", () =>
+        {
+            it("should not be integer", () => expect(whenIsInteger(null, 9)).to.equal(null));
+            it("should not be integer", () => expect(whenIsInteger(undefined, 9)).to.equal(undefined));
+
+            it("should not be integer", () => expect(whenIsInteger(3.1, 9)).to.equal(3.1));
+            it("should not be integer", () => expect(whenIsInteger(3.14, 9)).to.equal(3.14));
+            it("should not be integer", () => expect(whenIsInteger(3.14159265359, 9)).to.equal(3.14159265359));
+
+            it("should be integer", () => expect(whenIsInteger(-100, 9)).to.equal(9));
+            it("should be integer", () => expect(whenIsInteger(-1, 9)).to.equal(9));
+            it("should be integer", () => expect(whenIsInteger(0, 9)).to.equal(9));
+            it("should be integer", () => expect(whenIsInteger(2, 9)).to.equal(9));
+            it("should be integer", () => expect(whenIsInteger(200, 9)).to.equal(9));
+        });
+    });
+
     describe("whenIsNull()", () =>
     {
         describe("success", () =>
@@ -216,6 +236,36 @@ describe("object can extensions", () =>
             it("should be null", () => expect(whenIsNull("aaa", "9")).to.equal("aaa"));
             it("should be null", () => expect(whenIsNull(null, 9)).to.equal(9));
             it("should be null", () => expect(whenIsNull(undefined, 9)).to.equal(9));
+        });
+    });
+
+    describe("whenIsNullOrEmpty()", () =>
+    {
+        describe("success", () =>
+        {
+            it("should be valid", () => expect(whenIsNullOrEmpty(null, "9")).to.equal("9"));
+            it("should be valid", () => expect(whenIsNullOrEmpty(undefined, "9")).to.equal("9"));
+            it("should be valid", () => expect(whenIsNullOrEmpty("", "9")).to.equal("9"));
+            it("should be valid", () => expect(whenIsNullOrEmpty("a", "9")).to.equal("a"));
+            it("should be valid", () => expect(whenIsNullOrEmpty("aa", "9")).to.equal("aa"));
+            it("should be valid", () => expect(whenIsNullOrEmpty("aaa", "9")).to.equal("aaa"));
+        });
+    });
+
+    describe("mustIsNullOrWhiteSpace()", () =>
+    {
+        describe("success", () =>
+        {
+            it("should be valid", () => expect(whenIsNullOrWhiteSpace(null, "9")).to.equal("9"));
+            it("should be valid", () => expect(whenIsNullOrWhiteSpace(undefined, "9")).to.equal("9"));
+            it("should be valid", () => expect(whenIsNullOrWhiteSpace("", "9")).to.equal("9"));
+            it("should be valid", () => expect(whenIsNullOrWhiteSpace("\t", "9")).to.equal("9"));
+            it("should be valid", () => expect(whenIsNullOrWhiteSpace("     \t ", "9")).to.equal("9"));
+            it("should be valid", () => expect(whenIsNullOrWhiteSpace("   ", "9")).to.equal("9"));
+            it("should be valid", () => expect(whenIsNullOrWhiteSpace("a", "9")).to.equal("a"));
+            it("should be valid", () => expect(whenIsNullOrWhiteSpace("aa", "9")).to.equal("aa"));
+            it("should be valid", () => expect(whenIsNullOrWhiteSpace("aaa", "9")).to.equal("aaa"));
+            it("should be valid", () => expect(whenIsNullOrWhiteSpace(" a a a ", "9")).to.equal(" a a a "));
         });
     });
 

@@ -198,7 +198,7 @@ export function cannotBeNullOrWhiteSpace(value: string): string
     }
     else if (isNullOrWhiteSpace(value))
     {
-        throw new ArgumentError("Value cannot be whitespace.");
+        throw new ArgumentError("Value cannot be white space.");
     }
 
     return value;
@@ -217,14 +217,7 @@ export function cannotBeOneOf<T>(value: T, ...set: T[]): T
 {
     if (isOneOf(value, ...set))
     {
-        if (isNull(set))
-        {
-            throw new ArgumentError(`Value cannot be one of ${set}.`);
-        }
-        else
-        {
-            throw new ArgumentError(`Value cannot be one of [${set.join(", ")}].`);
-        }
+        throw new ArgumentError(`Value cannot be one of [${set.join(", ")}].`);
     }
 
     return value;

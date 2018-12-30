@@ -155,8 +155,6 @@ export function isGreaterThanOrEqualTo<T>(value: T, minValue: T): boolean
  */
 export function isInteger(value: number)
 {
-    cannotBeNull(value);
-
     if (isNull(value))
     {
         return false;

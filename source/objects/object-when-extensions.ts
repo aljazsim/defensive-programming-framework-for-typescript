@@ -218,6 +218,27 @@ export function whenIsNull<T>(value: T, defaultValue: T): T
 }
 
 /**
+ * Returns default value when the original value is null or undefined or empty or white space; otherwise returns the original value.
+ *
+ * @export
+ * @template T - The value type.
+ * @param {T} value - The value.
+ * @param {T} defaultValue - The default value.
+ * @returns {T} - The default value when the original value is null or undefined or empty or white space; otherwise returns the original value.
+ */
+export function whenIsNullOrWhiteSpace(value: string, defaultValue: string): string
+{
+    if (isNullOrWhiteSpace(value))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
+}
+
+/**
  * Returns default value when the original value does belong to the specified set; otherwise returns the original value.
  *
  * @export
@@ -274,25 +295,6 @@ export function whenIsSubTypeOf<T>(value: T, type: any, defaultValue: T): T
 export function whenIsTypeOf<T>(value: T, type: string, defaultValue: T): T
 {
     if (isTypeOf(value, type))
-    {
-        return defaultValue;
-    }
-    else
-    {
-        return value;
-    }
-}
-
-/**
- * Returns default value when the original value is equal to null or whitespace; otherwise returns the original value.
- *
- * @export
- * @param {T} value - The value.
- * @returns {T} - The default value when the original value is equal to null or whitespace; otherwise returns the original value.
- */
-export function whenNullOrWhiteSpace(value: string, defaultValue: string): string
-{
-    if (isNullOrWhiteSpace(value))
     {
         return defaultValue;
     }

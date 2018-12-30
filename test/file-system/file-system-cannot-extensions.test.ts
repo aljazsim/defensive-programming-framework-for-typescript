@@ -15,7 +15,7 @@ describe("file system cannot extensions", () =>
         {
             it("should fail for null directory path", () => expect(() => cannotDirectoryExist(null)).to.throw(ArgumentError, "Value cannot be null."));
             it("should fail for empty directory path", () => expect(() => cannotDirectoryExist("")).to.throw(ArgumentError, "Value cannot be empty."));
-            it("should fail for whitespace directory path", () => expect(() => cannotDirectoryExist("  \t")).to.throw(ArgumentError, "Value cannot be whitespace."));
+            it("should fail for whitespace directory path", () => expect(() => cannotDirectoryExist("  \t")).to.throw(ArgumentError, "Value cannot be white space."));
 
             // TODO: write tests for invalid directory paths
             // // it("should fail for invalid directory path", () => expect(() => cannotDirectoryExist("$~/\\")).to.throw(ArgumentError, "Value must be a valid directory path."));
@@ -30,7 +30,7 @@ describe("file system cannot extensions", () =>
         {
             it("should fail for null directory path", () => expect(() => cannotFileExist(null)).to.throw(ArgumentError, "Value cannot be null."));
             it("should fail for empty directory path", () => expect(() => cannotFileExist("")).to.throw(ArgumentError, "Value cannot be empty."));
-            it("should fail for whitespace directory path", () => expect(() => cannotFileExist("  \t")).to.throw(ArgumentError, "Value cannot be whitespace."));
+            it("should fail for whitespace directory path", () => expect(() => cannotFileExist("  \t")).to.throw(ArgumentError, "Value cannot be white space."));
 
             // TODO: write tests for invalid directory paths
             // // it("should fail for invalid directory path", () => expect(() => cannotFileExist("$~/\\")).to.throw(ArgumentError, "Value must be a valid directory path."));
@@ -54,8 +54,8 @@ describe("file system cannot extensions", () =>
 
         describe("failure", () =>
         {
-            it("should return true for null", () => () => expect(cannotBeAbsoluteDirectoryPath(null)).to.throw(ArgumentError, "Value cannot be an absolute directory path."));
-            it("should return true for undefined", () => () => expect(cannotBeAbsoluteDirectoryPath(undefined)).to.throw(ArgumentError, "Value cannot be an absolute directory path."));
+            it("should return true for null", () => () => expect(() => cannotBeAbsoluteDirectoryPath(null)).to.throw(ArgumentError, "Value cannot be an absolute directory path."));
+            it("should return true for undefined", () => () => expect(() => cannotBeAbsoluteDirectoryPath(undefined)).to.throw(ArgumentError, "Value cannot be an absolute directory path."));
             it("should fail for absolute directory path", () => expect(() => cannotBeAbsoluteDirectoryPath("C:\\")).to.throw(ArgumentError, "Value cannot be an absolute directory path."));
             it("should fail for absolute directory path", () => expect(() => cannotBeAbsoluteDirectoryPath("C:\\temp")).to.throw(ArgumentError, "Value cannot be an absolute directory path."));
             it("should fail for absolute directory path", () => expect(() => cannotBeAbsoluteDirectoryPath("C:\\temp\\")).to.throw(ArgumentError, "Value cannot be an absolute directory path."));
