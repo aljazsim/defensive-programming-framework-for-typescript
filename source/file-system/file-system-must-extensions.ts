@@ -78,7 +78,7 @@ export function mustBeValidDirectoryPath(value: string): string
 */
 export function mustBeValidFileName(value: string): string
 {
-    if (isValidFileName(value))
+    if (!isValidFileName(value))
     {
         throw new ArgumentError("Value must be a valid file name.");
     }
