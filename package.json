@@ -5,7 +5,7 @@
     "license": "MIT",
     "description": "Defensive programming framework for TypeScript and JavaScript",
     "homepage": "https://github.com/aljazsim/defensive-programming-framework-for-typescript",
-    "icon": "https://github.com/aljazsim/defensive-programming-framework-for-typescript/doc/icon.png",
+    "icon": "https://github.com/aljazsim/defensive-programming-framework-for-typescript/raw/master/doc/icon.png",
     "repository": "https://github.com/aljazsim/defensive-programming-framework-for-typescript.git",
     "main": "dist/source/index.js",
     "types": "dist/source/index.d.ts",
