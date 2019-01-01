@@ -135,7 +135,7 @@ Optional validation allows for invalid input to be substituted with a valid one 
 
 When conditions allow to substitute current value with a default one value when the result of evaluation is true.
 
-Example:0
+Example:
 
 - when value is between specified limits, substitute it with a default value,
 - when value is contains duplicates, substitute it with distinct values,

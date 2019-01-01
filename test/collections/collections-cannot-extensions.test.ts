@@ -21,7 +21,7 @@ describe("collections cannot extensions", () =>
         describe("failure", () =>
         {
             it("should fail for empty string", () => expect(() => cannotBeEmpty("")).to.throw(ArgumentError, "Value cannot be empty."));
-            it("should fail for empty array", () => expect(() => cannotBeEmpty([])).to.throw(ArgumentError, "Value cannot be empty."));
+            it("should fail  for empty array", () => expect(() => cannotBeEmpty([])).to.throw(ArgumentError, "Value cannot be empty."));
         });
 
     });
