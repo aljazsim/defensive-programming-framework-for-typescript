@@ -1,6 +1,18 @@
+# directores
+.nyc_output
 .vscode
+coverage
+dist/test
+doc
 source
 test
+
+
+# files
 .editorconfig
+.gitignore
 tsconfig.json
 tslint.json
+
+*.tgz
+*.log

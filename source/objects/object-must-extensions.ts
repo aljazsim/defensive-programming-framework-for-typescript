@@ -2,7 +2,7 @@ import { ArgumentError } from "../argument-error";
 import { doesMatch, is, isBetween, isEqualTo, isGreaterThan, isGreaterThanOrEqualTo, isInteger, isLessThan, isLessThanOrEqualTo, isNull, isNullOrWhiteSpace, isOneOf, isSubTypeOf, isTypeOf } from "./object-is-extensions";
 
 /**
- * Returns original value if the specified function returns true; otherwise throws a new ArgumentError.
+ * Returns the original value if the specified function returns true; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
@@ -21,14 +21,14 @@ export function mustBe<T>(value: T, func: (value: T) => boolean): T
 }
 
 /**
- * Returns original value if it is between the specified limits; otherwise throws a new ArgumentError.
+ * Returns the original value if it is between the specified limits; otherwise throws a new ArgumentError.
  *
  * @export
- * @param {(number|string)} value - The value.
- * @param {(number|string)} minValue -The minimum value type.
- * @param {(number|string)} maxValue - The maximum value type.
+ * @param {(number | string)} value - The value.
+ * @param {(number | string)} minValue -The minimum value type.
+ * @param {(number | string)} maxValue - The maximum value type.
  * @param {boolean} [inclusive=true] - If set to true include limits in the range.
- * @returns {(number|string)} - The original value if it is between the specified limits; otherwise throws a new ArgumentError.
+ * @returns {(number | string)} - The original value if it is between the specified limits; otherwise throws a new ArgumentError.
  */
 export function mustBeBetween(value: number | string, minValue: number | string, maxValue: number | string, inclusive: boolean = true): number | string
 {
@@ -42,14 +42,13 @@ export function mustBeBetween(value: number | string, minValue: number | string,
         {
             throw new ArgumentError(`Value must be between ${minValue} and ${maxValue}.`);
         }
-
     }
 
     return value;
 }
 
 /**
- * Returns original value if it is equal to the compared value; otherwise throws a new ArgumentError.
+ * Returns the original value if it is equal to the compared value; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
@@ -68,7 +67,7 @@ export function mustBeEqualTo<T>(value1: T, value2: T): T
 }
 
 /**
- * Returns original value if it is greater than the specified limit; otherwise throws a new ArgumentError.
+ * Returns the original value if it is greater than the specified limit; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
@@ -87,7 +86,7 @@ export function mustBeGreaterThan<T>(value: T, minValue: T): T
 }
 
 /**
- * Returns original value if it is greater than or equal to the specified limit; otherwise throws a new ArgumentError.
+ * Returns the original value if it is greater than or equal to the specified limit; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
@@ -106,7 +105,7 @@ export function mustBeGreaterThanOrEqualTo<T>(value: T, minValue: T): T
 }
 
 /**
- * Returns original value if it is an integer number; otherwise throws a new Argument error.
+ * Returns the original value if it is an integer number; otherwise throws a new Argument error.
  *
  * @export
  * @param {number} value - The value.
@@ -123,26 +122,7 @@ export function mustBeInteger(value: number)
 }
 
 /**
- * Returns original value if it is less than or equal to the specified limit; otherwise throws a new ArgumentError.
- *
- * @export
- * @template T - The value type.
- * @param {T} value - The value.
- * @param {T} maxValue - The maximum value.
- * @returns {T} - The original value if it is less than or equal to the specified limit; otherwise throws a new ArgumentError.
- */
-export function mustBeLessThanOrEqualTo<T>(value: T, maxValue: T): T
-{
-    if (!isLessThanOrEqualTo(value, maxValue))
-    {
-        throw new ArgumentError(`Value must be less than or equal to ${maxValue}.`);
-    }
-
-    return value;
-}
-
-/**
- * Returns original value if it is less than the specified limit; otherwise throws a new ArgumentError.
+ * Returns the original value if it is less than the specified limit; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
@@ -161,7 +141,26 @@ export function mustBeLessThan<T>(value: T, maxValue: T): T
 }
 
 /**
- * Returns original value if it equals null; otherwise throws a new ArgumentError.
+ * Returns the original value if it is less than or equal to the specified limit; otherwise throws a new ArgumentError.
+ *
+ * @export
+ * @template T - The value type.
+ * @param {T} value - The value.
+ * @param {T} maxValue - The maximum value.
+ * @returns {T} - The original value if it is less than or equal to the specified limit; otherwise throws a new ArgumentError.
+ */
+export function mustBeLessThanOrEqualTo<T>(value: T, maxValue: T): T
+{
+    if (!isLessThanOrEqualTo(value, maxValue))
+    {
+        throw new ArgumentError(`Value must be less than or equal to ${maxValue}.`);
+    }
+
+    return value;
+}
+
+/**
+ * Returns the original value if it equals null; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
@@ -179,7 +178,7 @@ export function mustBeNull<T>(value: T): T
 }
 
 /**
- * Returns original value if it equals null or whitespace; otherwise throws a new ArgumentError.
+ * Returns the original value if it equals null or whitespace; otherwise throws a new ArgumentError.
  *
  * @export
  * @param {T} value - The value.
@@ -196,7 +195,7 @@ export function mustBeNullOrWhiteSpace(value: string): string
 }
 
 /**
- * Returns original value if it does not belong to the specified set; otherwise throws a new ArgumentError.
+ * Returns the original value if it does not belong to the specified set; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
@@ -215,7 +214,7 @@ export function mustBeOneOf<T>(value: T, ...set: T[]): T
 }
 
 /**
- * Returns original value if it is equal to the specified subtype; otherwise throws a new ArgumentError.
+ * Returns the original value if it is equal to the specified subtype; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
@@ -234,7 +233,7 @@ export function mustBeSubTypeOf<T>(value: T, type: any): T
 }
 
 /**
- * Returns original value if it is equal to the specified type; otherwise throws a new ArgumentError.
+ * Returns the original value if it is equal to the specified type; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
@@ -253,7 +252,7 @@ export function mustBeTypeOf<T>(value: T, type: string): T
 }
 
 /**
- * Returns original value if it does not match the specified regular expression; otherwise throws a new ArgumentError.
+ * Returns the original value if it does not match the specified regular expression; otherwise throws a new ArgumentError.
  *
  * @export
  * @param {string} value - The value.

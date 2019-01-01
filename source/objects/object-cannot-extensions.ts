@@ -3,7 +3,7 @@ import { isEmpty } from "../collections/collection-is-extensions";
 import { doesMatch, is, isBetween, isEqualTo, isGreaterThan, isGreaterThanOrEqualTo, isInteger, isLessThan, isLessThanOrEqualTo, isNull, isNullOrWhiteSpace, isOneOf, isSubTypeOf, isTypeOf } from "./object-is-extensions";
 
 /**
- * Returns original value if the specified function returns false; otherwise throws a new ArgumentError.
+ * Returns the original value if the specified function returns false; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
@@ -22,7 +22,7 @@ export function cannotBe<T>(value: T, func: (value: T) => boolean): T
 }
 
 /**
- * Returns original value if it is not between the specified limits; otherwise throws a new ArgumentError.
+ * Returns the original value if it is not between the specified limits; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
@@ -50,7 +50,7 @@ export function cannotBeBetween(value: number | string, minValue: number | strin
 }
 
 /**
- * Returns original value if it is not equal to the compared value; otherwise throws a new ArgumentError.
+ * Returns the original value if it is not equal to the compared value; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
@@ -69,7 +69,7 @@ export function cannotBeEqualTo<T>(value1: T, value2: T): T
 }
 
 /**
- * Returns original value if it is not greater than the specified limit; otherwise throws a new ArgumentError.
+ * Returns the original value if it is not greater than the specified limit; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
@@ -88,7 +88,7 @@ export function cannotBeGreaterThan<T>(value: T, minValue: T): T
 }
 
 /**
- * Returns original value if it is not greater than or equal to the specified limit; otherwise throws a new ArgumentError.
+ * Returns the original value if it is not greater than or equal to the specified limit; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
@@ -107,7 +107,7 @@ export function cannotBeGreaterThanOrEqualTo<T>(value: T, minValue: T): T
 }
 
 /**
- * Returns original value if it is not an integer number; otherwise throws a new Argument error.
+ * Returns the original value if it is not an integer number; otherwise throws a new Argument error.
  *
  * @export
  * @param {number} value - The value.
@@ -124,26 +124,7 @@ export function cannotBeInteger(value: number)
 }
 
 /**
- * Returns original value if it is not less than or equal to the specified limit; otherwise throws a new ArgumentError.
- *
- * @export
- * @template T - The value type.
- * @param {T} value - The value.
- * @param {T} maxValue - The maximum value.
- * @returns {T} - The original value if it is not less than or equal to the specified limit; otherwise throws a new ArgumentError.
- */
-export function cannotBeLessThanOrEqualTo<T>(value: T, maxValue: T): T
-{
-    if (isLessThanOrEqualTo(value, maxValue))
-    {
-        throw new ArgumentError(`Value cannot be less than or equal to ${maxValue}.`);
-    }
-
-    return value;
-}
-
-/**
- * Returns original value if it is not less than the specified limit; otherwise throws a new ArgumentError.
+ * Returns the original value if it is not less than the specified limit; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
@@ -162,7 +143,26 @@ export function cannotBeLessThan<T>(value: T, maxValue: T): T
 }
 
 /**
- * Returns original value if it does not equal null or undefined; otherwise throws a new ArgumentError.
+ * Returns the original value if it is not less than or equal to the specified limit; otherwise throws a new ArgumentError.
+ *
+ * @export
+ * @template T - The value type.
+ * @param {T} value - The value.
+ * @param {T} maxValue - The maximum value.
+ * @returns {T} - The original value if it is not less than or equal to the specified limit; otherwise throws a new ArgumentError.
+ */
+export function cannotBeLessThanOrEqualTo<T>(value: T, maxValue: T): T
+{
+    if (isLessThanOrEqualTo(value, maxValue))
+    {
+        throw new ArgumentError(`Value cannot be less than or equal to ${maxValue}.`);
+    }
+
+    return value;
+}
+
+/**
+ * Returns the original value if it does not equal null or undefined; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
@@ -180,7 +180,7 @@ export function cannotBeNull<T>(value: T): T
 }
 
 /**
- * Returns original value if it does not equal null or whitespace; otherwise throws a new ArgumentError.
+ * Returns the original value if it does not equal null or whitespace; otherwise throws a new ArgumentError.
  *
  * @export
  * @param {T} value - The value.
@@ -205,7 +205,7 @@ export function cannotBeNullOrWhiteSpace(value: string): string
 }
 
 /**
- * Returns original value if it does not belong to the specified set; otherwise throws a new ArgumentError.
+ * Returns the original value if it does not belong to the specified set; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
@@ -224,7 +224,7 @@ export function cannotBeOneOf<T>(value: T, ...set: T[]): T
 }
 
 /**
- * Returns original value if it is not equal to the specified subtype; otherwise throws a new ArgumentError.
+ * Returns the original value if it is not equal to the specified subtype; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
@@ -243,7 +243,7 @@ export function cannotBeSubTypeOf<T>(value: T, type: any): T
 }
 
 /**
- * Returns original value if it is not equal to the specified type; otherwise throws a new ArgumentError.
+ * Returns the original value if it is not equal to the specified type; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
@@ -262,7 +262,7 @@ export function cannotBeTypeOf<T>(value: T, type: string): T
 }
 
 /**
- * Returns original value if it does not match the specified regular expression; otherwise throws a new ArgumentError.
+ * Returns the original value if it does not match the specified regular expression; otherwise throws a new ArgumentError.
  *
  * @export
  * @param {string} value - The value.

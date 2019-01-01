@@ -20,25 +20,6 @@ export function whenDoesNotDirectoryExist(value, defaultValue: string): string
 }
 
 /**
-* Returns default value when the specified file name is mpt valid; otherwise returns the original value.
-*
-* @export
-* @param {string} value - The value.
-* @returns {string} - The default value when the specified file name is not valid; otherwise returns the original value.
-*/
-export function whenIsNotValidFileName(value: string, defaultValue: string): string
-{
-    if (!isValidFileName(value))
-    {
-        return defaultValue;
-    }
-    else
-    {
-        return value;
-    }
-}
-
-/**
  * Returns default value when the specified file does not exist; otherwise returns the original value.
  *
  * @param {string} value - The value.
@@ -124,6 +105,25 @@ export function whenIsNotEmptyDirectory(value, defaultValue: string): string
 export function whenIsNotValidDirectoryPath(value, defaultValue: string): string
 {
     if (!isValidDirectoryPath(value))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
+}
+
+/**
+* Returns default value when the specified file name is mpt valid; otherwise returns the original value.
+*
+* @export
+* @param {string} value - The value.
+* @returns {string} - The default value when the specified file name is not valid; otherwise returns the original value.
+*/
+export function whenIsNotValidFileName(value: string, defaultValue: string): string
+{
+    if (!isValidFileName(value))
     {
         return defaultValue;
     }

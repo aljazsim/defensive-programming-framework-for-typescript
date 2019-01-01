@@ -3,15 +3,13 @@ import { cannotBeNull } from "../objects/object-cannot-extensions";
 import { isNull } from "../objects/object-is-extensions";
 import { contains, containsDuplicates, containsNull, containsOnlyNull, isEmpty, isEqualTo2, isOneOf2 } from "./collection-is-extensions";
 
-// #region Functions (8)
-
 /**
- * Returns original value if the specified value isn't empty; otherwise throws a new ArgumentError.
+ * Returns the original value if the specified value is not empty; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
  * @param {Array<T>} value - The value.
- * @returns {Array<T>} - The original value if the specified value isn't empty; otherwise throws a new ArgumentError.
+ * @returns {Array<T>} - The original value if the specified value is not empty; otherwise throws a new ArgumentError.
  */
 export function cannotBeEmpty<T>(value: Array<T> | string): Array<T> | string
 {
@@ -24,14 +22,14 @@ export function cannotBeEmpty<T>(value: Array<T> | string): Array<T> | string
 }
 
 /**
- * Returns original value if the specified value isn't equal to the compared value; otherwise throws a new ArgumentError.
+ * Returns the original value if the specified value is not equal to the compared value; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
  * @param {Array<T>} value1 - The value 1.
  * @param {Array<T>} value2 - The value 2.
  * @param {boolean} [ignoreOrder=false] - If set to true; ignore item order.
- * @returns {Array<T>} - The original value if the specified value isn't equal to the compared value; otherwise throws a new ArgumentError.
+ * @returns {Array<T>} - The original value if the specified value is not equal to the compared value; otherwise throws a new ArgumentError.
  */
 export function cannotBeEqualTo2<T>(value1: Array<T>, value2: Array<T>, ignoreOrder: boolean = false): Array<T>
 {
@@ -51,12 +49,12 @@ export function cannotBeEqualTo2<T>(value1: Array<T>, value2: Array<T>, ignoreOr
 }
 
 /**
- * Returns original value if the specified value isn't null or empty; otherwise throws a new ArgumentError.
+ * Returns the original value if the specified value is not null or empty; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
  * @param {Array<T>} value - The value.
- * @returns {Array<T>} - The original value if the specified value isn't null or empty; otherwise throws a new ArgumentError.
+ * @returns {Array<T>} - The original value if the specified value is not null or empty; otherwise throws a new ArgumentError.
  */
 export function cannotBeNullOrEmpty<T>(value: Array<T> | string): Array<T> | string
 {
@@ -67,13 +65,13 @@ export function cannotBeNullOrEmpty<T>(value: Array<T> | string): Array<T> | str
 }
 
 /**
- * Returns original value if the specified value doesn't belong to the specified set; otherwise throws a new ArgumentError.
+ * Returns the original value if the specified value does not belong to the specified set; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
  * @param {T} value - The value.
  * @param {Array<T>} set - The set.
- * @returns {T} - The original value if the specified value doesn't belong to the specified set; otherwise throws a new ArgumentError.
+ * @returns {T} - The original value if the specified value does not belong to the specified set; otherwise throws a new ArgumentError.
  */
 export function cannotBeOneOf2<T>(value: T, set: Array<T>): T
 {
@@ -86,13 +84,13 @@ export function cannotBeOneOf2<T>(value: T, set: Array<T>): T
 }
 
 /**
- * Returns original value if the specified value doesn't contain any items corresponding to the selector function; otherwise throws a new ArgumentError.
+ * Returns the original value if the specified value does not contain any items corresponding to the selector function; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
  * @param {Array<T>} value - The value.
  * @param {(T) => boolean} func - The selector function.
- * @returns {Array<T>} - The original value if the specified value doesn't contain any items corresponding to the selector function; otherwise throws a new ArgumentError.
+ * @returns {Array<T>} - The original value if the specified value does not contain any items corresponding to the selector function; otherwise throws a new ArgumentError.
  */
 export function cannotContain<T>(value: Array<T>, func: (T) => boolean): Array<T>
 {
@@ -105,12 +103,12 @@ export function cannotContain<T>(value: Array<T>, func: (T) => boolean): Array<T
 }
 
 /**
- * Returns original value if the specified value doesn't contain duplicates; otherwise throws a new ArgumentError.
+ * Returns the original value if the specified value does not contain duplicates; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
  * @param {Array<T>} value - The value.
- * @returns {Array<T>} - The original value if the specified value doesn't contain duplicates; otherwise throws a new ArgumentError.
+ * @returns {Array<T>} - The original value if the specified value does not contain duplicates; otherwise throws a new ArgumentError.
  */
 export function cannotContainDuplicates<T>(value: Array<T>): Array<T>
 {
@@ -123,12 +121,12 @@ export function cannotContainDuplicates<T>(value: Array<T>): Array<T>
 }
 
 /**
- * Returns original value if the specified value doesn't contain null values; otherwise throws a new ArgumentError.
+ * Returns the original value if the specified value does not contain null values; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
  * @param {Array<T>} value - The value.
- * @returns {Array<T>} - The original value if the specified value doesn't contain null values; otherwise throws a new ArgumentError.
+ * @returns {Array<T>} - The original value if the specified value does not contain null values; otherwise throws a new ArgumentError.
  */
 export function cannotContainNull<T>(value: Array<T>): Array<T>
 {
@@ -141,12 +139,12 @@ export function cannotContainNull<T>(value: Array<T>): Array<T>
 }
 
 /**
- * Returns original value if the specified value doesn't contain only null values; otherwise throws a new ArgumentError.
+ * Returns the original value if the specified value does not contain only null values; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
  * @param {Array<T>} value - The value.
- * @returns {Array<T>} - The original value if the specified value doesn't contain only null values; otherwise throws a new ArgumentError.
+ * @returns {Array<T>} - The original value if the specified value does not contain only null values; otherwise throws a new ArgumentError.
  */
 export function cannotContainOnlyNull<T>(value: Array<T>): Array<T>
 {

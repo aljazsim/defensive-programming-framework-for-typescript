@@ -44,9 +44,9 @@ export function is<T>(value: T, func: (value: T) => boolean): boolean
  *
  * @export
  * @template T - The value type.
- * @param {(number|string)} value - The value.
- * @param {(number|string)} minValue - The minimum value.
- * @param {(number|string)} maxValue - The maximum value.
+ * @param {(number | string)} value - The value.
+ * @param {(number | string)} minValue - The minimum value.
+ * @param {(number | string)} maxValue - The maximum value.
  * @param {boolean} [inclusive=true] - If set to true include the limits in the range.
  * @returns {boolean} - True if the specified value is between the specified limits; otherwise, false.
  */

@@ -2,7 +2,7 @@ import { ArgumentError } from "../argument-error";
 import { doesDirectoryExist, doesFileExist, isAbsoluteDirectoryPath, isAbsoluteFilePath, isEmptyDirectory, isValidDirectoryPath, isValidFileName, isValidFilePath } from "./file-system-is-extensions";
 
 /**
- * Returns original value if the specified value is an absolute directory path; otherwise throws a new ArgumentError.
+ * Returns the original value if the specified value is an absolute directory path; otherwise throws a new ArgumentError.
  *
  * @export
  * @param {string} value - The value.
@@ -19,7 +19,7 @@ export function mustBeAbsoluteDirectoryPath(value: string): string
 }
 
 /**
- * Returns original value if the specified value is an absolute file path; otherwise throws a new ArgumentError.
+ * Returns the original value if the specified value is an absolute file path; otherwise throws a new ArgumentError.
  *
  * @export
  * @param {string} value - The value.
@@ -36,7 +36,7 @@ export function mustBeAbsoluteFilePath(value: string): string
 }
 
 /**
- * Returns original value if the specified value is an empty directory path; otherwise throws a new ArgumentError.
+ * Returns the original value if the specified value is an empty directory path; otherwise throws a new ArgumentError.
  *
  * @export
  * @param {string} value - The value.
@@ -53,7 +53,7 @@ export function mustBeEmptyDirectory(value: string): string
 }
 
 /**
- * Returns original value if the specified value is valid directory path; otherwise throws a new ArgumentError.
+ * Returns the original value if the specified value is valid directory path; otherwise throws a new ArgumentError.
  *
  * @export
  * @param {string} value - The value.
@@ -70,7 +70,7 @@ export function mustBeValidDirectoryPath(value: string): string
 }
 
 /**
-* Returns original value if the specified value is a valid file name; otherwise throws a new ArgumentError.
+* Returns the original value if the specified value is a valid file name; otherwise throws a new ArgumentError.
 *
 * @export
 * @param {string} value - The value.
@@ -87,7 +87,7 @@ export function mustBeValidFileName(value: string): string
 }
 
 /**
-* Returns original value if the specified value is a valid file path; otherwise throws a new ArgumentError.
+* Returns the original value if the specified value is a valid file path; otherwise throws a new ArgumentError.
 *
 * @export
 * @param {string} value - The value.
@@ -104,7 +104,7 @@ export function mustBeValidFilePath(value: string): string
 }
 
 /**
- * Returns original value if the specified directory does exist; otherwise throws a new ArgumentError.
+ * Returns the original value if the specified directory does exist; otherwise throws a new ArgumentError.
  *
  * @export
  * @param {string} value - The value.
@@ -121,7 +121,7 @@ export function mustDirectoryExist(value: string): string
 }
 
 /**
- * Returns original value if the specified file does exist; otherwise throws a new ArgumentError.
+ * Returns the original value if the specified file does exist; otherwise throws a new ArgumentError.
  *
  * @export
  * @param {string} value - The value.

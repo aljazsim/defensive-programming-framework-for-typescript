@@ -1,7 +1,7 @@
 import { contains, containsDuplicates, containsNull, containsOnlyNull, isEmpty, isEqualTo2, isNullOrEmpty, isOneOf2 } from "./collection-is-extensions";
 
 /**
- * Returns original value if the specified value contains any items corresponding to the selector function; otherwise throws a new ArgumentException; otherwise returns the original value.
+ * Returns the original value if the specified value contains any items corresponding to the selector function; otherwise throws a new ArgumentException; otherwise returns the original value.
  *
  * @export
  * @template T - The value type.
@@ -23,7 +23,7 @@ export function whenContains<T>(value: Array<T>, func: (T) => boolean, defaultVa
 }
 
 /**
- * Returns original value if the specified value contains duplicates; otherwise returns the original value.
+ * Returns the original value if the specified value contains duplicates; otherwise returns the original value.
  *
  * @export
  * @template T - The value type.
@@ -44,7 +44,7 @@ export function whenContainsDuplicates<T>(value: Array<T>, defaultValue: Array<T
 }
 
 /**
- * Returns original value if the specified value contains null values; otherwise returns the original value.
+ * Returns the original value if the specified value contains null values; otherwise returns the original value.
  *
  * @export
  * @template T - The value type.
@@ -65,7 +65,7 @@ export function whenContainsNull<T>(value: Array<T>, defaultValue: Array<T>): Ar
 }
 
 /**
- * Returns original value if the specified value contains only null values; otherwise returns the original value.
+ * Returns the original value if the specified value contains only null values; otherwise returns the original value.
  *
  * @export
  * @template T - The value type.
@@ -86,7 +86,7 @@ export function whenContainsOnlyNull<T>(value: Array<T>, defaultValue: Array<T>)
 }
 
 /**
- * Returns original value if the specified value is empty; otherwise returns the original value.
+ * Returns the original value if the specified value is empty; otherwise returns the original value.
  *
  * @export
  * @template T - The value type.
@@ -107,7 +107,7 @@ export function whenIsEmpty<T>(value: Array<T> | string, defaultValue: Array<T> 
 }
 
 /**
- * Returns original value if the specified value is equal to the compared value; otherwise returns the original value.
+ * Returns the original value if the specified value is equal to the compared value; otherwise returns the original value.
  *
  * @export
  * @template T
@@ -130,7 +130,7 @@ export function whenIsEqualTo2<T>(value1: Array<T>, value2: Array<T>, ignoreOrde
 }
 
 /**
- * Returns original value if the specified value is null or empty; otherwise returns the original value.
+ * Returns the original value if the specified value is null or empty; otherwise returns the original value.
  *
  * @export
  * @template T - The value type.
@@ -151,7 +151,7 @@ export function whenIsNullOrEmpty<T>(value: Array<T> | string, defaultValue: Arr
 }
 
 /**
- * Returns original value if the specified value belongs to the specified set; otherwise returns the original value.
+ * Returns the original value if the specified value belongs to the specified set; otherwise returns the original value.
  *
  * @export
  * @template T - The value type.

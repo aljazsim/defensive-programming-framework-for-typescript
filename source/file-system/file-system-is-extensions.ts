@@ -124,30 +124,6 @@ export function isValidDirectoryPath(value: string): boolean
 }
 
 /**
- * Determines whether the specified value is a valid file path.
- *
- * @export
- * @param {string} value - The value.
- * @returns {boolean} - True if the specified value is a valid file path; otherwise, false.
- */
-export function isValidFilePath(value: string): boolean
-{
-    if (isNull(value))
-    {
-        return true;
-    }
-    else if (isNullOrWhiteSpace(value))
-    {
-        return false;
-    }
-    else
-    {
-        // TODO: check for invalid characters
-        return true;
-    }
-}
-
-/**
  * Determines whether the specified value is a valid file name.
  *
  * @export
@@ -165,6 +141,30 @@ export function isValidFileName(value: string): boolean
         return false;
     }
     else if (value.indexOf(path.sep) > -1)
+    {
+        return false;
+    }
+    else
+    {
+        // TODO: check for invalid characters
+        return true;
+    }
+}
+
+/**
+ * Determines whether the specified value is a valid file path.
+ *
+ * @export
+ * @param {string} value - The value.
+ * @returns {boolean} - True if the specified value is a valid file path; otherwise, false.
+ */
+export function isValidFilePath(value: string): boolean
+{
+    if (isNull(value))
+    {
+        return true;
+    }
+    else if (isNullOrWhiteSpace(value))
     {
         return false;
     }

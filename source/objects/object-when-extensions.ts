@@ -1,6 +1,6 @@
 import { doesMatch, is, isBetween, isEqualTo, isGreaterThan, isGreaterThanOrEqualTo, isInteger, isLessThan, isLessThanOrEqualTo, isNull, isNullOrWhiteSpace, isOneOf, isSubTypeOf, isTypeOf } from "./object-is-extensions";
 
-/**
+/*ł*
  * Returns default value when the original value does match the specified regular expression; otherwise returns the original value.
  *
  * @export

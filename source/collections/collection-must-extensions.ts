@@ -66,13 +66,13 @@ export function mustBeNullOrEmpty<T>(value: Array<T> | string): Array<T> | strin
 }
 
 /**
- * Returns original value if the specified value doesn't belong to the specified set; otherwise throws a new ArgumentError.
+ * Returns original value if the specified value does not belong to the specified set; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
  * @param {T} value - The value.
  * @param {Array<T>} set - The set.
- * @returns {T} - The original value if the specified value doesn't belong to the specified set; otherwise throws a new ArgumentError.
+ * @returns {T} - The original value if the specified value does not belong to the specified set; otherwise throws a new ArgumentError.
  */
 export function mustBeOneOf2<T>(value: T, set: Array<T>): T
 {
@@ -85,13 +85,13 @@ export function mustBeOneOf2<T>(value: T, set: Array<T>): T
 }
 
 /**
- * Returns original value if the specified value doesn't contain any items corresponding to the selector function; otherwise throws a new ArgumentError.
+ * Returns original value if the specified value does not contain any items corresponding to the selector function; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
  * @param {Array<T>} value - The value.
  * @param {(T) => boolean} func - The selector function.
- * @returns {Array<T>} - The original value if the specified value doesn't contain any items corresponding to the selector function; otherwise throws a new ArgumentError.
+ * @returns {Array<T>} - The original value if the specified value does not contain any items corresponding to the selector function; otherwise throws a new ArgumentError.
  */
 export function mustContain<T>(value: Array<T>, func: (T) => boolean): Array<T>
 {
@@ -104,12 +104,12 @@ export function mustContain<T>(value: Array<T>, func: (T) => boolean): Array<T>
 }
 
 /**
- * Returns original value if the specified value doesn't contain duplicates; otherwise throws a new ArgumentError.
+ * Returns original value if the specified value does not contain duplicates; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
  * @param {Array<T>} value - The value.
- * @returns {Array<T>} - The original value if the specified value doesn't contain duplicates; otherwise throws a new ArgumentError.
+ * @returns {Array<T>} - The original value if the specified value does not contain duplicates; otherwise throws a new ArgumentError.
  */
 export function mustContainDuplicates<T>(value: Array<T>): Array<T>
 {
@@ -122,12 +122,12 @@ export function mustContainDuplicates<T>(value: Array<T>): Array<T>
 }
 
 /**
- * Returns original value if the specified value doesn't contain null values; otherwise throws a new ArgumentError.
+ * Returns original value if the specified value does not contain null values; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
  * @param {Array<T>} value - The value.
- * @returns {Array<T>} - The original value if the specified value doesn't contain null values; otherwise throws a new ArgumentError.
+ * @returns {Array<T>} - The original value if the specified value does not contain null values; otherwise throws a new ArgumentError.
  */
 export function mustContainNull<T>(value: Array<T>): Array<T>
 {
@@ -140,12 +140,12 @@ export function mustContainNull<T>(value: Array<T>): Array<T>
 }
 
 /**
- * Returns original value if the specified value doesn't contain only null values; otherwise throws a new ArgumentError.
+ * Returns original value if the specified value does not contain only null values; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
  * @param {Array<T>} value - The value.
- * @returns {Array<T>} - The original value if the specified value doesn't contain only null values; otherwise throws a new ArgumentError.
+ * @returns {Array<T>} - The original value if the specified value does not contain only null values; otherwise throws a new ArgumentError.
  */
 export function mustContainOnlyNull<T>(value: Array<T>): Array<T>
 {

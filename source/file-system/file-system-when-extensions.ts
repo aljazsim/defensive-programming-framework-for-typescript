@@ -20,25 +20,6 @@ export function whenDoesDirectoryExist(value, defaultValue: string): string
 }
 
 /**
-* Returns default value when the specified file name is valid; otherwise returns the original value.
-*
-* @export
-* @param {string} value - The value.
-* @returns {string} - The default value when the specified file name is valid; otherwise returns the original value.
-*/
-export function whenIsValidFileName(value: string, defaultValue: string): string
-{
-    if (isValidFileName(value))
-    {
-        return defaultValue;
-    }
-    else
-    {
-        return value;
-    }
-}
-
-/**
  * Returns default value when the specified file does exist; otherwise returns the original value.
  *
  * @param {string} value - The value.
@@ -124,6 +105,25 @@ export function whenIsEmptyDirectory(value, defaultValue: string): string
 export function whenIsValidDirectoryPath(value, defaultValue: string): string
 {
     if (isValidDirectoryPath(value))
+    {
+        return defaultValue;
+    }
+    else
+    {
+        return value;
+    }
+}
+
+/**
+* Returns default value when the specified file name is valid; otherwise returns the original value.
+*
+* @export
+* @param {string} value - The value.
+* @returns {string} - The default value when the specified file name is valid; otherwise returns the original value.
+*/
+export function whenIsValidFileName(value: string, defaultValue: string): string
+{
+    if (isValidFileName(value))
     {
         return defaultValue;
     }
