@@ -291,6 +291,6 @@ dpf.cannotBeNullOrEmpty(value);
 
 ## Change log
 
-### [1.0.0] - 201-01-01
+### [1.0.0] - 2019-01-01
 
 - initial commit
