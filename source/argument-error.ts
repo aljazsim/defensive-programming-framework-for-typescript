@@ -8,7 +8,7 @@
 export class ArgumentError extends Error
 {
     /**
-	 * Creates an instance of FooError.
+	 * Creates an instance of ArgumentError.
 	 * @param {string} errorMessage
 	 * @memberof FooError
 	 */
