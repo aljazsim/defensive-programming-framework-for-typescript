@@ -309,6 +309,6 @@ dpf.cannotBeNullOrEmpty(value);
 
 - first version
 
-### [1.0.3] - 2019-01-14
+### [1.0.2] - 2019-01-14
 
 - added strict mode for better type checking

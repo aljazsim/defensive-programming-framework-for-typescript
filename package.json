@@ -1,6 +1,6 @@
 {
     "name": "defensive-programming-framework",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "author": "Aljaz Simonic",
     "license": "MIT",
     "description": "Defensive programming framework for TypeScript and JavaScript",
