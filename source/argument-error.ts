@@ -9,7 +9,7 @@ export class ArgumentError extends Error
 {
     /**
 	 * Creates an instance of ArgumentError.
-	 * @param {string} errorMessage
+	 * @param errorMessage
 	 * @memberof FooError
 	 */
     constructor(errorMessage: string)

@@ -1,13 +1,15 @@
 import { doesDirectoryExist, doesFileExist, isAbsoluteDirectoryPath, isAbsoluteFilePath, isEmptyDirectory, isValidDirectoryPath, isValidFileName, isValidFilePath } from "./file-system-is-extensions";
 
+// #region Functions (8)
+
 /**
  * Returns default value when the specified directory does exist; otherwise returns the original value.
  *
- * @param {string} value - The value.
- * @param {string} defaultValue - The default value.
- * @returns {string} - The default value when the directory does exist; otherwise returns the original value.
+ * @param value - The value.
+ * @param defaultValue - The default value.
+ * @returns - The default value when the directory does exist; otherwise returns the original value.
  */
-export function whenDoesDirectoryExist(value, defaultValue: string): string
+export function whenDoesDirectoryExist(value: string | null | undefined, defaultValue: string | null | undefined): string | null | undefined
 {
     if (doesDirectoryExist(value))
     {
@@ -22,11 +24,11 @@ export function whenDoesDirectoryExist(value, defaultValue: string): string
 /**
  * Returns default value when the specified file does exist; otherwise returns the original value.
  *
- * @param {string} value - The value.
- * @param {string} defaultValue - The default value.
- * @returns {string} - The default value when the file does exist; otherwise returns the original value.
+ * @param value - The value.
+ * @param defaultValue - The default value.
+ * @returns - The default value when the file does exist; otherwise returns the original value.
  */
-export function whenDoesFileExist(value, defaultValue: string): string
+export function whenDoesFileExist(value: string | null | undefined, defaultValue: string | null | undefined): string | null | undefined
 {
     if (doesFileExist(value))
     {
@@ -41,11 +43,11 @@ export function whenDoesFileExist(value, defaultValue: string): string
 /**
  * Returns default value when the specified directory path is an absolute directory path; otherwise returns the original value.
  *
- * @param {string} value - The value.
- * @param {string} defaultValue - The default value.
- * @returns {string} - The default value when the directory path is an absolute directory path; otherwise returns the original value.
+ * @param value - The value.
+ * @param defaultValue - The default value.
+ * @returns - The default value when the directory path is an absolute directory path; otherwise returns the original value.
  */
-export function whenIsAbsoluteDirectoryPath(value, defaultValue: string): string
+export function whenIsAbsoluteDirectoryPath(value: string | null | undefined, defaultValue: string | null | undefined): string | null | undefined
 {
     if (isAbsoluteDirectoryPath(value))
     {
@@ -60,11 +62,11 @@ export function whenIsAbsoluteDirectoryPath(value, defaultValue: string): string
 /**
  * Returns default value when the specified file path is an absolute file path; otherwise returns the original value.
  *
- * @param {string} value - The value.
- * @param {string} defaultValue - The default value.
- * @returns {string} - The default value when the file path is an absolute file path; otherwise returns the original value.
+ * @param value - The value.
+ * @param defaultValue - The default value.
+ * @returns - The default value when the file path is an absolute file path; otherwise returns the original value.
  */
-export function whenIsAbsoluteFilePath(value, defaultValue: string): string
+export function whenIsAbsoluteFilePath(value: string | null | undefined, defaultValue: string | null | undefined): string | null | undefined
 {
     if (isAbsoluteFilePath(value))
     {
@@ -79,11 +81,11 @@ export function whenIsAbsoluteFilePath(value, defaultValue: string): string
 /**
  * Returns default value when the specified directory path is empty; otherwise returns the original value.
  *
- * @param {string} value - The value.
- * @param {string} defaultValue - The default value.
- * @returns {string} - The default value when the directory path is empty; otherwise returns the original value.
+ * @param value - The value.
+ * @param defaultValue - The default value.
+ * @returns - The default value when the directory path is empty; otherwise returns the original value.
  */
-export function whenIsEmptyDirectory(value, defaultValue: string): string
+export function whenIsEmptyDirectory(value: string | null | undefined, defaultValue: string | null | undefined): string | null | undefined
 {
     if (isEmptyDirectory(value))
     {
@@ -98,11 +100,11 @@ export function whenIsEmptyDirectory(value, defaultValue: string): string
 /**
  * Returns default value when the original value is a valid directory path; otherwise returns the original value.
  *
- * @param {string} value - The value.
- * @param {string} defaultValue - The default value.
- * @returns {string} - The default value when the original value is a valid directory path; otherwise returns the original value.
+ * @param value - The value.
+ * @param defaultValue - The default value.
+ * @returns - The default value when the original value is a valid directory path; otherwise returns the original value.
  */
-export function whenIsValidDirectoryPath(value, defaultValue: string): string
+export function whenIsValidDirectoryPath(value: string | null | undefined, defaultValue: string | null | undefined): string | null | undefined
 {
     if (isValidDirectoryPath(value))
     {
@@ -118,10 +120,10 @@ export function whenIsValidDirectoryPath(value, defaultValue: string): string
 * Returns default value when the specified file name is valid; otherwise returns the original value.
 *
 * @export
-* @param {string} value - The value.
-* @returns {string} - The default value when the specified file name is valid; otherwise returns the original value.
+* @param value - The value.
+* @returns - The default value when the specified file name is valid; otherwise returns the original value.
 */
-export function whenIsValidFileName(value: string, defaultValue: string): string
+export function whenIsValidFileName(value: string | null | undefined, defaultValue: string | null | undefined): string | null | undefined
 {
     if (isValidFileName(value))
     {
@@ -136,11 +138,11 @@ export function whenIsValidFileName(value: string, defaultValue: string): string
 /**
  * Returns default value when the original value is a valid file path; otherwise returns the original value.
  *
- * @param {string} value - The value.
- * @param {string} defaultValue - The default value.
- * @returns {string} - The default value when the original value is a valid file path; otherwise returns the original value.
+ * @param value - The value.
+ * @param defaultValue - The default value.
+ * @returns - The default value when the original value is a valid file path; otherwise returns the original value.
  */
-export function whenIsValidFilePath(value, defaultValue: string): string
+export function whenIsValidFilePath(value: string | null | undefined, defaultValue: string): string | null | undefined
 {
     if (isValidFilePath(value))
     {
@@ -151,3 +153,5 @@ export function whenIsValidFilePath(value, defaultValue: string): string
         return value;
     }
 }
+
+// #endregion

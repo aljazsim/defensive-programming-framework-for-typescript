@@ -1,52 +1,70 @@
-import { cannotBeNullOrEmpty } from "../collections/collection-cannot-extensions";
-import { cannotBeNullOrWhiteSpace } from "../objects/object-cannot-extensions";
-import { isNull, isNullOrWhiteSpace } from "../objects/object-is-extensions";
+import { cannotBeNullOrEmpty, cannotBeNullOrWhiteSpace } from "../strings/string-cannot-extensions";
+import { isNullOrWhiteSpace } from "../strings/string-is-extensions";
 import { mustBeValidDirectoryPath, mustBeValidFilePath } from "./file-system-must-extensions";
 import * as fs from "fs";
 import * as path from "path";
+
+// #region Functions (8)
 
 /**
  * Determines whether the specified directory exists.
  *
  * @export
- * @param {string} value - The value.
- * @returns {boolean} - True if the specified directory exists; otherwise, false.
+ * @param value - The value.
+ * @returns - True if the specified directory exists; otherwise, false.
  */
-export function doesDirectoryExist(value: string): boolean
+export function doesDirectoryExist(value: string | null | undefined): boolean
 {
     cannotBeNullOrWhiteSpace(value);
     mustBeValidDirectoryPath(value);
 
-    return fs.existsSync(value);
+    if (value === null ||
+        value === undefined)
+    {
+        return false;
+    }
+    else
+    {
+        return fs.existsSync(value);
+    }
 }
 
 /**
  * Determines whether the specified file exists.
  *
  * @export
- * @param {string} value - The value.
- * @returns {boolean} - True if the specified file exists; otherwise, false.
+ * @param value - The value.
+ * @returns - True if the specified file exists; otherwise, false.
  */
-export function doesFileExist(value: string): boolean
+export function doesFileExist(value: string | null | undefined): boolean
 {
     cannotBeNullOrWhiteSpace(value);
     mustBeValidFilePath(value);
 
-    return fs.existsSync(value);
+    if (value === null ||
+        value === undefined)
+    {
+        return false;
+    }
+    else
+    {
+        return fs.existsSync(value);
+    }
 }
 
 /**
  * Determines whether the specified value is an absolute directory path.
  *
  * @export
- * @param {string} value - The value.
- * @returns {boolean} - True if the specified value is an absolute directory path; otherwise, false.
+ * @param value - The value.
+ * @returns - True if the specified value is an absolute directory path; otherwise, false.
  */
-export function isAbsoluteDirectoryPath(value: string): boolean
+export function isAbsoluteDirectoryPath(value: string | null | undefined): boolean
 {
     mustBeValidDirectoryPath(value);
 
-    if (isNull(value))
+    if (value === null ||
+        value === undefined)
     {
         return true;
     }
@@ -60,14 +78,15 @@ export function isAbsoluteDirectoryPath(value: string): boolean
 * Determines whether the specified value is an absolute file path.
 *
 * @export
-* @param {string} value - The value.
-* @returns {boolean} - True if the specified value is an absolute file path; otherwise, false.
+* @param value - The value.
+* @returns - True if the specified value is an absolute file path; otherwise, false.
 */
-export function isAbsoluteFilePath(value: string): boolean
+export function isAbsoluteFilePath(value: string | null | undefined): boolean
 {
     mustBeValidFilePath(value);
 
-    if (isNull(value))
+    if (value === null ||
+        value === undefined)
     {
         return true;
     }
@@ -81,15 +100,20 @@ export function isAbsoluteFilePath(value: string): boolean
  * Determines whether specified directory is empty.
  *
  * @export
- * @param {string} value - The value.
- * @returns {boolean} - True if specified directory is empty; otherwise, false.
+ * @param value - The value.
+ * @returns - True if specified directory is empty; otherwise, false.
  */
-export function isEmptyDirectory(value: string): boolean
+export function isEmptyDirectory(value: string | null | undefined): boolean
 {
     cannotBeNullOrEmpty(value);
     mustBeValidDirectoryPath(value);
 
-    if (doesDirectoryExist(value))
+    if (value === null ||
+        value === undefined)
+    {
+        return false;
+    }
+    else if (doesDirectoryExist(value))
     {
         return fs.readdirSync(value).length === 0;
     }
@@ -103,12 +127,13 @@ export function isEmptyDirectory(value: string): boolean
  * Determines whether the specified value is a valid directory path.
  *
  * @export
- * @param {string} value - The value.
- * @returns {boolean} - True if the specified value is a valid directory path; otherwise, false.
+ * @param value - The value.
+ * @returns - True if the specified value is a valid directory path; otherwise, false.
  */
-export function isValidDirectoryPath(value: string): boolean
+export function isValidDirectoryPath(value: string | null | undefined): boolean
 {
-    if (isNull(value))
+    if (value === null ||
+        value === undefined)
     {
         return true;
     }
@@ -127,12 +152,13 @@ export function isValidDirectoryPath(value: string): boolean
  * Determines whether the specified value is a valid file name.
  *
  * @export
- * @param {string} value - The value.
- * @returns {boolean} - True if the specified value is a valid file name; otherwise, false.
+ * @param value - The value.
+ * @returns - True if the specified value is a valid file name; otherwise, false.
  */
-export function isValidFileName(value: string): boolean
+export function isValidFileName(value: string | null | undefined): boolean
 {
-    if (isNull(value))
+    if (value === null ||
+        value === undefined)
     {
         return true;
     }
@@ -155,12 +181,13 @@ export function isValidFileName(value: string): boolean
  * Determines whether the specified value is a valid file path.
  *
  * @export
- * @param {string} value - The value.
- * @returns {boolean} - True if the specified value is a valid file path; otherwise, false.
+ * @param value - The value.
+ * @returns - True if the specified value is a valid file path; otherwise, false.
  */
-export function isValidFilePath(value: string): boolean
+export function isValidFilePath(value: string | null | undefined): boolean
 {
-    if (isNull(value))
+    if (value === null ||
+        value === undefined)
     {
         return true;
     }
@@ -174,3 +201,5 @@ export function isValidFilePath(value: string): boolean
         return true;
     }
 }
+
+// #endregion

@@ -1,6 +1,6 @@
 import "mocha";
 import { ArgumentError } from "../../source/argument-error";
-import { contains, containsDuplicates, containsNull, containsOnlyNull, isEmpty, isEqualTo2, isNullOrEmpty, isOneOf2 } from "../../source/collections/collection-is-extensions";
+import { contains, containsDuplicates, containsNull, containsOnlyNull, isEmptyArray, isEqualToArray, isNullOrEmptyArray, isOneOfArrays } from "../../source/collections/collection-is-extensions";
 import { expect } from "chai";
 
 describe("collections cannot extensions", () =>
@@ -9,9 +9,9 @@ describe("collections cannot extensions", () =>
     {
         describe("success", () =>
         {
-            it("should return false", () => expect(contains(null, x => x > 3)).to.equal(false));
-            it("should return false", () => expect(contains(undefined, x => x > 3)).to.equal(false));
-            it("should return false", () => expect(contains([], x => x > 3)).to.equal(false));
+            it("should return false", () => expect(contains(null, x => x !== null && x !== undefined && x > 3)).to.equal(false));
+            it("should return false", () => expect(contains(undefined, x => x !== null && x !== undefined && x > 3)).to.equal(false));
+            it("should return false", () => expect(contains([], x => x !== null && x !== undefined && x > 3)).to.equal(false));
             it("should return true", () => expect(contains([null], x => x === null)).to.equal(true));
             it("should return true", () => expect(contains([undefined], x => x === undefined)).to.equal(true));
 
@@ -88,20 +88,16 @@ describe("collections cannot extensions", () =>
     {
         describe("success", () =>
         {
-            it("should return false", () => expect(isEmpty(null)).to.equal(false));
-            it("should return false", () => expect(isEmpty(undefined)).to.equal(false));
-            it("should return true", () => expect(isEmpty("")).to.equal(true));
-            it("should return true", () => expect(isEmpty([])).to.equal(true));
-            it("should return false", () => expect(isEmpty("a")).to.equal(false));
-            it("should return false", () => expect(isEmpty("ab")).to.equal(false));
-            it("should return false", () => expect(isEmpty("abc")).to.equal(false));
-            it("should return false", () => expect(isEmpty([1])).to.equal(false));
-            it("should return false", () => expect(isEmpty([1, 2])).to.equal(false));
-            it("should return false", () => expect(isEmpty([1, null])).to.equal(false));
-            it("should return false", () => expect(isEmpty([null, null])).to.equal(false));
-            it("should return false", () => expect(isEmpty([undefined])).to.equal(false));
-            it("should return false", () => expect(isEmpty([undefined, undefined])).to.equal(false));
-            it("should return false", () => expect(isEmpty([null, undefined, null, undefined])).to.equal(false));
+            it("should return false", () => expect(isEmptyArray(null)).to.equal(false));
+            it("should return false", () => expect(isEmptyArray(undefined)).to.equal(false));
+            it("should return true", () => expect(isEmptyArray([])).to.equal(true));
+            it("should return false", () => expect(isEmptyArray([1])).to.equal(false));
+            it("should return false", () => expect(isEmptyArray([1, 2])).to.equal(false));
+            it("should return false", () => expect(isEmptyArray([1, null])).to.equal(false));
+            it("should return false", () => expect(isEmptyArray([null, null])).to.equal(false));
+            it("should return false", () => expect(isEmptyArray([undefined])).to.equal(false));
+            it("should return false", () => expect(isEmptyArray([undefined, undefined])).to.equal(false));
+            it("should return false", () => expect(isEmptyArray([null, undefined, null, undefined])).to.equal(false));
         });
     });
 
@@ -109,19 +105,19 @@ describe("collections cannot extensions", () =>
     {
         describe("success", () =>
         {
-            it("should return true", () => expect(isEqualTo2(null, null)).to.equal(true));
-            it("should return true", () => expect(isEqualTo2(undefined, undefined)).to.equal(true));
-            it("should return false", () => expect(isEqualTo2(null, [0])).to.equal(false));
-            it("should return false", () => expect(isEqualTo2([0], null)).to.equal(false));
-            it("should return false", () => expect(isEqualTo2(undefined, [0])).to.equal(false));
-            it("should return false", () => expect(isEqualTo2([0], undefined)).to.equal(false));
-            it("should return true", () => expect(isEqualTo2([1, 2, 3], [1, 2, 3])).to.equal(true));
-            it("should return false", () => expect(isEqualTo2([1, 2, 3], [3, 2, 1])).to.equal(false));
-            it("should return true", () => expect(isEqualTo2([1, 2, 3], [3, 2, 1], true)).to.equal(true));
-            it("should return true", () => expect(isEqualTo2(["a", "b", "c"], ["a", "b", "c"])).to.equal(true));
+            it("should return true", () => expect(isEqualToArray(null, null)).to.equal(true));
+            it("should return true", () => expect(isEqualToArray(undefined, undefined)).to.equal(true));
+            it("should return false", () => expect(isEqualToArray(null, [0])).to.equal(false));
+            it("should return false", () => expect(isEqualToArray([0], null)).to.equal(false));
+            it("should return false", () => expect(isEqualToArray(undefined, [0])).to.equal(false));
+            it("should return false", () => expect(isEqualToArray([0], undefined)).to.equal(false));
+            it("should return true", () => expect(isEqualToArray([1, 2, 3], [1, 2, 3])).to.equal(true));
+            it("should return false", () => expect(isEqualToArray([1, 2, 3], [3, 2, 1])).to.equal(false));
+            it("should return true", () => expect(isEqualToArray([1, 2, 3], [3, 2, 1], true)).to.equal(true));
+            it("should return true", () => expect(isEqualToArray(["a", "b", "c"], ["a", "b", "c"])).to.equal(true));
 
-            it("should return true", () => expect(isEqualTo2(["a", "b", "c"], ["a", "b", "d"])).to.equal(false));
-            it("should return true", () => expect(isEqualTo2([1, 2, 3], [3, 4, 5], true)).to.equal(false));
+            it("should return true", () => expect(isEqualToArray(["a", "b", "c"], ["a", "b", "d"])).to.equal(false));
+            it("should return true", () => expect(isEqualToArray([1, 2, 3], [3, 4, 5], true)).to.equal(false));
 
         });
     });
@@ -130,16 +126,13 @@ describe("collections cannot extensions", () =>
     {
         describe("success", () =>
         {
-            it("should true", () => expect(isNullOrEmpty(null)).to.equal(true));
-            it("should true", () => expect(isNullOrEmpty(undefined)).to.equal(true));
-            it("should true", () => expect(isNullOrEmpty([])).to.equal(true));
-            it("should true", () => expect(isNullOrEmpty("")).to.equal(true));
-            it("should false", () => expect(isNullOrEmpty("a")).to.equal(false));
-            it("should false", () => expect(isNullOrEmpty("ab")).to.equal(false));
-            it("should false", () => expect(isNullOrEmpty([1])).to.equal(false));
-            it("should false", () => expect(isNullOrEmpty([1, 2])).to.equal(false));
-            it("should false", () => expect(isNullOrEmpty(["a"])).to.equal(false));
-            it("should false", () => expect(isNullOrEmpty(["a", "b"])).to.equal(false));
+            it("should true", () => expect(isNullOrEmptyArray(null)).to.equal(true));
+            it("should true", () => expect(isNullOrEmptyArray(undefined)).to.equal(true));
+            it("should true", () => expect(isNullOrEmptyArray([])).to.equal(true));
+            it("should false", () => expect(isNullOrEmptyArray([1])).to.equal(false));
+            it("should false", () => expect(isNullOrEmptyArray([1, 2])).to.equal(false));
+            it("should false", () => expect(isNullOrEmptyArray(["a"])).to.equal(false));
+            it("should false", () => expect(isNullOrEmptyArray(["a", "b"])).to.equal(false));
         });
     });
 
@@ -147,21 +140,23 @@ describe("collections cannot extensions", () =>
     {
         describe("success", () =>
         {
-            it("should return false", () => expect(isOneOf2(null, [1, 2, 3])).to.equal(false));
-            it("should return false", () => expect(isOneOf2(undefined, [1, 2, 3])).to.equal(false));
-            it("should return false", () => expect(isOneOf2(1, [0, 2, 3])).to.equal(false));
-            it("should return false", () => expect(isOneOf2("aaa", ["a", "aa", "aaaa"])).to.equal(false));
-            it("should return false", () => expect(isOneOf2("x", [null, undefined])).to.equal(false));
-            it("should return true", () => expect(isOneOf2(1, [0, 1, 2, 3, 4])).to.equal(true));
-            it("should return true", () => expect(isOneOf2(3, [0, 1, 2, 3, 4])).to.equal(true));
-            it("should return true", () => expect(isOneOf2(3, [0, 3, 3, 3, 1, 2, 3, 4])).to.equal(true));
-            it("should return true", () => expect(isOneOf2("x", [null, undefined, 1, 6, "a", "x", -1, "CCC"])).to.equal(true));
+            let tmp: (string | null | undefined)[] = [null, undefined];
+
+            it("should return false", () => expect(isOneOfArrays(null, [1, 2, 3])).to.equal(false));
+            it("should return false", () => expect(isOneOfArrays(undefined, [1, 2, 3])).to.equal(false));
+            it("should return false", () => expect(isOneOfArrays(1, [0, 2, 3])).to.equal(false));
+            it("should return false", () => expect(isOneOfArrays("aaa", ["a", "aa", "aaaa"])).to.equal(false));
+            it("should return false", () => expect(isOneOfArrays("x", tmp)).to.equal(false));
+            it("should return true", () => expect(isOneOfArrays(1, [0, 1, 2, 3, 4])).to.equal(true));
+            it("should return true", () => expect(isOneOfArrays(3, [0, 1, 2, 3, 4])).to.equal(true));
+            it("should return true", () => expect(isOneOfArrays(3, [0, 3, 3, 3, 1, 2, 3, 4])).to.equal(true));
+            it("should return true", () => expect(isOneOfArrays("x", [null, undefined, 1, 6, "a", "x", -1, "CCC"])).to.equal(true));
         });
 
         describe("failure", () =>
         {
-            it("should fail for null", () => expect(() => isOneOf2(1, null)).to.throw(ArgumentError, "Value cannot be null."));
-            it("should fail for undefined", () => expect(() => isOneOf2(1, undefined)).to.throw(ArgumentError, "Value cannot be null."));
+            it("should fail for null", () => expect(() => isOneOfArrays(1, null)).to.throw(ArgumentError, "Value cannot be null."));
+            it("should fail for undefined", () => expect(() => isOneOfArrays(1, undefined)).to.throw(ArgumentError, "Value cannot be null."));
         });
     });
 });

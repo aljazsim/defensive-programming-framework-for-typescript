@@ -1,18 +1,19 @@
 import { ArgumentError } from "../argument-error";
-import { isNull } from "../objects/object-is-extensions";
-import { contains, containsDuplicates, containsNull, containsOnlyNull, isEmpty, isEqualTo2, isNullOrEmpty, isOneOf2 } from "./collection-is-extensions";
+import { contains, containsDuplicates, containsNull, containsOnlyNull, isEmptyArray, isEqualToArray, isNullOrEmptyArray, isOneOfArrays } from "./collection-is-extensions";
+
+// #region Functions (8)
 
 /**
  * Returns original value if the specified value is empty; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
- * @param {Array<T>} value - The value.
- * @returns {Array<T>} - The original value if the specified value is empty; otherwise throws a new ArgumentError.
+ * @param value - The value.
+ * @returns - The original value if the specified value is empty; otherwise throws a new ArgumentError.
  */
-export function mustBeEmpty<T>(value: Array<T> | string): Array<T> | string
+export function mustBeEmptyArray<T>(value: Array<T> | null | undefined): Array<T> | null | undefined
 {
-    if (!isEmpty(value))
+    if (!isEmptyArray(value))
     {
         throw new ArgumentError("Value must be empty.");
     }
@@ -25,16 +26,17 @@ export function mustBeEmpty<T>(value: Array<T> | string): Array<T> | string
  *
  * @export
  * @template T - The value type.
- * @param {Array<T>} value1 - The value 1.
- * @param {Array<T>} value2 - The value 2.
- * @param {boolean} [ignoreOrder=false] - If set to true; ignore item order.
- * @returns {Array<T>} - The original value if the specified value is equal to the compared value; otherwise throws a new ArgumentError.
+ * @param value1 - The value 1.
+ * @param value2 - The value 2.
+ * @param [ignoreOrder=false] - If set to true; ignore item order.
+ * @returns - The original value if the specified value is equal to the compared value; otherwise throws a new ArgumentError.
  */
-export function mustBeEqualTo2<T>(value1: Array<T>, value2: Array<T>, ignoreOrder: boolean = false): Array<T>
+export function mustBeEqualToArray<T>(value1: Array<T> | null | undefined, value2: Array<T> | null | undefined, ignoreOrder: boolean = false): Array<T> | null | undefined
 {
-    if (!isEqualTo2(value1, value2, ignoreOrder))
+    if (!isEqualToArray(value1, value2, ignoreOrder))
     {
-        if (isNull(value2))
+        if (value2 === null ||
+            value2 === undefined)
         {
             throw new ArgumentError(`Value must be equal to ${value2}.`);
         }
@@ -52,12 +54,12 @@ export function mustBeEqualTo2<T>(value1: Array<T>, value2: Array<T>, ignoreOrde
  *
  * @export
  * @template T - The value type.
- * @param {Array<T>} value - The value.
- * @returns {Array<T>} - The original value if the specified value is null or empty; otherwise throws a new ArgumentError.
+ * @param value - The value.
+ * @returns - The original value if the specified value is null or empty; otherwise throws a new ArgumentError.
  */
-export function mustBeNullOrEmpty<T>(value: Array<T> | string): Array<T> | string
+export function mustBeNullOrEmptyArray<T>(value: Array<T> | null | undefined): Array<T> | null | undefined
 {
-    if (!isNullOrEmpty(value))
+    if (!isNullOrEmptyArray(value))
     {
         throw new ArgumentError("Value must be null or empty.");
     }
@@ -70,15 +72,19 @@ export function mustBeNullOrEmpty<T>(value: Array<T> | string): Array<T> | strin
  *
  * @export
  * @template T - The value type.
- * @param {T} value - The value.
- * @param {Array<T>} set - The set.
- * @returns {T} - The original value if the specified value does not belong to the specified set; otherwise throws a new ArgumentError.
+ * @param value - The value.
+ * @param set - The set.
+ * @returns - The original value if the specified value does not belong to the specified set; otherwise throws a new ArgumentError.
  */
-export function mustBeOneOf2<T>(value: T, set: Array<T>): T
+export function mustBeOneOfArray<T>(value: T | null | undefined, set: T[] | null | undefined): T | null | undefined
 {
-    if (!isOneOf2(value, set))
+    if (!isOneOfArrays(value, set))
     {
-        throw new ArgumentError(`Value must be one of [${set.join(", ")}].`);
+        if (set !== null &&
+            set !== undefined)
+        {
+            throw new ArgumentError(`Value must be one of [${set.join(", ")}].`);
+        }
     }
 
     return value;
@@ -89,11 +95,11 @@ export function mustBeOneOf2<T>(value: T, set: Array<T>): T
  *
  * @export
  * @template T - The value type.
- * @param {Array<T>} value - The value.
- * @param {(T) => boolean} func - The selector function.
- * @returns {Array<T>} - The original value if the specified value does not contain any items corresponding to the selector function; otherwise throws a new ArgumentError.
+ * @param value - The value.
+ * @param func - The selector function.
+ * @returns - The original value if the specified value does not contain any items corresponding to the selector function; otherwise throws a new ArgumentError.
  */
-export function mustContain<T>(value: Array<T>, func: (T) => boolean): Array<T>
+export function mustContain<T>(value: Array<T> | null | undefined, func: ((value: T | null | undefined) => boolean) | null | undefined): Array<T> | null | undefined
 {
     if (!contains(value, func))
     {
@@ -108,10 +114,10 @@ export function mustContain<T>(value: Array<T>, func: (T) => boolean): Array<T>
  *
  * @export
  * @template T - The value type.
- * @param {Array<T>} value - The value.
- * @returns {Array<T>} - The original value if the specified value does not contain duplicates; otherwise throws a new ArgumentError.
+ * @param value - The value.
+ * @returns - The original value if the specified value does not contain duplicates; otherwise throws a new ArgumentError.
  */
-export function mustContainDuplicates<T>(value: Array<T>): Array<T>
+export function mustContainDuplicates<T>(value: Array<T> | null | undefined): Array<T> | null | undefined
 {
     if (!containsDuplicates(value))
     {
@@ -126,10 +132,10 @@ export function mustContainDuplicates<T>(value: Array<T>): Array<T>
  *
  * @export
  * @template T - The value type.
- * @param {Array<T>} value - The value.
- * @returns {Array<T>} - The original value if the specified value does not contain null values; otherwise throws a new ArgumentError.
+ * @param value - The value.
+ * @returns - The original value if the specified value does not contain null values; otherwise throws a new ArgumentError.
  */
-export function mustContainNull<T>(value: Array<T>): Array<T>
+export function mustContainNull<T>(value: Array<T> | null | undefined): Array<T> | null | undefined
 {
     if (!containsNull(value))
     {
@@ -144,10 +150,10 @@ export function mustContainNull<T>(value: Array<T>): Array<T>
  *
  * @export
  * @template T - The value type.
- * @param {Array<T>} value - The value.
- * @returns {Array<T>} - The original value if the specified value does not contain only null values; otherwise throws a new ArgumentError.
+ * @param value - The value.
+ * @returns - The original value if the specified value does not contain only null values; otherwise throws a new ArgumentError.
  */
-export function mustContainOnlyNull<T>(value: Array<T>): Array<T>
+export function mustContainOnlyNull<T>(value: Array<T> | null | undefined): Array<T> | null | undefined
 {
     if (!containsOnlyNull(value))
     {
@@ -156,3 +162,5 @@ export function mustContainOnlyNull<T>(value: Array<T>): Array<T>
 
     return value;
 }
+
+// #endregion

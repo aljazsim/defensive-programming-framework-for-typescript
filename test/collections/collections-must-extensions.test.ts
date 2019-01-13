@@ -1,6 +1,6 @@
 import "mocha";
 import { ArgumentError } from "../../source/argument-error";
-import { mustBeEmpty, mustBeEqualTo2, mustBeNullOrEmpty, mustBeOneOf2, mustContain, mustContainDuplicates, mustContainNull, mustContainOnlyNull } from "../../source/collections/collection-must-extensions";
+import { mustBeEmptyArray, mustBeEqualToArray, mustBeNullOrEmptyArray, mustBeOneOfArray, mustContain, mustContainDuplicates, mustContainNull, mustContainOnlyNull } from "../../source/collections/collection-must-extensions";
 import { expect } from "chai";
 
 describe("collections must extensions", () =>
@@ -9,43 +9,38 @@ describe("collections must extensions", () =>
     {
         describe("success", () =>
         {
-            it("should return empty string", () => expect(mustBeEmpty("")).to.equal(""));
-            it("should return empty array", () => expect(mustBeEmpty([])).to.eql([]));
+            it("should return empty array", () => expect(mustBeEmptyArray([])).to.eql([]));
         });
 
         describe("failure", () =>
         {
-            it("should fail for null", () => expect(() => mustBeEmpty(null)).to.throw(ArgumentError, "Value must be empty."));
-            it("should fail for undefined", () => expect(() => mustBeEmpty(undefined)).to.throw(ArgumentError, "Value must be empty."));
-            it("should fail for \"a\"", () => expect(() => mustBeEmpty("a")).to.throw(ArgumentError, "Value must be empty."));
-            it("should fail for \"ab\"", () => expect(() => mustBeEmpty("ab")).to.throw(ArgumentError, "Value must be empty."));
-            it("should fail for \"abc\"", () => expect(() => mustBeEmpty("abc")).to.throw(ArgumentError, "Value must be empty."));
-            it("should fail for [1]", () => expect(() => mustBeEmpty([1])).to.throw(ArgumentError, "Value must be empty."));
-            it("should fail for [1, 2]", () => expect(() => mustBeEmpty([1, 2])).to.throw(ArgumentError, "Value must be empty."));
+            it("should fail for null", () => expect(() => mustBeEmptyArray(null)).to.throw(ArgumentError, "Value must be empty."));
+            it("should fail for undefined", () => expect(() => mustBeEmptyArray(undefined)).to.throw(ArgumentError, "Value must be empty."));
+            it("should fail for [1]", () => expect(() => mustBeEmptyArray([1])).to.throw(ArgumentError, "Value must be empty."));
+            it("should fail for [1, 2]", () => expect(() => mustBeEmptyArray([1, 2])).to.throw(ArgumentError, "Value must be empty."));
         });
-
     });
 
     describe("mustBeEqual2()", () =>
     {
         describe("success", () =>
         {
-            it("should return null", () => expect(mustBeEqualTo2(null, null)).to.equal(null));
-            it("should return undefined", () => expect(mustBeEqualTo2(undefined, undefined)).to.equal(undefined));
-            it("should return identical array", () => expect(mustBeEqualTo2([1, 2, 3], [1, 2, 3])).to.eql([1, 2, 3]));
-            it("should return identical array", () => expect(mustBeEqualTo2([1, 2, 3], [3, 1, 2], true)).to.eql([1, 2, 3]));
+            it("should return null", () => expect(mustBeEqualToArray(null, null)).to.equal(null));
+            it("should return undefined", () => expect(mustBeEqualToArray(undefined, undefined)).to.equal(undefined));
+            it("should return identical array", () => expect(mustBeEqualToArray([1, 2, 3], [1, 2, 3])).to.eql([1, 2, 3]));
+            it("should return identical array", () => expect(mustBeEqualToArray([1, 2, 3], [3, 1, 2], true)).to.eql([1, 2, 3]));
         });
 
         describe("failure", () =>
         {
-            it("should fail for null", () => expect(() => mustBeEqualTo2(null, [0, 1, 2, 3])).to.throw(ArgumentError, "Value must be equal to [0, 1, 2, 3]."));
-            it("should fail for null", () => expect(() => mustBeEqualTo2([0], null)).to.throw(ArgumentError, "Value must be equal to null."));
-            it("should fail for undefined", () => expect(() => mustBeEqualTo2(undefined, [0, 1, 2, 3])).to.throw(ArgumentError, "Value must be equal to [0, 1, 2, 3]."));
-            it("should fail for undefined", () => expect(() => mustBeEqualTo2([0], undefined)).to.throw(ArgumentError, "Value must be equal to undefined."));
-            it("should fail for [1, 2, 3]", () => expect(() => mustBeEqualTo2([1, 2, 3], [0, 1, 2, 3])).to.throw(ArgumentError, "Value must be equal to [0, 1, 2, 3]."));
-            it("should fail for [1, 2, 3]", () => expect(() => mustBeEqualTo2([1, 2, 3], [3, 4, 5])).to.throw(ArgumentError, "Value must be equal to [3, 4, 5]."));
-            it("should fail for [1, 2, 3]", () => expect(() => mustBeEqualTo2([1, 2, 3], [3, 2, 1])).to.throw(ArgumentError, "Value must be equal to [3, 2, 1]."));
-            it("should fail for [\"a\", \"b\", \"c\"]", () => expect(() => mustBeEqualTo2(["a", "b", "c"], ["a", "c", "d"])).to.throw(ArgumentError, "Value must be equal to [a, c, d]."));
+            it("should fail for null", () => expect(() => mustBeEqualToArray(null, [0, 1, 2, 3])).to.throw(ArgumentError, "Value must be equal to [0, 1, 2, 3]."));
+            it("should fail for null", () => expect(() => mustBeEqualToArray([0], null)).to.throw(ArgumentError, "Value must be equal to null."));
+            it("should fail for undefined", () => expect(() => mustBeEqualToArray(undefined, [0, 1, 2, 3])).to.throw(ArgumentError, "Value must be equal to [0, 1, 2, 3]."));
+            it("should fail for undefined", () => expect(() => mustBeEqualToArray([0], undefined)).to.throw(ArgumentError, "Value must be equal to undefined."));
+            it("should fail for [1, 2, 3]", () => expect(() => mustBeEqualToArray([1, 2, 3], [0, 1, 2, 3])).to.throw(ArgumentError, "Value must be equal to [0, 1, 2, 3]."));
+            it("should fail for [1, 2, 3]", () => expect(() => mustBeEqualToArray([1, 2, 3], [3, 4, 5])).to.throw(ArgumentError, "Value must be equal to [3, 4, 5]."));
+            it("should fail for [1, 2, 3]", () => expect(() => mustBeEqualToArray([1, 2, 3], [3, 2, 1])).to.throw(ArgumentError, "Value must be equal to [3, 2, 1]."));
+            it("should fail for [\"a\", \"b\", \"c\"]", () => expect(() => mustBeEqualToArray(["a", "b", "c"], ["a", "c", "d"])).to.throw(ArgumentError, "Value must be equal to [a, c, d]."));
         });
     });
 
@@ -53,20 +48,17 @@ describe("collections must extensions", () =>
     {
         describe("success", () =>
         {
-            it("should return null", () => expect(mustBeNullOrEmpty(null)).to.equal(null));
-            it("should return undefined", () => expect(mustBeNullOrEmpty(undefined)).to.equal(undefined));
-            it("should return empty string", () => expect(mustBeNullOrEmpty("")).to.equal(""));
-            it("should return for empty array", () => expect(mustBeNullOrEmpty([])).to.eql([]));
+            it("should return null", () => expect(mustBeNullOrEmptyArray(null)).to.equal(null));
+            it("should return undefined", () => expect(mustBeNullOrEmptyArray(undefined)).to.equal(undefined));
+            it("should return for empty array", () => expect(mustBeNullOrEmptyArray([])).to.eql([]));
         });
 
         describe("failure", () =>
         {
-            it("should fail for \"a\"", () => expect(() => mustBeNullOrEmpty("a")).to.throw(ArgumentError, "Value must be null or empty."));
-            it("should fail for \"ab\"", () => expect(() => mustBeNullOrEmpty("ab")).to.throw(ArgumentError, "Value must be null or empty."));
-            it("should fail for [1]", () => expect(() => mustBeNullOrEmpty([1])).to.throw(ArgumentError, "Value must be null or empty."));
-            it("should fail for [1, 2]", () => expect(() => mustBeNullOrEmpty([1, 2])).to.throw(ArgumentError, "Value must be null or empty."));
-            it("should fail for [\"a\"]", () => expect(() => mustBeNullOrEmpty(["a"])).to.throw(ArgumentError, "Value must be null or empty."));
-            it("should fail for [\"a\", \"b\"]", () => expect(() => mustBeNullOrEmpty(["a", "b"])).to.throw(ArgumentError, "Value must be null or empty."));
+            it("should fail for [1]", () => expect(() => mustBeNullOrEmptyArray([1])).to.throw(ArgumentError, "Value must be null or empty."));
+            it("should fail for [1, 2]", () => expect(() => mustBeNullOrEmptyArray([1, 2])).to.throw(ArgumentError, "Value must be null or empty."));
+            it("should fail for [\"a\"]", () => expect(() => mustBeNullOrEmptyArray(["a"])).to.throw(ArgumentError, "Value must be null or empty."));
+            it("should fail for [\"a\", \"b\"]", () => expect(() => mustBeNullOrEmptyArray(["a", "b"])).to.throw(ArgumentError, "Value must be null or empty."));
         });
     });
 
@@ -74,17 +66,17 @@ describe("collections must extensions", () =>
     {
         describe("success", () =>
         {
-            it("should return included value", () => expect(mustBeOneOf2(1, [0, 1, 2, 3, 4])).to.equal(1));
+            it("should return included value", () => expect(mustBeOneOfArray(1, [0, 1, 2, 3, 4])).to.equal(1));
         });
 
         describe("failure", () =>
         {
-            it("should return null", () => expect(() => mustBeOneOf2(1, null)).to.throw(ArgumentError, "Value cannot be null."));
-            it("should return undefined", () => expect(() => mustBeOneOf2(1, undefined)).to.throw(ArgumentError, "Value cannot be null."));
-            it("should fail for null", () => expect(() => mustBeOneOf2(null, [1, 2, 3])).to.throw(ArgumentError, "Value must be one of [1, 2, 3]."));
-            it("should fail for undefined", () => expect(() => mustBeOneOf2(undefined, [1, 2, 3])).to.throw(ArgumentError, "Value must be one of [1, 2, 3]."));
-            it("should fail for 1", () => expect(() => mustBeOneOf2(1, [0, 2, 3])).to.throw(ArgumentError, "Value must be one of [0, 2, 3]."));
-            it("should fail for \"aaa\"", () => expect(() => mustBeOneOf2("aaa", ["a", "aa", "aaaa"])).to.throw(ArgumentError, "Value must be one of [a, aa, aaaa]."));
+            it("should return null", () => expect(() => mustBeOneOfArray(1, null)).to.throw(ArgumentError, "Value cannot be null."));
+            it("should return undefined", () => expect(() => mustBeOneOfArray(1, undefined)).to.throw(ArgumentError, "Value cannot be null."));
+            it("should fail for null", () => expect(() => mustBeOneOfArray(null, [1, 2, 3])).to.throw(ArgumentError, "Value must be one of [1, 2, 3]."));
+            it("should fail for undefined", () => expect(() => mustBeOneOfArray(undefined, [1, 2, 3])).to.throw(ArgumentError, "Value must be one of [1, 2, 3]."));
+            it("should fail for 1", () => expect(() => mustBeOneOfArray(1, [0, 2, 3])).to.throw(ArgumentError, "Value must be one of [0, 2, 3]."));
+            it("should fail for \"aaa\"", () => expect(() => mustBeOneOfArray("aaa", ["a", "aa", "aaaa"])).to.throw(ArgumentError, "Value must be one of [a, aa, aaaa]."));
         });
     });
 
@@ -105,9 +97,9 @@ describe("collections must extensions", () =>
             it("should fail for null", () => expect(() => mustContain([], null)).to.throw(ArgumentError, "Value cannot be null."));
             it("should fail for undefined", () => expect(() => mustContain(undefined, x => x === undefined)).to.throw(ArgumentError, "Value must contain the specified expression."));
             it("should fail for undefined", () => expect(() => mustContain([], undefined)).to.throw(ArgumentError, "Value cannot be null."));
-            it("should fail for []", () => expect(() => mustContain([], x => x > 3)).to.throw(ArgumentError, "Value must contain the specified expression."));
-            it("should fail for [1, 2, 3]", () => expect(() => mustContain([1, 2, 3], x => x > 3)).to.throw(ArgumentError, "Value must contain the specified expression."));
-            it("should fail for [\"a\", \"aa\", \"aaa\"]", () => expect(() => mustContain(["a", "aa", "aaa"], x => x.indexOf("b") > 0)).to.throw(ArgumentError, "Value must contain the specified expression."));
+            it("should fail for []", () => expect(() => mustContain([], x => x !== null && x !== undefined && x > 3)).to.throw(ArgumentError, "Value must contain the specified expression."));
+            it("should fail for [1, 2, 3]", () => expect(() => mustContain([1, 2, 3], x => x !== null && x !== undefined && x > 3)).to.throw(ArgumentError, "Value must contain the specified expression."));
+            it("should fail for [\"a\", \"aa\", \"aaa\"]", () => expect(() => mustContain(["a", "aa", "aaa"], x => x !== null && x !== undefined && x.indexOf("b") > 0)).to.throw(ArgumentError, "Value must contain the specified expression."));
         });
     });
 

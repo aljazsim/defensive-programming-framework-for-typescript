@@ -99,6 +99,7 @@ describe("file system cannot extensions", () =>
             it("should return true for absolute file path", () => expect(() => cannotBeAbsoluteFilePath("C:\\temp\\sub_folder\\")).to.throw(ArgumentError, "Value cannot be an absolute file path."));
             it("should return true for absolute file path", () => expect(() => cannotBeAbsoluteFilePath("C:\\temp\\sub-folder\\")).to.throw(ArgumentError, "Value cannot be an absolute file path."));
             it("should return true for absolute file path", () => expect(() => cannotBeAbsoluteFilePath("C:\\temp\\sub-folder\\1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111")).to.throw(ArgumentError, "Value cannot be an absolute file path."));
+
             // TODO: write tests for invalid file paths
             // // it("should fail for invalid file path", () => expect(() => isAbsoluteFilePath("$~/\\")).to.throw(ArgumentError, "Value must be a valid directory path."));
         });
@@ -125,6 +126,7 @@ describe("file system cannot extensions", () =>
         {
             it("should return false for empty string", () => expect(cannotBeValidDirectoryPath("")).to.equal(""));
             it("should return false for whitespace", () => expect(cannotBeValidDirectoryPath("    \t          ")).to.equal("    \t          "));
+
             // TODO: write tests for invalid directory paths
             // // it("should return false invalid directory path", () => expect(cannotBeValidDirectoryPath("???")).to.equal("???"));
 

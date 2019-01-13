@@ -56,18 +56,19 @@
     ],
     "dependencies": {},
     "devDependencies": {
-        "@types/node": "^10.12.18",
-        "@types/mocha": "5.2.5",
         "@types/chai": "4.1.7",
+        "@types/mocha": "5.2.5",
+        "@types/node": "^10.12.18",
+        "@types/rimraf": "^2.0.2",
         "chai": "^4.2.0",
         "mocha": "^5.2.0",
         "npm-check-updates": "^2.15.0",
-        "tslint": "^5.12.0",
-        "ts-node": "7.0.1",
-        "typescript": "^3.2.2",
         "nyc": "13.1.0",
-        "ts-mocha": "2.0.0",
+        "rimraf": "2.6.2",
         "source-map-support": "^0.5.9",
-        "rimraf": "2.6.2"
+        "ts-mocha": "2.0.0",
+        "ts-node": "7.0.1",
+        "tslint": "^5.12.0",
+        "typescript": "^3.2.2"
     }
 }

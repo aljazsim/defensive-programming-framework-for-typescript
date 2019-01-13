@@ -1,75 +1,28 @@
 import { cannotBeNull } from "./object-cannot-extensions";
-import { mustBeLessThanOrEqualTo } from "./object-must-extensions";
 
-/**
- * Determines whether the specified value matches the specified regular expression.
- *
- * @export
- * @param {string} value - The value.
- * @param {RegExp} regex - The regular expression
- * @returns {boolean} - True if specified value matches the specified regular expression; otherwise, false.
- */
-export function doesMatch(value: string, regex: RegExp): boolean
-{
-    cannotBeNull(regex);
-
-    if (value === null)
-    {
-        return false;
-    }
-    else
-    {
-        return regex.test(value);
-    }
-}
+// #region Functions (6)
 
 /**
  * Determines whether the specified function returns true.
  *
  * @export
  * @template T - The value type.
- * @param {T} value - The value.
+ * @param value - The value.
  * @param {(value: T) => boolean} func - The function.
- * @returns {boolean} - True if the specified function returns true; otherwise, false.
+ * @returns - True if the specified function returns true; otherwise, false.
  */
-export function is<T>(value: T, func: (value: T) => boolean): boolean
+export function is<T>(value: T | null | undefined, func: ((value: T | null | undefined) => boolean) | null | undefined): boolean
 {
     cannotBeNull(func);
 
-    return func(value);
-}
-
-/**
- * Determines whether the specified value is between the specified limits.
- *
- * @export
- * @template T - The value type.
- * @param {(number | string)} value - The value.
- * @param {(number | string)} minValue - The minimum value.
- * @param {(number | string)} maxValue - The maximum value.
- * @param {boolean} [inclusive=true] - If set to true include the limits in the range.
- * @returns {boolean} - True if the specified value is between the specified limits; otherwise, false.
- */
-export function isBetween(value: number | string, minValue: number | string, maxValue: number | string, inclusive: boolean = true): boolean
-{
-    cannotBeNull(minValue);
-    cannotBeNull(maxValue);
-    mustBeLessThanOrEqualTo(minValue, maxValue);
-
-    if (isNull(value))
+    if (func !== null &&
+        func !== undefined)
     {
-        return false;
+        return func(value);
     }
     else
     {
-        if (inclusive)
-        {
-            return value >= minValue && value <= maxValue;
-        }
-        else
-        {
-            return value > minValue && value < maxValue;
-        }
+        return false;
     }
 }
 
@@ -78,11 +31,11 @@ export function isBetween(value: number | string, minValue: number | string, max
  *
  * @export
  * @template T - The value type.
- * @param {T} value1 - The value 1.
- * @param {T} value2 - The value 2.
- * @returns {boolean} - True if the specified value is equal to to the compared value; otherwise, false.
+ * @param value1 - The value 1.
+ * @param value2 - The value 2.
+ * @returns - True if the specified value is equal to to the compared value; otherwise, false.
  */
-export function isEqualTo<T>(value1: T, value2: T): boolean
+export function isEqualTo<T>(value1: T | null | undefined, value2: T | null | undefined): boolean
 {
     if (value1 === null &&
         value2 === undefined)
@@ -101,146 +54,16 @@ export function isEqualTo<T>(value1: T, value2: T): boolean
 }
 
 /**
- * Determines whether the specified value is greater than the specified limit.
- *
- * @export
- * @template T - The value type.
- * @param {T} value - The value.
- * @param {T} minValue - The minimum value.
- * @returns {boolean} - True if the specified value is greater than the specified limit; otherwise, false.
- */
-export function isGreaterThan<T>(value: T, minValue: T): boolean
-{
-    cannotBeNull(minValue);
-
-    if (isNull(value))
-    {
-        return false;
-    }
-    else
-    {
-        return value > minValue;
-    }
-}
-
-/**
- * Determines whether the specified value is greater than or equal the specified limit.
- *
- * @export
- * @template T - The value type.
- * @param {T} value - The value.
- * @param {T} minValue - The minimum value.
- * @returns {boolean} - True if the specified value is greater than or equal to the specified limit; otherwise, false.
- */
-export function isGreaterThanOrEqualTo<T>(value: T, minValue: T): boolean
-{
-    cannotBeNull(minValue);
-
-    if (isNull(value))
-    {
-        return false;
-    }
-    else
-    {
-        return value >= minValue;
-    }
-}
-
-/**
- * Determines whether the specified value is an integer number.
- *
- * @export
- * @param {number} value - The value.
- * @returns - True if the specified value is na integer number; otherwise, false.
- */
-export function isInteger(value: number)
-{
-    if (isNull(value))
-    {
-        return false;
-    }
-    else
-    {
-        return value === Math.round(value);
-    }
-}
-
-/**
- * Determines whether the specified value is less than the specified limit.
- *
- * @export
- * @template T - The value type.
- * @param {T} value - The value.
- * @param {T} maxValue - The minimum value.
- * @returns {boolean} - True if the specified value is less than the specified limit; otherwise, false.
- */
-export function isLessThan<T>(value: T, maxValue: T): boolean
-{
-    cannotBeNull(maxValue);
-
-    if (isNull(value))
-    {
-        return false;
-    }
-    else
-    {
-        return value < maxValue;
-    }
-}
-
-/**
- * Determines whether the specified value is less than or equal to the specified limit.
- *
- * @export
- * @template T - The value type.
- * @param {T} value - The value.
- * @param {T} maxValue - The minimum value.
- * @returns {boolean} - True if the specified value is less than or equal to  the specified limit; otherwise, false.
- */
-export function isLessThanOrEqualTo<T>(value: T, maxValue: T): boolean
-{
-    cannotBeNull(maxValue);
-
-    if (isNull(value))
-    {
-        return false;
-    }
-    else
-    {
-        return value <= maxValue;
-    }
-}
-
-/**
  * Determines whether the specified value is null or undefined.
  *
  * @export
  * @template T - The value type.
- * @param {T} value - The value.
- * @returns {boolean} - True if the specified value is null or undefined; otherwise, false.
+ * @param value - The value.
+ * @returns - True if the specified value is null or undefined; otherwise, false.
  */
-export function isNull<T>(value: T): boolean
+export function isNull<T>(value: T | null | undefined): boolean
 {
     return value === null || value === undefined;
-}
-
-/**
- * Determines whether the specified value is null or whitespace.
- *
- * @export
- * @param {string} value - The value.
- * @returns {boolean} - True if the specified value is null or whitespace
- */
-export function isNullOrWhiteSpace(value: string): boolean
-{
-    if (isNull(value))
-    {
-        return true;
-    }
-    else
-    {
-        return value.trim() === "";
-    }
 }
 
 /**
@@ -248,19 +71,23 @@ export function isNullOrWhiteSpace(value: string): boolean
  *
  * @export
  * @template T - The value type.
- * @param {T} value - The value.
- * @param {...T[]} set - The set.
- * @returns {boolean} - True if the specified value is one of the specified set; otherwise, false.
+ * @param value - The value.
+ * @param set - The set.
+ * @returns - True if the specified value is one of the specified set; otherwise, false.
  */
-export function isOneOf<T>(value: T, ...set: T[]): boolean
+export function isOneOf<T>(value: T | null | undefined, set: T[] | null | undefined): boolean
 {
     cannotBeNull(set);
 
-    for (const item of set)
+    if (set !== null &&
+        set !== undefined)
     {
-        if (value === item)
+        for (const item of set)
         {
-            return true;
+            if (value === item)
+            {
+                return true;
+            }
         }
     }
 
@@ -272,11 +99,11 @@ export function isOneOf<T>(value: T, ...set: T[]): boolean
  *
  * @export
  * @template T - The value type.
- * @param {T} value - The value.
- * @param {*} type - The type.
- * @returns {boolean} - True if the specified value is subtype of the specified type; otherwise, false.
+ * @param value - The value.
+ * @param type - The type.
+ * @returns - True if the specified value is subtype of the specified type; otherwise, false.
  */
-export function isSubTypeOf<T>(value: T, type: any): boolean
+export function isSubTypeOf<T>(value: T | null | undefined, type: any): boolean
 {
     cannotBeNull(type);
 
@@ -288,13 +115,15 @@ export function isSubTypeOf<T>(value: T, type: any): boolean
  *
  * @export
  * @template T - The value type.
- * @param {T} value - The value.
- * @param {*} type - The type.
- * @returns {boolean} - True if the specified value is type of the specified type; otherwise, false.
+ * @param value - The value.
+ * @param type - The type.
+ * @returns - True if the specified value is type of the specified type; otherwise, false.
  */
-export function isTypeOf<T>(value: T, type: string): boolean
+export function isTypeOf<T>(value: T | null | undefined, type: string | null | undefined): boolean
 {
     cannotBeNull(type);
 
     return typeof value === type;
 }
+
+// #endregion

@@ -1,6 +1,6 @@
 import "mocha";
 import { ArgumentError } from "../../source/argument-error";
-import { whenContainsNot, whenContainsNotDuplicates, whenContainsNotNull, whenContainsNotOnlyNull, whenIsNotEmpty, whenIsNotEqualTo2, whenIsNotNullOrEmpty, whenIsNotOneOf2 } from "../../source/collections/collection-when-not-extensions";
+import { whenContainsNot, whenContainsNotDuplicates, whenContainsNotNull, whenContainsNotOnlyNull, whenIsNotEmptyArray, whenIsNotEqualToArray, whenIsNotNullOrEmptyArray, whenIsNotOneOfArray } from "../../source/collections/collection-when-not-extensions";
 import { expect } from "chai";
 
 describe("collections cannot extensions", () =>
@@ -9,9 +9,9 @@ describe("collections cannot extensions", () =>
     {
         describe("success", () =>
         {
-            it("should return false", () => expect(whenContainsNot(null, x => x > 3, [1])).to.eql([1]));
-            it("should return false", () => expect(whenContainsNot(undefined, x => x > 3, [1])).to.eql([1]));
-            it("should return false", () => expect(whenContainsNot([], x => x > 3, [1])).to.eql([1]));
+            it("should return false", () => expect(whenContainsNot(null, x => x !== null && x !== undefined && x > 3, [1])).to.eql([1]));
+            it("should return false", () => expect(whenContainsNot(undefined, x => x !== null && x !== undefined && x > 3, [1])).to.eql([1]));
+            it("should return false", () => expect(whenContainsNot([], x => x !== null && x !== undefined && x > 3, [1])).to.eql([1]));
             it("should return true", () => expect(whenContainsNot([null], x => x === null, [1])).to.eql([null]));
             it("should return true", () => expect(whenContainsNot([undefined], x => x === undefined, [1])).to.eql([undefined]));
             it("should return false", () => expect(whenContainsNot(["aaa"], x => x === null, ["1"])).to.eql(["1"]));
@@ -79,7 +79,7 @@ describe("collections cannot extensions", () =>
             it("should return true", () => expect(whenContainsNotOnlyNull([undefined], [1])).to.eql([undefined]));
             it("should return true", () => expect(whenContainsNotOnlyNull([undefined, undefined], [1])).to.eql([undefined, undefined]));
             it("should return true", () => expect(whenContainsNotOnlyNull([undefined, undefined, undefined], [1])).to.eql([undefined, undefined, undefined]));
-            it("should return true", () => expect(whenContainsNotOnlyNull([null, undefined, null, undefined], [1])).to.eql([null, undefined, null, undefined]));
+            it("should return true", () => expect(whenContainsNotOnlyNull(<(number | null | undefined)[]>[null, undefined, null, undefined], [1])).to.eql([null, undefined, null, undefined]));
         });
     });
 
@@ -87,20 +87,16 @@ describe("collections cannot extensions", () =>
     {
         describe("success", () =>
         {
-            it("should return false", () => expect(whenIsNotEmpty(null, [1])).to.eql([1]));
-            it("should return false", () => expect(whenIsNotEmpty(undefined, [1])).to.eql([1]));
-            it("should return true", () => expect(whenIsNotEmpty("", "1")).to.equal(""));
-            it("should return true", () => expect(whenIsNotEmpty([], [1])).to.eql([]));
-            it("should return false", () => expect(whenIsNotEmpty("a", "1")).to.equal("1"));
-            it("should return false", () => expect(whenIsNotEmpty("ab", "1")).to.equal("1"));
-            it("should return false", () => expect(whenIsNotEmpty("abc", "1")).to.equal("1"));
-            it("should return false", () => expect(whenIsNotEmpty([1], [2])).to.eql([2]));
-            it("should return false", () => expect(whenIsNotEmpty([1, 2], [1])).to.eql([1]));
-            it("should return false", () => expect(whenIsNotEmpty([1, null], [1])).to.eql([1]));
-            it("should return false", () => expect(whenIsNotEmpty([null, null], [1])).to.eql([1]));
-            it("should return false", () => expect(whenIsNotEmpty([undefined], [1])).to.eql([1]));
-            it("should return false", () => expect(whenIsNotEmpty([undefined, undefined], [1])).to.eql([1]));
-            it("should return false", () => expect(whenIsNotEmpty([null, undefined, null, undefined], [1])).to.eql([1]));
+            it("should return false", () => expect(whenIsNotEmptyArray(null, [1])).to.eql([1]));
+            it("should return false", () => expect(whenIsNotEmptyArray(undefined, [1])).to.eql([1]));
+            it("should return true", () => expect(whenIsNotEmptyArray([], [1])).to.eql([]));
+            it("should return false", () => expect(whenIsNotEmptyArray([1], [2])).to.eql([2]));
+            it("should return false", () => expect(whenIsNotEmptyArray([1, 2], [1])).to.eql([1]));
+            it("should return false", () => expect(whenIsNotEmptyArray([1, null], [1])).to.eql([1]));
+            it("should return false", () => expect(whenIsNotEmptyArray([null, null], [1])).to.eql([1]));
+            it("should return false", () => expect(whenIsNotEmptyArray([undefined], [1])).to.eql([1]));
+            it("should return false", () => expect(whenIsNotEmptyArray([undefined, undefined], [1])).to.eql([1]));
+            it("should return false", () => expect(whenIsNotEmptyArray(<(number | null | undefined)[]>[null, undefined, null, undefined], [1])).to.eql([1]));
         });
     });
 
@@ -108,16 +104,16 @@ describe("collections cannot extensions", () =>
     {
         describe("success", () =>
         {
-            it("should return true", () => expect(whenIsNotEqualTo2(null, null, false, [1])).to.eql(null));
-            it("should return true", () => expect(whenIsNotEqualTo2(undefined, undefined, false, [1])).to.eql(undefined));
-            it("should return false", () => expect(whenIsNotEqualTo2(null, [0], false, [1])).to.eql([1]));
-            it("should return false", () => expect(whenIsNotEqualTo2([0], null, false, [1])).to.eql([1]));
-            it("should return false", () => expect(whenIsNotEqualTo2(undefined, [0], false, [1])).to.eql([1]));
-            it("should return false", () => expect(whenIsNotEqualTo2([0], undefined, false, [1])).to.eql([1]));
-            it("should return true", () => expect(whenIsNotEqualTo2([1, 2, 3], [1, 2, 3], false, [1])).to.eql([1, 2, 3]));
-            it("should return false", () => expect(whenIsNotEqualTo2([1, 2, 3], [3, 2, 1], false, [1])).to.eql([1]));
-            it("should return true", () => expect(whenIsNotEqualTo2([1, 2, 3], [3, 2, 1], true, [1])).to.eql([1, 2, 3]));
-            it("should return true", () => expect(whenIsNotEqualTo2(["a", "b", "c"], ["a", "b", "c"], false, ["1"])).to.eql(["a", "b", "c"]));
+            it("should return true", () => expect(whenIsNotEqualToArray(null, null, false, [1])).to.eql(null));
+            it("should return true", () => expect(whenIsNotEqualToArray(undefined, undefined, false, [1])).to.eql(undefined));
+            it("should return false", () => expect(whenIsNotEqualToArray(null, [0], false, [1])).to.eql([1]));
+            it("should return false", () => expect(whenIsNotEqualToArray([0], null, false, [1])).to.eql([1]));
+            it("should return false", () => expect(whenIsNotEqualToArray(undefined, [0], false, [1])).to.eql([1]));
+            it("should return false", () => expect(whenIsNotEqualToArray([0], undefined, false, [1])).to.eql([1]));
+            it("should return true", () => expect(whenIsNotEqualToArray([1, 2, 3], [1, 2, 3], false, [1])).to.eql([1, 2, 3]));
+            it("should return false", () => expect(whenIsNotEqualToArray([1, 2, 3], [3, 2, 1], false, [1])).to.eql([1]));
+            it("should return true", () => expect(whenIsNotEqualToArray([1, 2, 3], [3, 2, 1], true, [1])).to.eql([1, 2, 3]));
+            it("should return true", () => expect(whenIsNotEqualToArray(["a", "b", "c"], ["a", "b", "c"], false, ["1"])).to.eql(["a", "b", "c"]));
         });
     });
 
@@ -125,16 +121,13 @@ describe("collections cannot extensions", () =>
     {
         describe("success", () =>
         {
-            it("should true", () => expect(whenIsNotNullOrEmpty(null, [1])).to.eql(null));
-            it("should true", () => expect(whenIsNotNullOrEmpty(undefined, [1])).to.eql(undefined));
-            it("should true", () => expect(whenIsNotNullOrEmpty([], [1])).to.eql([]));
-            it("should true", () => expect(whenIsNotNullOrEmpty("", "1")).to.equal(""));
-            it("should false", () => expect(whenIsNotNullOrEmpty("a", "1")).to.equal("1"));
-            it("should false", () => expect(whenIsNotNullOrEmpty("ab", "1")).to.equal("1"));
-            it("should false", () => expect(whenIsNotNullOrEmpty([1], [2])).to.eql([2]));
-            it("should false", () => expect(whenIsNotNullOrEmpty([1, 2], [1])).to.eql([1]));
-            it("should false", () => expect(whenIsNotNullOrEmpty(["a"], ["1"])).to.eql(["1"]));
-            it("should false", () => expect(whenIsNotNullOrEmpty(["a", "b"], ["1"])).to.eql(["1"]));
+            it("should true", () => expect(whenIsNotNullOrEmptyArray(null, [1])).to.eql(null));
+            it("should true", () => expect(whenIsNotNullOrEmptyArray(undefined, [1])).to.eql(undefined));
+            it("should true", () => expect(whenIsNotNullOrEmptyArray([], [1])).to.eql([]));
+            it("should false", () => expect(whenIsNotNullOrEmptyArray([1], [2])).to.eql([2]));
+            it("should false", () => expect(whenIsNotNullOrEmptyArray([1, 2], [1])).to.eql([1]));
+            it("should false", () => expect(whenIsNotNullOrEmptyArray(["a"], ["1"])).to.eql(["1"]));
+            it("should false", () => expect(whenIsNotNullOrEmptyArray(["a", "b"], ["1"])).to.eql(["1"]));
         });
     });
 
@@ -142,21 +135,23 @@ describe("collections cannot extensions", () =>
     {
         describe("success", () =>
         {
-            it("should return false", () => expect(whenIsNotOneOf2(null, [1, 2, 3], 1)).to.equal(1));
-            it("should return false", () => expect(whenIsNotOneOf2(undefined, [1, 2, 3], 1)).to.equal(1));
-            it("should return false", () => expect(whenIsNotOneOf2(1, [0, 2, 3], 2)).to.equal(2));
-            it("should return false", () => expect(whenIsNotOneOf2("aaa", ["a", "aa", "aaaa"], "1")).to.equal("1"));
-            it("should return false", () => expect(whenIsNotOneOf2("x", [<string>null, undefined], "a")).to.equal("a"));
-            it("should return true", () => expect(whenIsNotOneOf2(1, [0, 1, 2, 3, 4], 9)).to.equal(1));
-            it("should return true", () => expect(whenIsNotOneOf2(3, [0, 1, 2, 3, 4], 9)).to.equal(3));
-            it("should return true", () => expect(whenIsNotOneOf2(3, [0, 3, 3, 3, 1, 2, 3, 4], 9)).to.equal(3));
-            it("should return true", () => expect(whenIsNotOneOf2("x", [null, undefined, 1, 6, "a", "x", -1, "CCC"], "9")).to.equal("x"));
+            let array: (string | null | undefined)[] = [null, undefined];
+
+            it("should return false", () => expect(whenIsNotOneOfArray(null, [1, 2, 3], 1)).to.equal(1));
+            it("should return false", () => expect(whenIsNotOneOfArray(undefined, [1, 2, 3], 1)).to.equal(1));
+            it("should return false", () => expect(whenIsNotOneOfArray(1, [0, 2, 3], 2)).to.equal(2));
+            it("should return false", () => expect(whenIsNotOneOfArray("aaa", ["a", "aa", "aaaa"], "1")).to.equal("1"));
+            it("should return false", () => expect(whenIsNotOneOfArray("x", array, "a")).to.equal("a"));
+            it("should return true", () => expect(whenIsNotOneOfArray(1, [0, 1, 2, 3, 4], 9)).to.equal(1));
+            it("should return true", () => expect(whenIsNotOneOfArray(3, [0, 1, 2, 3, 4], 9)).to.equal(3));
+            it("should return true", () => expect(whenIsNotOneOfArray(3, [0, 3, 3, 3, 1, 2, 3, 4], 9)).to.equal(3));
+            it("should return true", () => expect(whenIsNotOneOfArray("x", [null, undefined, 1, 6, "a", "x", -1, "CCC"], "9")).to.equal("x"));
         });
 
         describe("failure", () =>
         {
-            it("should fail for null", () => expect(() => whenIsNotOneOf2(1, null, 9)).to.throw(ArgumentError, "Value cannot be null."));
-            it("should fail for undefined", () => expect(() => whenIsNotOneOf2(1, undefined, 9)).to.throw(ArgumentError, "Value cannot be null."));
+            it("should fail for null", () => expect(() => whenIsNotOneOfArray(1, null, 9)).to.throw(ArgumentError, "Value cannot be null."));
+            it("should fail for undefined", () => expect(() => whenIsNotOneOfArray(1, undefined, 9)).to.throw(ArgumentError, "Value cannot be null."));
         });
     });
 });

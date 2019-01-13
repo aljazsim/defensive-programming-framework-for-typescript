@@ -159,7 +159,7 @@ Example:
 
 ```typescript
 filePath = whenIsNot(filePath, x => x.trim() === x, filePath.trim());
-text = whenDoesNotMatch(text, /^[0-9]$/, "0");
+text = whenIsNotMatch(text, /^[0-9]$/, "0");
 letter = whenIsNotOneOf(letter, ["a", "b", "c"], "a");
 filePath = whenIsNotAbsoluteFilePath(filePath, path.isAbsolute(filePath));
 ```
@@ -192,37 +192,52 @@ All validation functions exist in must, cannot, when, when not and affirmative c
 
 ### Object validation functions
 
-| is                     | must                       | cannot                       | when                       | when not                      |
-| ---------------------- | -------------------------- | ---------------------------- | -------------------------- | ----------------------------- |
-| doesMatch              | mustMatch                  | cannotMatch                  | whenDoesMatch              | whenDoesNotMatch              |
-| is                     | mustBe                     | cannotBe                     | whenIs                     | whenIsNot                     |
-| isBetween              | mustBeBetween              | cannotBeBetween              | whenIsBetween              | whenIsNotBetween              |
-| isEqualTo              | mustBeEqualTo              | cannotBeEqualTo              | whenIsEqualTo              | whenIsNotEqualTo              |
-| isGreaterThan          | mustBeGreaterThan          | cannotBeGreaterThan          | whenIsGreaterThan          | whenIsNotGreaterThan          |
-| isGreaterThanOrEqualTo | mustBeGreaterThanOrEqualTo | cannotBeGreaterThanOrEqualTo | whenIsGreaterThanOrEqualTo | whenIsNotGreaterThanOrEqualTo |
-| isLessThan             | mustBeLessThan             | cannotBeLessThan             | whenIsLessThan             | whenIsNotLessThan             |
-| isLessThanOrEqualTo    | mustBeLessThanOrEqualTo    | cannotBeLessThanOrEqualTo    | whenIsLessThanOrEqualTo    | whenIsNotLessThanOrEqualTo    |
-| isNull                 | mustBeNull                 | cannotBeNull                 | whenIsNull                 | whenIsNotNull                 |
-| isOneOf                | mustBeOneOf                | cannotBeOneOf                | whenIsOneOf                | whenIsNotOneOf                |
-| isSubTypeOf            | mustBeSubTypeOf            | cannotBeSubTypeOf            | whenIsSubTypeOf            | whenIsNotSubTypeOf            |
-| isTypeOf               | mustBeTypeOf               | cannotBeTypeOf               | whenIsTypeOf               | whenIsNotTypeOf               |
+| is          | must            | cannot            | when            | when not           |
+| ----------- | --------------- | ----------------- | --------------- | ------------------ |
+| is          | mustBe          | cannotBe          | whenIs          | whenIsNot          |
+| isEqualTo   | mustBeEqualTo   | cannotBeEqualTo   | whenIsEqualTo   | whenIsNotEqualTo   |
+| isNull      | mustBeNull      | cannotBeNull      | whenIsNull      | whenIsNotNull      |
+| isOneOf     | mustBeOneOf     | cannotBeOneOf     | whenIsOneOf     | whenIsNotOneOf     |
+| isSubTypeOf | mustBeSubTypeOf | cannotBeSubTypeOf | whenIsSubTypeOf | whenIsNotSubTypeOf |
+| isTypeOf    | mustBeTypeOf    | cannotBeTypeOf    | whenIsTypeOf    | whenIsNotTypeOf    |
 
 Note: undefined is treated as null (e. g. cannotBeNull(undefined) will throw an ArgumentError the same way cannotBeNull(null) would.
 
+### String validation functions
+
+| is                 | must                   | cannot                   | when                   | when not                  |
+| ------------------ | ---------------------- | ------------------------ | ---------------------- | ------------------------- |
+| isEmpty            | mustBeEmpty            | cannotBeEmpty            | whenIsEmpty            | whenIsNotEmpty            |
+| isNullOrEmpty      | mustBeNullOrEmpty      | cannotBeNullOrEmpty      | whenIsNullOrEmpty      | whenIsNotNullOrEmpty      |
+| isNullOrWhitespace | mustBeNullOrWhitespace | cannotBeNullOrWhitespace | whenIsNullOrWhitespace | whenIsNotNullOrWhitespace |
+| isMatch            | mustMatch              | cannotMatch              | whenIsMatch            | whenIsNotMatch            |
+
+### Number validation functions
+
+| is                     | must                       | cannot                       | when                       | when not                      |
+| ---------------------- | -------------------------- | ---------------------------- | -------------------------- | ----------------------------- |
+| isBetween              | mustBeBetween              | cannotBeBetween              | whenIsBetween              | whenIsNotBetween              |
+| isFloat                | mustBeFloat                | cannotBeFloat                | whenIsFloat                | whenIsNotFloat                |
+| isGreaterThan          | mustBeGreaterThan          | cannotBeGreaterThan          | whenIsGreaterThan          | whenIsNotGreaterThan          |
+| isGreaterThanOrEqualTo | mustBeGreaterThanOrEqualTo | cannotBeGreaterThanOrEqualTo | whenIsGreaterThanOrEqualTo | whenIsNotGreaterThanOrEqualTo |
+| isInteger              | mustBeInteger              | cannotBeInteger              | whenIsInteger              | whenIsNotInteger              |
+| isLessThan             | mustBeLessThan             | cannotBeLessThan             | whenIsLessThan             | whenIsNotLessThan             |
+| isLessThanOrEqualTo    | mustBeLessThanOrEqualTo    | cannotBeLessThanOrEqualTo    | whenIsLessThanOrEqualTo    | whenIsNotLessThanOrEqualTo    |
+
 ### Collection validation functions
 
-| is                 | must                  | cannot                  | when                   | when not                  |
-| ------------------ | --------------------- | ----------------------- | ---------------------- | ------------------------- |
-| contains           | mustContain           | cannotContain           | whenContains           | whenContainsNot           |
-| containsDuplicates | mustContainDuplicates | cannotContainDuplicates | whenContainsDuplicates | whenContainsNotDuplicates |
-| containsNull       | mustContainNull       | cannotContainNull       | whenContainsNull       | whenContainsNotNull       |
-| containsOnlyNull   | mustContainOnlyNull   | cannotContainOnlyNull   | whenContainsOnlyNull   | whenContainsNotOnlyNull   |
-| isEmpty            | mustBeEmpty           | cannotBeEmpty           | whenIsEmpty            | whenIsNotEmpty            |
-| isEqualTo2         | mustBeEqualTo2        | cannotBeEqualTo2        | whenIsEqualTo2         | whenIsNotEqualTo2         |
-| isNullOrEmpty      | mustBeNullOrEmpty     | cannotBeNullOrEmpty     | whenIsNullOrEmpty      | whenIsNotNullOrEmpty      |
-| isOneOf2           | mustBeOneOf2          | cannotBeOneOf2          | whenIsOneOf2           | whenIsNotOneOf2           |
+| is                 | must                   | cannot                   | when                   | when not                  |
+| ------------------ | ---------------------- | ------------------------ | ---------------------- | ------------------------- |
+| contains           | mustContain            | cannotContain            | whenContains           | whenContainsNot           |
+| containsDuplicates | mustContainDuplicates  | cannotContainDuplicates  | whenContainsDuplicates | whenContainsNotDuplicates |
+| containsNull       | mustContainNull        | cannotContainNull        | whenContainsNull       | whenContainsNotNull       |
+| containsOnlyNull   | mustContainOnlyNull    | cannotContainOnlyNull    | whenContainsOnlyNull   | whenContainsNotOnlyNull   |
+| isEmptyArray       | mustBeEmptyArray       | cannotBeEmptyArray       | whenIsEmptyArray       | whenIsNotEmptyArray       |
+| isEqualToArray     | mustBeEqualToArray     | cannotBeEqualToArray     | whenIsEqualToArray     | whenIsNotEqualToArray     |
+| isNullOrEmptyArray | mustBeNullOrEmptyArray | cannotBeNullOrEmptyArray | whenIsNullOrEmptyArray | whenIsNotNullOrEmptyArray |
+| isOneOfArrays      | mustBeOneOfArrays      | cannotBeOneOfArrays      | whenIsOneOfArrays      | whenIsNotOneOfArray       |
 
-Note: due to naming clashes, collection has functions isEqualTo2 and isOneOf2.
+Note: due to naming clashes, collection has functions isEmptyArray, isEqualToArray and isNullOrEmptyArray, isOneOfArrays.
 
 ### File system validation functions
 
@@ -242,16 +257,15 @@ Note: due to naming clashes, collection has functions isEqualTo2 and isOneOf2.
 Run the following command console:
 
 ```powershell
-npm install --save defensive-programming-framework
+npm i defensive-programming-framework
 ```
 
 Or just simply add reference in jour packages.json file:
 
 ```json
- "dependencies": {
-        "defensive-programming-framework": "1.0.0"
-        ...
-    }
+"dependencies": {
+    "defensive-programming-framework": "1.0.0"
+}
 ```
 
 and then install the package via NPM:
@@ -293,4 +307,8 @@ dpf.cannotBeNullOrEmpty(value);
 
 ### [1.0.0] - 2019-01-01
 
-- initial commit
+- first version
+
+### [1.0.3] - 2019-01-14
+
+- added strict mode for better type checking

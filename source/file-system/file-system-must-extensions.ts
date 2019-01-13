@@ -1,14 +1,16 @@
 import { ArgumentError } from "../argument-error";
 import { doesDirectoryExist, doesFileExist, isAbsoluteDirectoryPath, isAbsoluteFilePath, isEmptyDirectory, isValidDirectoryPath, isValidFileName, isValidFilePath } from "./file-system-is-extensions";
 
+// #region Functions (8)
+
 /**
  * Returns the original value if the specified value is an absolute directory path; otherwise throws a new ArgumentError.
  *
  * @export
- * @param {string} value - The value.
- * @returns {string} - The original value if the specified value is an absolute directory path; otherwise throws a new ArgumentError.
+ * @param value - The value.
+ * @returns - The original value if the specified value is an absolute directory path; otherwise throws a new ArgumentError.
  */
-export function mustBeAbsoluteDirectoryPath(value: string): string
+export function mustBeAbsoluteDirectoryPath(value: string | null | undefined): string | null | undefined
 {
     if (!isAbsoluteDirectoryPath(value))
     {
@@ -22,10 +24,10 @@ export function mustBeAbsoluteDirectoryPath(value: string): string
  * Returns the original value if the specified value is an absolute file path; otherwise throws a new ArgumentError.
  *
  * @export
- * @param {string} value - The value.
- * @returns {string} - The original value if the specified value is an absolute file path; otherwise throws a new ArgumentError.
+ * @param value - The value.
+ * @returns - The original value if the specified value is an absolute file path; otherwise throws a new ArgumentError.
  */
-export function mustBeAbsoluteFilePath(value: string): string
+export function mustBeAbsoluteFilePath(value: string | null | undefined): string | null | undefined
 {
     if (!isAbsoluteFilePath(value))
     {
@@ -39,10 +41,10 @@ export function mustBeAbsoluteFilePath(value: string): string
  * Returns the original value if the specified value is an empty directory path; otherwise throws a new ArgumentError.
  *
  * @export
- * @param {string} value - The value.
- * @returns {string} - The original value if the specified value is an empty directory path; otherwise throws a new ArgumentError.
+ * @param value - The value.
+ * @returns - The original value if the specified value is an empty directory path; otherwise throws a new ArgumentError.
  */
-export function mustBeEmptyDirectory(value: string): string
+export function mustBeEmptyDirectory(value: string | null | undefined): string | null | undefined
 {
     if (!isEmptyDirectory(value))
     {
@@ -56,10 +58,10 @@ export function mustBeEmptyDirectory(value: string): string
  * Returns the original value if the specified value is valid directory path; otherwise throws a new ArgumentError.
  *
  * @export
- * @param {string} value - The value.
- * @returns {string} - The original value if the specified value is a valid directory path; otherwise throws a new ArgumentError.
+ * @param value - The value.
+ * @returns - The original value if the specified value is a valid directory path; otherwise throws a new ArgumentError.
  */
-export function mustBeValidDirectoryPath(value: string): string
+export function mustBeValidDirectoryPath(value: string | null | undefined): string | null | undefined
 {
     if (!isValidDirectoryPath(value))
     {
@@ -73,10 +75,10 @@ export function mustBeValidDirectoryPath(value: string): string
 * Returns the original value if the specified value is a valid file name; otherwise throws a new ArgumentError.
 *
 * @export
-* @param {string} value - The value.
-* @returns {string} - The original value if the specified value is a valid file name; otherwise throws a new ArgumentError.
+* @param value - The value.
+* @returns - The original value if the specified value is a valid file name; otherwise throws a new ArgumentError.
 */
-export function mustBeValidFileName(value: string): string
+export function mustBeValidFileName(value: string | null | undefined): string | null | undefined
 {
     if (!isValidFileName(value))
     {
@@ -90,10 +92,10 @@ export function mustBeValidFileName(value: string): string
 * Returns the original value if the specified value is a valid file path; otherwise throws a new ArgumentError.
 *
 * @export
-* @param {string} value - The value.
-* @returns {string} - The original value if the specified value is a valid file path; otherwise throws a new ArgumentError.
+* @param value - The value.
+* @returns - The original value if the specified value is a valid file path; otherwise throws a new ArgumentError.
 */
-export function mustBeValidFilePath(value: string): string
+export function mustBeValidFilePath(value: string | null | undefined): string | null | undefined
 {
     if (!isValidFilePath(value))
     {
@@ -107,10 +109,10 @@ export function mustBeValidFilePath(value: string): string
  * Returns the original value if the specified directory does exist; otherwise throws a new ArgumentError.
  *
  * @export
- * @param {string} value - The value.
- * @returns {string} - The original value if the specified directory does exist; otherwise throws a new ArgumentError.
+ * @param value - The value.
+ * @returns - The original value if the specified directory does exist; otherwise throws a new ArgumentError.
  */
-export function mustDirectoryExist(value: string): string
+export function mustDirectoryExist(value: string | null | undefined): string | null | undefined
 {
     if (!doesDirectoryExist(value))
     {
@@ -124,10 +126,10 @@ export function mustDirectoryExist(value: string): string
  * Returns the original value if the specified file does exist; otherwise throws a new ArgumentError.
  *
  * @export
- * @param {string} value - The value.
- * @returns {string} - The original value if the specified file does exist; otherwise throws a new ArgumentError.
+ * @param value - The value.
+ * @returns - The original value if the specified file does exist; otherwise throws a new ArgumentError.
  */
-export function mustFileExist(value: string): string
+export function mustFileExist(value: string | null | undefined): string | null | undefined
 {
     if (!doesFileExist(value))
     {
@@ -136,3 +138,5 @@ export function mustFileExist(value: string): string
 
     return value;
 }
+
+// #endregion

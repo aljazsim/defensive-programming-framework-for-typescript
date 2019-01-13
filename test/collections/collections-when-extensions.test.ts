@@ -1,6 +1,6 @@
 import "mocha";
 import { ArgumentError } from "../../source/argument-error";
-import { whenContains, whenContainsDuplicates, whenContainsNull, whenContainsOnlyNull, whenIsEmpty, whenIsEqualTo2, whenIsNullOrEmpty, whenIsOneOf2 } from "../../source/collections/collection-when-extensions";
+import { whenContains, whenContainsDuplicates, whenContainsNull, whenContainsOnlyNull, whenIsEmptyArray, whenIsEqualToArray, whenIsNullOrEmptyArray, whenIsOneOfArray } from "../../source/collections/collection-when-extensions";
 import { expect } from "chai";
 
 describe("collections cannot extensions", () =>
@@ -9,9 +9,9 @@ describe("collections cannot extensions", () =>
     {
         describe("success", () =>
         {
-            it("should return false", () => expect(whenContains(null, x => x > 3, [1])).to.eql(null));
-            it("should return false", () => expect(whenContains(undefined, x => x > 3, [1])).to.eql(undefined));
-            it("should return false", () => expect(whenContains([], x => x > 3, [1])).to.eql([]));
+            it("should return false", () => expect(whenContains(null, x => x !== null && x !== undefined && x > 3, [1])).to.eql(null));
+            it("should return false", () => expect(whenContains(undefined, x => x !== null && x !== undefined && x > 3, [1])).to.eql(undefined));
+            it("should return false", () => expect(whenContains([], x => x !== null && x !== undefined && x > 3, [1])).to.eql([]));
             it("should return true", () => expect(whenContains([null], x => x === null, [1])).to.eql([1]));
             it("should return true", () => expect(whenContains([undefined], x => x === undefined, [1])).to.eql([1]));
             it("should return false", () => expect(whenContains(["aaa"], x => x === null, ["1"])).to.eql(["aaa"]));
@@ -79,7 +79,7 @@ describe("collections cannot extensions", () =>
             it("should return true", () => expect(whenContainsOnlyNull([undefined], [1])).to.eql([1]));
             it("should return true", () => expect(whenContainsOnlyNull([undefined, undefined], [1])).to.eql([1]));
             it("should return true", () => expect(whenContainsOnlyNull([undefined, undefined, undefined], [1])).to.eql([1]));
-            it("should return true", () => expect(whenContainsOnlyNull([null, undefined, null, undefined], [1])).to.eql([1]));
+            it("should return true", () => expect(whenContainsOnlyNull(<(number | undefined | null)[]>[null, undefined, null, undefined], [1])).to.eql([1]));
         });
     });
 
@@ -87,20 +87,16 @@ describe("collections cannot extensions", () =>
     {
         describe("success", () =>
         {
-            it("should return false", () => expect(whenIsEmpty(null, [1])).to.equal(null));
-            it("should return false", () => expect(whenIsEmpty(undefined, [1])).to.equal(undefined));
-            it("should return true", () => expect(whenIsEmpty("", "1")).to.equal("1"));
-            it("should return true", () => expect(whenIsEmpty([], [1])).to.eql([1]));
-            it("should return false", () => expect(whenIsEmpty("a", "1")).to.equal("a"));
-            it("should return false", () => expect(whenIsEmpty("ab", "1")).to.equal("ab"));
-            it("should return false", () => expect(whenIsEmpty("abc", "1")).to.equal("abc"));
-            it("should return false", () => expect(whenIsEmpty([1], [2])).to.eql([1]));
-            it("should return false", () => expect(whenIsEmpty([1, 2], [1])).to.eql([1, 2]));
-            it("should return false", () => expect(whenIsEmpty([1, null], [1])).to.eql([1, null]));
-            it("should return false", () => expect(whenIsEmpty([null, null], [1])).to.eql([null, null]));
-            it("should return false", () => expect(whenIsEmpty([undefined], [1])).to.eql([undefined]));
-            it("should return false", () => expect(whenIsEmpty([undefined, undefined], [1])).to.eql([undefined, undefined]));
-            it("should return false", () => expect(whenIsEmpty([null, undefined, null, undefined], [1])).to.eql([null, undefined, null, undefined]));
+            it("should return false", () => expect(whenIsEmptyArray(null, [1])).to.equal(null));
+            it("should return false", () => expect(whenIsEmptyArray(undefined, [1])).to.equal(undefined));
+            it("should return true", () => expect(whenIsEmptyArray([], [1])).to.eql([1]));
+            it("should return false", () => expect(whenIsEmptyArray([1], [2])).to.eql([1]));
+            it("should return false", () => expect(whenIsEmptyArray([1, 2], [1])).to.eql([1, 2]));
+            it("should return false", () => expect(whenIsEmptyArray([1, null], [1])).to.eql([1, null]));
+            it("should return false", () => expect(whenIsEmptyArray([null, null], [1])).to.eql([null, null]));
+            it("should return false", () => expect(whenIsEmptyArray([undefined], [1])).to.eql([undefined]));
+            it("should return false", () => expect(whenIsEmptyArray([undefined, undefined], [1])).to.eql([undefined, undefined]));
+            it("should return false", () => expect(whenIsEmptyArray([null, undefined, null, undefined], <(number | null | undefined)[]>[1])).to.eql([null, undefined, null, undefined]));
         });
     });
 
@@ -108,16 +104,16 @@ describe("collections cannot extensions", () =>
     {
         describe("success", () =>
         {
-            it("should return true", () => expect(whenIsEqualTo2(null, null, false, [1])).to.eql([1]));
-            it("should return true", () => expect(whenIsEqualTo2(undefined, undefined, false, [1])).to.eql([1]));
-            it("should return false", () => expect(whenIsEqualTo2(null, [0], false, [1])).to.equal(null));
-            it("should return false", () => expect(whenIsEqualTo2([0], null, false, [1])).to.eql([0]));
-            it("should return false", () => expect(whenIsEqualTo2(undefined, [0], false, [1])).to.equal(undefined));
-            it("should return false", () => expect(whenIsEqualTo2([0], undefined, false, [1])).to.eql([0]));
-            it("should return true", () => expect(whenIsEqualTo2([1, 2, 3], [1, 2, 3], false, [1])).to.eql([1]));
-            it("should return false", () => expect(whenIsEqualTo2([1, 2, 3], [3, 2, 1], false, [1])).to.eql([1, 2, 3]));
-            it("should return true", () => expect(whenIsEqualTo2([1, 2, 3], [3, 2, 1], true, [1])).to.eql([1]));
-            it("should return true", () => expect(whenIsEqualTo2(["a", "b", "c"], ["a", "b", "c"], false, ["1"])).to.eql(["1"]));
+            it("should return true", () => expect(whenIsEqualToArray(null, null, false, [1])).to.eql([1]));
+            it("should return true", () => expect(whenIsEqualToArray(undefined, undefined, false, [1])).to.eql([1]));
+            it("should return false", () => expect(whenIsEqualToArray(null, [0], false, [1])).to.equal(null));
+            it("should return false", () => expect(whenIsEqualToArray([0], null, false, [1])).to.eql([0]));
+            it("should return false", () => expect(whenIsEqualToArray(undefined, [0], false, [1])).to.equal(undefined));
+            it("should return false", () => expect(whenIsEqualToArray([0], undefined, false, [1])).to.eql([0]));
+            it("should return true", () => expect(whenIsEqualToArray([1, 2, 3], [1, 2, 3], false, [1])).to.eql([1]));
+            it("should return false", () => expect(whenIsEqualToArray([1, 2, 3], [3, 2, 1], false, [1])).to.eql([1, 2, 3]));
+            it("should return true", () => expect(whenIsEqualToArray([1, 2, 3], [3, 2, 1], true, [1])).to.eql([1]));
+            it("should return true", () => expect(whenIsEqualToArray(["a", "b", "c"], ["a", "b", "c"], false, ["1"])).to.eql(["1"]));
         });
     });
 
@@ -125,16 +121,13 @@ describe("collections cannot extensions", () =>
     {
         describe("success", () =>
         {
-            it("should true", () => expect(whenIsNullOrEmpty(null, [1])).to.eql([1]));
-            it("should true", () => expect(whenIsNullOrEmpty(undefined, [1])).to.eql([1]));
-            it("should true", () => expect(whenIsNullOrEmpty([], [1])).to.eql([1]));
-            it("should true", () => expect(whenIsNullOrEmpty("", "1")).to.equal("1"));
-            it("should false", () => expect(whenIsNullOrEmpty("a", "1")).to.equal("a"));
-            it("should false", () => expect(whenIsNullOrEmpty("ab", "1")).to.equal("ab"));
-            it("should false", () => expect(whenIsNullOrEmpty([1], [2])).to.eql([1]));
-            it("should false", () => expect(whenIsNullOrEmpty([1, 2], [1])).to.eql([1, 2]));
-            it("should false", () => expect(whenIsNullOrEmpty(["a"], ["1"])).to.eql(["a"]));
-            it("should false", () => expect(whenIsNullOrEmpty(["a", "b"], ["1"])).to.eql(["a", "b"]));
+            it("should true", () => expect(whenIsNullOrEmptyArray(null, [1])).to.eql([1]));
+            it("should true", () => expect(whenIsNullOrEmptyArray(undefined, [1])).to.eql([1]));
+            it("should true", () => expect(whenIsNullOrEmptyArray([], [1])).to.eql([1]));
+            it("should false", () => expect(whenIsNullOrEmptyArray([1], [2])).to.eql([1]));
+            it("should false", () => expect(whenIsNullOrEmptyArray([1, 2], [1])).to.eql([1, 2]));
+            it("should false", () => expect(whenIsNullOrEmptyArray(["a"], ["1"])).to.eql(["a"]));
+            it("should false", () => expect(whenIsNullOrEmptyArray(["a", "b"], ["1"])).to.eql(["a", "b"]));
         });
     });
 
@@ -142,21 +135,21 @@ describe("collections cannot extensions", () =>
     {
         describe("success", () =>
         {
-            it("should return false", () => expect(whenIsOneOf2(null, [1, 2, 3], 1)).to.equal(null));
-            it("should return false", () => expect(whenIsOneOf2(undefined, [1, 2, 3], 1)).to.equal(undefined));
-            it("should return false", () => expect(whenIsOneOf2(1, [0, 2, 3], 1)).to.equal(1));
-            it("should return false", () => expect(whenIsOneOf2("aaa", ["a", "aa", "aaaa"], "1")).to.equal("aaa"));
-            it("should return false", () => expect(whenIsOneOf2("x", [<string>null, undefined], "a")).to.equal("x"));
-            it("should return true", () => expect(whenIsOneOf2(1, [0, 1, 2, 3, 4], 9)).to.equal(9));
-            it("should return true", () => expect(whenIsOneOf2(3, [0, 1, 2, 3, 4], 9)).to.equal(9));
-            it("should return true", () => expect(whenIsOneOf2(3, [0, 3, 3, 3, 1, 2, 3, 4], 9)).to.equal(9));
-            it("should return true", () => expect(whenIsOneOf2("x", [null, undefined, 1, 6, "a", "x", -1, "CCC"], "9")).to.equal("9"));
+            it("should return false", () => expect(whenIsOneOfArray(null, [1, 2, 3], 1)).to.equal(null));
+            it("should return false", () => expect(whenIsOneOfArray(undefined, [1, 2, 3], 1)).to.equal(undefined));
+            it("should return false", () => expect(whenIsOneOfArray(1, [0, 2, 3], 1)).to.equal(1));
+            it("should return false", () => expect(whenIsOneOfArray("aaa", ["a", "aa", "aaaa"], "1")).to.equal("aaa"));
+            it("should return false", () => expect(whenIsOneOfArray("x", <(string | null | undefined)[]>[null, undefined], "a")).to.equal("x"));
+            it("should return true", () => expect(whenIsOneOfArray(1, [0, 1, 2, 3, 4], 9)).to.equal(9));
+            it("should return true", () => expect(whenIsOneOfArray(3, [0, 1, 2, 3, 4], 9)).to.equal(9));
+            it("should return true", () => expect(whenIsOneOfArray(3, [0, 3, 3, 3, 1, 2, 3, 4], 9)).to.equal(9));
+            it("should return true", () => expect(whenIsOneOfArray("x", [null, undefined, 1, 6, "a", "x", -1, "CCC"], "9")).to.equal("9"));
         });
 
         describe("failure", () =>
         {
-            it("should fail for null", () => expect(() => whenIsOneOf2(1, null, 9)).to.throw(ArgumentError, "Value cannot be null."));
-            it("should fail for undefined", () => expect(() => whenIsOneOf2(1, undefined, 9)).to.throw(ArgumentError, "Value cannot be null."));
+            it("should fail for null", () => expect(() => whenIsOneOfArray(1, null, 9)).to.throw(ArgumentError, "Value cannot be null."));
+            it("should fail for undefined", () => expect(() => whenIsOneOfArray(1, undefined, 9)).to.throw(ArgumentError, "Value cannot be null."));
         });
     });
 });

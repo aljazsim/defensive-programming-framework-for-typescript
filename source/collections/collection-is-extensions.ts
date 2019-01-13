@@ -1,20 +1,25 @@
 import { cannotBeNull } from "../objects/object-cannot-extensions";
-import { isNull } from "../objects/object-is-extensions";
+import { isEqualTo, isNull } from "../objects/object-is-extensions";
+
+// #region Functions (8)
 
 /**
  * Determines whether the specified collection contains any items corresponding to the selector function.
  *
  * @export
  * @template T - The value type.
- * @param {Array<T>} value - The value.
- * @param {(T) => boolean} func - The function.
- * @returns {boolean} - True if the specified collection contains any items corresponding to the selector function; otherwise, false.
+ * @param value - The value.
+ * @param func - The function.
+ * @returns - True if the specified collection contains any items corresponding to the selector function; otherwise, false.
  */
-export function contains<T>(value: Array<T>, func: (T) => boolean): boolean
+export function contains<T>(value: Array<T> | null | undefined, func: ((value: T | null | undefined) => boolean) | null | undefined): boolean
 {
     cannotBeNull(func);
 
-    if (!isNull(value))
+    if (value !== null &&
+        value !== undefined &&
+        func !== null &&
+        func !== undefined)
     {
         for (const item of value)
         {
@@ -33,14 +38,15 @@ export function contains<T>(value: Array<T>, func: (T) => boolean): boolean
  *
  * @export
  * @template T - The value type.
- * @param {Array<T>} value - The value.
+ * @param value - The value.
  * @returns - True if the specified collection contains duplicates; otherwise, false.
  */
-export function containsDuplicates<T>(value: Array<T>)
+export function containsDuplicates<T>(value: Array<T> | null | undefined): boolean
 {
     const duplicates = new Set<T>();
 
-    if (!isNull(value))
+    if (value !== null &&
+        value !== undefined)
     {
         for (const item of value)
         {
@@ -63,12 +69,13 @@ export function containsDuplicates<T>(value: Array<T>)
  *
  * @export
  * @template T - The value type.
- * @param {Array<T>} value - The value.
- * @returns {boolean} - True if the specified collection contains a null value; otherwise, false.
+ * @param value - The value.
+ * @returns - True if the specified collection contains a null value; otherwise, false.
  */
-export function containsNull<T>(value: Array<T>): boolean
+export function containsNull<T>(value: Array<T> | null | undefined): boolean
 {
-    if (!isNull(value))
+    if (value !== null &&
+        value !== undefined)
     {
         for (const item of value)
         {
@@ -87,22 +94,26 @@ export function containsNull<T>(value: Array<T>): boolean
  *
  * @export
  * @template T - The value type.
- * @param {Array<T>} value - The value.
- * @returns {boolean} - True if the specified collection contains only null values; otherwise, false.
+ * @param value - The value.
+ * @returns - True if the specified collection contains only null values; otherwise, false.
  */
-export function containsOnlyNull<T>(value: Array<T>): boolean
+export function containsOnlyNull<T>(value: Array<T> | null | undefined): boolean
 {
-    if (!isNullOrEmpty(value))
+    if (value !== null &&
+        value !== undefined)
     {
-        for (const item of value)
+        if (!isNullOrEmptyArray(value))
         {
-            if (!isNull(item))
+            for (const item of value)
             {
-                return false;
+                if (!isNull(item))
+                {
+                    return false;
+                }
             }
-        }
 
-        return true;
+            return true;
+        }
     }
 
     return false;
@@ -113,12 +124,13 @@ export function containsOnlyNull<T>(value: Array<T>): boolean
  *
  * @export
  * @template T - The value type.
- * @param {Array<T>} value - The value.
- * @returns {boolean} - True if the specified collection is empty; otherwise, false.
+ * @param value - The value.
+ * @returns - True if the specified collection is empty; otherwise, false.
  */
-export function isEmpty<T>(value: Array<T> | string): boolean
+export function isEmptyArray<T>(value: Array<T> | null | undefined): boolean
 {
-    if (isNull(value))
+    if (value === null ||
+        value === undefined)
     {
         return false;
     }
@@ -133,20 +145,22 @@ export function isEmpty<T>(value: Array<T> | string): boolean
  *
  * @export
  * @template T - The value type.
- * @param {Array <T>} value1 - The value 1.
- * @param {Array<T>} value2 - The value 2.
- * @param {boolean} [ignoreOrder=false] - If set to true ignore order of the items.
- * @returns {boolean} - True if the specified collection is equal to compared collection; otherwise, false.
+ * @param value1 - The value 1.
+ * @param value2 - The value 2.
+ * @param [ignoreOrder=false] - If set to true ignore order of the items.
+ * @returns - True if the specified collection is equal to compared collection; otherwise, false.
  */
-export function isEqualTo2<T>(value1: Array<T>, value2: Array<T>, ignoreOrder: boolean = false): boolean
+export function isEqualToArray<T>(value1: Array<T> | null | undefined, value2: Array<T> | null | undefined, ignoreOrder: boolean = false): boolean
 {
-    if (isNull(value1) &&
-        isNull(value2))
+    if ((value1 === null || value1 === undefined) &&
+        (value2 === null || value2 === undefined))
     {
         return true;
     }
-    else if (!isNull(value1) &&
-        !isNull(value2) &&
+    else if (value1 !== null &&
+        value1 !== undefined &&
+        value2 !== null &&
+        value2 !== undefined &&
         value1.length === value2.length)
     {
         if (ignoreOrder)
@@ -184,12 +198,13 @@ export function isEqualTo2<T>(value1: Array<T>, value2: Array<T>, ignoreOrder: b
  *
  * @export
  * @template T - The value type.
- * @param {T} value - The value.
- * @returns {boolean} - True if the specified collection is null or empty; otherwise, false.
+ * @param value - The value.
+ * @returns - True if the specified collection is null or empty; otherwise, false.
  */
-export function isNullOrEmpty<T>(value: Array<T> | string): boolean
+export function isNullOrEmptyArray<T>(value: Array<T> | null | undefined): boolean
 {
-    if (isNull(value))
+    if (value === null ||
+        value === undefined)
     {
         return true;
     }
@@ -204,13 +219,27 @@ export function isNullOrEmpty<T>(value: Array<T> | string): boolean
  *
  * @export
  * @template T - The value type.
- * @param {T} value - The value.
- * @param {Array<T>} set - The set.
- * @returns {boolean} - True if the specified value belongs to the specified set; otherwise, false.
+ * @param value - The value.
+ * @param set - The set.
+ * @returns - True if the specified value belongs to the specified set; otherwise, false.
  */
-export function isOneOf2<T>(value: T, set: Array<T>): boolean
+export function isOneOfArrays<T>(value: T | null | undefined, set: Array<T> | null | undefined): boolean
 {
     cannotBeNull(set);
 
-    return set.indexOf(value) > 0;
+    if (set !== null &&
+        set !== undefined)
+    {
+        for (const item of set)
+        {
+            if (isEqualTo(item, value))
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
 }
+
+// #endregion
