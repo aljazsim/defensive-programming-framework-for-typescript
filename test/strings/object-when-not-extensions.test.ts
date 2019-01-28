@@ -1,6 +1,6 @@
 import "mocha";
 import { ArgumentError } from "../../source/argument-error";
-import { whenDoesNotMatch, whenIsNotEmpty, whenIsNotNullOrEmpty, whenIsNotNullOrWhiteSpace } from "../../source/strings/string-when-not-extensions";
+import { whenIsNotEmpty, whenIsNotMatch, whenIsNotNullOrEmpty, whenIsNotNullOrWhiteSpace } from "../../source/strings/string-when-not-extensions";
 import { expect } from "chai";
 
 describe("object cannot extensions", () =>
@@ -48,25 +48,25 @@ describe("object cannot extensions", () =>
         });
     });
 
-    describe("whenDoesNotMatch()", () =>
+    describe("whenIsNotMatch()", () =>
     {
         describe("success", () =>
         {
-            it("should not match", () => expect(whenDoesNotMatch(null, /a/, "9")).to.equal("9"));
-            it("should not match", () => expect(whenDoesNotMatch(undefined, /a/, "9")).to.equal("9"));
-            it("should not match", () => expect(whenDoesNotMatch("a", /\\./, "9")).to.equal("9"));
-            it("should not match", () => expect(whenDoesNotMatch("a", /b/, "9")).to.equal("9"));
-            it("should not match", () => expect(whenDoesNotMatch("b", /a/, "9")).to.equal("9"));
-            it("should not match", () => expect(whenDoesNotMatch("a tree and a rock", /^[a-z]+$/, "9")).to.equal("9"));
-            it("should not match", () => expect(whenDoesNotMatch("d64af57b5bbb5c65", /^[0-9]+$/, "9")).to.equal("9"));
-            it("should not match", () => expect(whenDoesNotMatch("353644353i345345", /^[0-9]+$/, "9")).to.equal("9"));
-            it("should match", () => expect(whenDoesNotMatch("13", /^[0-9]+$/, "9")).to.equal("13"));
+            it("should not match", () => expect(whenIsNotMatch(null, /a/, "9")).to.equal("9"));
+            it("should not match", () => expect(whenIsNotMatch(undefined, /a/, "9")).to.equal("9"));
+            it("should not match", () => expect(whenIsNotMatch("a", /\\./, "9")).to.equal("9"));
+            it("should not match", () => expect(whenIsNotMatch("a", /b/, "9")).to.equal("9"));
+            it("should not match", () => expect(whenIsNotMatch("b", /a/, "9")).to.equal("9"));
+            it("should not match", () => expect(whenIsNotMatch("a tree and a rock", /^[a-z]+$/, "9")).to.equal("9"));
+            it("should not match", () => expect(whenIsNotMatch("d64af57b5bbb5c65", /^[0-9]+$/, "9")).to.equal("9"));
+            it("should not match", () => expect(whenIsNotMatch("353644353i345345", /^[0-9]+$/, "9")).to.equal("9"));
+            it("should match", () => expect(whenIsNotMatch("13", /^[0-9]+$/, "9")).to.equal("13"));
         });
 
         describe("failure", () =>
         {
-            it("should fail for null", () => expect(() => whenDoesNotMatch("a", null, "9")).to.throw(ArgumentError, "Value cannot be null."));
-            it("should fail for null", () => expect(() => whenDoesNotMatch("a", undefined, "9")).to.throw(ArgumentError, "Value cannot be null."));
+            it("should fail for null", () => expect(() => whenIsNotMatch("a", null, "9")).to.throw(ArgumentError, "Value cannot be null."));
+            it("should fail for null", () => expect(() => whenIsNotMatch("a", undefined, "9")).to.throw(ArgumentError, "Value cannot be null."));
         });
     });
 });

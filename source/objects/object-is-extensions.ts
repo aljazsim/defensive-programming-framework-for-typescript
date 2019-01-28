@@ -95,15 +95,15 @@ export function isOneOf<T>(value: T | null | undefined, set: T[] | null | undefi
 }
 
 /**
- * Determines whether the specified value is subtype of of the specified type.
+ * Determines whether the specified value is instance of of the specified type.
  *
  * @export
  * @template T - The value type.
  * @param value - The value.
  * @param type - The type.
- * @returns - True if the specified value is subtype of the specified type; otherwise, false.
+ * @returns - True if the specified value is instance of the specified type; otherwise, false.
  */
-export function isSubTypeOf<T>(value: T | null | undefined, type: any): boolean
+export function isInstanceOf<T>(value: T | null | undefined, type: any): boolean
 {
     cannotBeNull(type);
 

@@ -1,6 +1,6 @@
 import "mocha";
 import { ArgumentError } from "../../source/argument-error";
-import { cannotBe, cannotBeEqualTo, cannotBeNull, cannotBeOneOf, cannotBeSubTypeOf, cannotBeTypeOf } from "../../source/objects/object-cannot-extensions";
+import { cannotBe, cannotBeEqualTo, cannotBeInstanceOf, cannotBeNull, cannotBeOneOf, cannotBeTypeOf } from "../../source/objects/object-cannot-extensions";
 import { expect } from "chai";
 
 describe("object cannot extensions", () =>
@@ -94,26 +94,26 @@ describe("object cannot extensions", () =>
 
         describe("failure", () =>
         {
-            it("should fail for subtype of", () => expect(() => cannotBeOneOf(1, null)).to.throw(ArgumentError, "Value cannot be null."));
-            it("should fail for subtype of", () => expect(() => cannotBeOneOf(1, undefined)).to.throw(ArgumentError, "Value cannot be null."));
-            it("should fail for subtype of", () => expect(() => cannotBeOneOf(1, [0, 1, 2, 3])).to.throw(ArgumentError, "Value cannot be one of [0, 1, 2, 3]."));
-            it("should fail for subtype of", () => expect(() => cannotBeOneOf("a", ["a", "b", "c"])).to.throw(ArgumentError, "Value cannot be one of [a, b, c]."));
+            it("should fail for instance of", () => expect(() => cannotBeOneOf(1, null)).to.throw(ArgumentError, "Value cannot be null."));
+            it("should fail for instance of", () => expect(() => cannotBeOneOf(1, undefined)).to.throw(ArgumentError, "Value cannot be null."));
+            it("should fail for instance of", () => expect(() => cannotBeOneOf(1, [0, 1, 2, 3])).to.throw(ArgumentError, "Value cannot be one of [0, 1, 2, 3]."));
+            it("should fail for instance of", () => expect(() => cannotBeOneOf("a", ["a", "b", "c"])).to.throw(ArgumentError, "Value cannot be one of [a, b, c]."));
         });
     });
 
-    describe("cannotBeSubTypeOf()", () =>
+    describe("cannotBeInstanceOf()", () =>
     {
         describe("success", () =>
         {
-            it("should not be subtype of", () => expect(cannotBeSubTypeOf(1, Error)).to.eql(1));
-            it("should not be subtype of", () => expect(cannotBeSubTypeOf("a", Error)).to.eql("a"));
+            it("should not be instance of", () => expect(cannotBeInstanceOf(1, Error)).to.eql(1));
+            it("should not be instance of", () => expect(cannotBeInstanceOf("a", Error)).to.eql("a"));
         });
 
         describe("failure", () =>
         {
-            it("should fail for null", () => expect(() => cannotBeSubTypeOf(new ArgumentError("test"), null)).to.throw(ArgumentError, "Value cannot be null."));
-            it("should fail for null", () => expect(() => cannotBeSubTypeOf(new ArgumentError("test"), undefined)).to.throw(ArgumentError, "Value cannot be null."));
-            it("should fail for subtype", () => expect(() => cannotBeSubTypeOf(new ArgumentError("test"), Error)).to.throw(ArgumentError, "Value cannot be subtype of type Error."));
+            it("should fail for null", () => expect(() => cannotBeInstanceOf(new ArgumentError("test"), null)).to.throw(ArgumentError, "Value cannot be null."));
+            it("should fail for null", () => expect(() => cannotBeInstanceOf(new ArgumentError("test"), undefined)).to.throw(ArgumentError, "Value cannot be null."));
+            it("should fail for instance", () => expect(() => cannotBeInstanceOf(new ArgumentError("test"), Error)).to.throw(ArgumentError, "Value cannot be instance of type Error."));
         });
     });
 });

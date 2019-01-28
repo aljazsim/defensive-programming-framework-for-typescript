@@ -1,6 +1,6 @@
 import "mocha";
 import { ArgumentError } from "../../source/argument-error";
-import { whenIs, whenIsEqualTo, whenIsNull, whenIsOneOf, whenIsSubTypeOf, whenIsTypeOf } from "../../source/objects/object-when-extensions";
+import { whenIs, whenIsEqualTo, whenIsInstanceOf, whenIsNull, whenIsOneOf, whenIsTypeOf } from "../../source/objects/object-when-extensions";
 import { expect } from "chai";
 
 describe("object can extensions", () =>
@@ -86,19 +86,19 @@ describe("object can extensions", () =>
         });
     });
 
-    describe("whenIsSubTypeOf()", () =>
+    describe("whenIsInstanceOf()", () =>
     {
         describe("success", () =>
         {
-            it("should be subtype of", () => expect(whenIsSubTypeOf(1, Error, 2)).to.eql(1));
-            it("should be subtype of", () => expect(whenIsSubTypeOf("a", Error, "b")).to.eql("a"));
-            it("should bes subtype of", () => expect(whenIsSubTypeOf(new ArgumentError("test"), Error, null)).to.equals(null));
+            it("should be instance of", () => expect(whenIsInstanceOf(1, Error, 2)).to.eql(1));
+            it("should be instance of", () => expect(whenIsInstanceOf("a", Error, "b")).to.eql("a"));
+            it("should bes instance of", () => expect(whenIsInstanceOf(new ArgumentError("test"), Error, null)).to.equals(null));
         });
 
         describe("failure", () =>
         {
-            it("should fail for null", () => expect(() => whenIsSubTypeOf(new ArgumentError("test"), null, new Error("test"))).to.throw(ArgumentError, "Value cannot be null."));
-            it("should fail for null", () => expect(() => whenIsSubTypeOf(new ArgumentError("test"), undefined, new Error("test"))).to.throw(ArgumentError, "Value cannot be null."));
+            it("should fail for null", () => expect(() => whenIsInstanceOf(new ArgumentError("test"), null, new Error("test"))).to.throw(ArgumentError, "Value cannot be null."));
+            it("should fail for null", () => expect(() => whenIsInstanceOf(new ArgumentError("test"), undefined, new Error("test"))).to.throw(ArgumentError, "Value cannot be null."));
         });
     });
 

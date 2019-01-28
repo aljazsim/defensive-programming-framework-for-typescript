@@ -1,5 +1,5 @@
 import { ArgumentError } from "../argument-error";
-import { is, isEqualTo, isOneOf, isSubTypeOf, isTypeOf } from "./object-is-extensions";
+import { is, isEqualTo, isInstanceOf, isOneOf, isTypeOf } from "./object-is-extensions";
 
 // #region Functions (6)
 
@@ -84,19 +84,19 @@ export function cannotBeOneOf<T>(value: T | null | undefined, set: T[] | null | 
 }
 
 /**
- * Returns the original value if it is not equal to the specified subtype; otherwise throws a new ArgumentError.
+ * Returns the original value if it is not equal to the specified instance; otherwise throws a new ArgumentError.
  *
  * @export
  * @template T - The value type.
  * @param value - The value.
  * @param type - The type.
- * @returns - The original value if it is not equal to the specified subtype; otherwise throws a new ArgumentError.
+ * @returns - The original value if it is not equal to the specified instance; otherwise throws a new ArgumentError.
  */
-export function cannotBeSubTypeOf<T>(value: T | null | undefined, type: any): T | null | undefined
+export function cannotBeInstanceOf<T>(value: T | null | undefined, type: any): T | null | undefined
 {
-    if (isSubTypeOf(value, type))
+    if (isInstanceOf(value, type))
     {
-        throw new ArgumentError(`Value cannot be subtype of type ${type.name}.`);
+        throw new ArgumentError(`Value cannot be instance of type ${type.name}.`);
     }
 
     return value;

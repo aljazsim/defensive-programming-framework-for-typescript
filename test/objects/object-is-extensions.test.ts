@@ -1,6 +1,6 @@
 import "mocha";
 import { ArgumentError } from "../../source/argument-error";
-import { is, isEqualTo, isNull, isOneOf, isSubTypeOf, isTypeOf } from "../../source/objects/object-is-extensions";
+import { is, isEqualTo, isInstanceOf, isNull, isOneOf, isTypeOf } from "../../source/objects/object-is-extensions";
 import { expect } from "chai";
 
 describe("object can extensions", () =>
@@ -90,19 +90,19 @@ describe("object can extensions", () =>
         });
     });
 
-    describe("isSubTypeOf()", () =>
+    describe("isInstanceOf()", () =>
     {
         describe("success", () =>
         {
-            it("should be subtype of", () => expect(isSubTypeOf(1, Error)).to.equal(false));
-            it("should be subtype of", () => expect(isSubTypeOf("a", Error)).to.equal(false));
-            it("should bes subtype of", () => expect(isSubTypeOf(new ArgumentError("test"), Error)).to.equals(true));
+            it("should be instance of", () => expect(isInstanceOf(1, Error)).to.equal(false));
+            it("should be instance of", () => expect(isInstanceOf("a", Error)).to.equal(false));
+            it("should bes instance of", () => expect(isInstanceOf(new ArgumentError("test"), Error)).to.equals(true));
         });
 
         describe("failure", () =>
         {
-            it("should fail for null", () => expect(() => isSubTypeOf(new ArgumentError("test"), null)).to.throw(ArgumentError, "Value cannot be null."));
-            it("should fail for null", () => expect(() => isSubTypeOf(new ArgumentError("test"), undefined)).to.throw(ArgumentError, "Value cannot be null."));
+            it("should fail for null", () => expect(() => isInstanceOf(new ArgumentError("test"), null)).to.throw(ArgumentError, "Value cannot be null."));
+            it("should fail for null", () => expect(() => isInstanceOf(new ArgumentError("test"), undefined)).to.throw(ArgumentError, "Value cannot be null."));
         });
     });
 

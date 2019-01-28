@@ -1,4 +1,4 @@
-import { is, isEqualTo, isOneOf, isSubTypeOf, isTypeOf } from "./object-is-extensions";
+import { is, isEqualTo, isInstanceOf, isOneOf, isTypeOf } from "./object-is-extensions";
 
 // #region Functions (6)
 
@@ -91,18 +91,18 @@ export function whenIsOneOf<T>(value: T | null | undefined, set: T[], defaultVal
 }
 
 /**
- * Returns default value when the original value is subtype of the specified type; otherwise returns the original value.
+ * Returns default value when the original value is instance of the specified type; otherwise returns the original value.
  *
  * @export
  * @template T - The value typ.e
  * @param value - The value.
  * @param type - The type.
  * @param defaultValue - The default value.
- * @returns - The default value when the original value is subtype of the specified type; otherwise returns the original value.
+ * @returns - The default value when the original value is instance of the specified type; otherwise returns the original value.
  */
-export function whenIsSubTypeOf<T>(value: T | null | undefined, type: any, defaultValue: T | null | undefined): T | null | undefined
+export function whenIsInstanceOf<T>(value: T | null | undefined, type: any, defaultValue: T | null | undefined): T | null | undefined
 {
-    if (isSubTypeOf(value, type))
+    if (isInstanceOf(value, type))
     {
         return defaultValue;
     }

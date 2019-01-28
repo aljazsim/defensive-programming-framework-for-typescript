@@ -1,6 +1,6 @@
 import "mocha";
 import { ArgumentError } from "../../source/argument-error";
-import { whenIsNot, whenIsNotEqualTo, whenIsNotNull, whenIsNotOneOf, whenIsNotSubTypeOf, whenIsNotTypeOf } from "../../source/objects/object-when-not-extensions";
+import { whenIsNot, whenIsNotEqualTo, whenIsNotInstanceOf, whenIsNotNull, whenIsNotOneOf, whenIsNotTypeOf } from "../../source/objects/object-when-not-extensions";
 import { expect } from "chai";
 
 describe("object cannot extensions", () =>
@@ -86,21 +86,21 @@ describe("object cannot extensions", () =>
         });
     });
 
-    describe("whenIsNotSubTypeOf()", () =>
+    describe("whenIsNotInstanceOf()", () =>
     {
         describe("success", () =>
         {
             const temp = new ArgumentError("test");
 
-            it("should not be subtype of", () => expect(whenIsNotSubTypeOf(1, Error, 2)).to.eql(2));
-            it("should not be subtype of", () => expect(whenIsNotSubTypeOf("a", Error, "b")).to.eql("b"));
-            it("should bes subtype of", () => expect(whenIsNotSubTypeOf(temp, Error, null)).to.equals(temp));
+            it("should not be instance of", () => expect(whenIsNotInstanceOf(1, Error, 2)).to.eql(2));
+            it("should not be instance of", () => expect(whenIsNotInstanceOf("a", Error, "b")).to.eql("b"));
+            it("should bes instance of", () => expect(whenIsNotInstanceOf(temp, Error, null)).to.equals(temp));
         });
 
         describe("failure", () =>
         {
-            it("should fail for null", () => expect(() => whenIsNotSubTypeOf(new ArgumentError("test"), null, new Error("test"))).to.throw(ArgumentError, "Value cannot be null."));
-            it("should fail for null", () => expect(() => whenIsNotSubTypeOf(new ArgumentError("test"), undefined, new Error("test"))).to.throw(ArgumentError, "Value cannot be null."));
+            it("should fail for null", () => expect(() => whenIsNotInstanceOf(new ArgumentError("test"), null, new Error("test"))).to.throw(ArgumentError, "Value cannot be null."));
+            it("should fail for null", () => expect(() => whenIsNotInstanceOf(new ArgumentError("test"), undefined, new Error("test"))).to.throw(ArgumentError, "Value cannot be null."));
         });
     });
 
