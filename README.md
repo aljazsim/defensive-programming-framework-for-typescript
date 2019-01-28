@@ -101,8 +101,6 @@ mustMatch(text, /^[0-9]+$/);
 mustBeGreaterThanOrEqualTo(index, 0);
 mustBeLessThan(index, items.length);
 mustBe(items, x => x != null);
-mustBeAbsoluteDirectoryPath(directoryPath);
-mustFileExist(filePath);
 ```
 
 ### Cannot conditions
@@ -192,14 +190,14 @@ All validation functions exist in must, cannot, when, when not and affirmative c
 
 ### Object validation functions
 
-| is          | must            | cannot            | when            | when not           |
-| ----------- | --------------- | ----------------- | --------------- | ------------------ |
-| is          | mustBe          | cannotBe          | whenIs          | whenIsNot          |
-| isEqualTo   | mustBeEqualTo   | cannotBeEqualTo   | whenIsEqualTo   | whenIsNotEqualTo   |
-| isNull      | mustBeNull      | cannotBeNull      | whenIsNull      | whenIsNotNull      |
-| isOneOf     | mustBeOneOf     | cannotBeOneOf     | whenIsOneOf     | whenIsNotOneOf     |
-| isSubTypeOf | mustBeSubTypeOf | cannotBeSubTypeOf | whenIsSubTypeOf | whenIsNotSubTypeOf |
-| isTypeOf    | mustBeTypeOf    | cannotBeTypeOf    | whenIsTypeOf    | whenIsNotTypeOf    |
+| is           | must             | cannot             | when             | when not            |
+| ------------ | ---------------- | ------------------ | ---------------- | ------------------- |
+| is           | mustBe           | cannotBe           | whenIs           | whenIsNot           |
+| isEqualTo    | mustBeEqualTo    | cannotBeEqualTo    | whenIsEqualTo    | whenIsNotEqualTo    |
+| isNull       | mustBeNull       | cannotBeNull       | whenIsNull       | whenIsNotNull       |
+| isOneOf      | mustBeOneOf      | cannotBeOneOf      | whenIsOneOf      | whenIsNotOneOf      |
+| isInstanceOf | mustBeInstanceOf | cannotBeInstanceOf | whenIsInstanceOf | whenIsNotInstanceOf |
+| isTypeOf     | mustBeTypeOf     | cannotBeTypeOf     | whenIsTypeOf     | whenIsNotTypeOf     |
 
 Note: undefined is treated as null (e. g. cannotBeNull(undefined) will throw an ArgumentError the same way cannotBeNull(null) would.
 
@@ -239,7 +237,7 @@ Note: undefined is treated as null (e. g. cannotBeNull(undefined) will throw an 
 
 Note: due to naming clashes, collection has functions isEmptyArray, isEqualToArray and isNullOrEmptyArray, isOneOfArrays.
 
-### File system validation functions
+<!-- ### File system validation functions
 
 | is                      | must                        | cannot                        | when                        | when not                       |
 | ----------------------- | --------------------------- | ----------------------------- | --------------------------- | ------------------------------ |
@@ -251,16 +249,18 @@ Note: due to naming clashes, collection has functions isEmptyArray, isEqualToArr
 | isValidDirectoryPath    | mustBeValidDirectoryPath    | cannotBeValidDirectoryPath    | whenIsValidDirectoryPath    | whenIsNotValidDirectoryPath    |
 | isValidFileName         | mustBeValidFileName         | cannotBeValidFileName         | whenIsValidFileName         | whenIsNotValidFileName         |
 | isValidFilePath         | mustBeValidFilePath         | cannotBeValidFilePath         | whenIsValidFilePath         | whenIsNotValidFilePath         |
+-->
+
 
 ## Installation
 
-Run the following command console:
+Run the following console command:
 
 ```powershell
 npm i defensive-programming-framework
 ```
 
-Or just simply add reference in jour packages.json file:
+Or just simply add reference in your packages.json file:
 
 ```json
 "dependencies": {
@@ -307,8 +307,14 @@ dpf.cannotBeNullOrEmpty(value);
 
 ### [1.0.0] - 2019-01-01
 
-- first version
+- first version.
 
-### [1.0.2] - 2019-01-14
+### [1.0.3] - 2019-01-14
 
-- added strict mode for better type checking
+- added strict mode for better type checking.
+
+### [1.0.4] - 2019-01-28
+
+- removed file system methods for browser app compatibility,
+- renamed whenDoesMatch() to  whenIsMatch() for consistency,
+- renamed whenDoesNotMatch() to  whenIsNotMatch() for consistency.
